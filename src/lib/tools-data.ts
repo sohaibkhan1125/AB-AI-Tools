@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -128,7 +128,7 @@ export const TOOLS_DATA: Tool[] = [
   {
     id: 'unit-converter',
     name: 'Unit Converter',
-    description: 'Convert various units of measurement like length, weight, temperature.',
+    description: 'Convert between various units of measurement like length, weight, temperature.',
     icon: ArrowRightLeft,
     href: '/tools/unit-converter',
     keywords: ['unit', 'converter', 'measurement', 'length', 'weight', 'temperature', 'metric', 'imperial']
@@ -204,6 +204,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: TrendingUp,
     href: '/tools/investment-roi-calculator',
     keywords: ['roi', 'investment', 'return', 'profit', 'loss', 'finance', 'calculator']
+  },
+  {
+    id: 'bmi-calculator',
+    name: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index (BMI) and understand your weight category.',
+    icon: HeartPulse,
+    href: '/tools/bmi-calculator',
+    keywords: ['bmi', 'body mass index', 'health', 'weight', 'fitness', 'calculator']
   }
   // Add more tools here in the future
   // Example:
