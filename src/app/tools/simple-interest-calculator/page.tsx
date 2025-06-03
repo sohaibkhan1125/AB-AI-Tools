@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -29,9 +30,9 @@ export default function SimpleInterestCalculatorPage() {
   const form = useForm<SimpleInterestFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      principal: undefined,
-      rate: undefined,
-      timeYears: undefined,
+      principal: '' as unknown as number,
+      rate: '' as unknown as number,
+      timeYears: '' as unknown as number,
     },
   });
 

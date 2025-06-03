@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -28,7 +29,7 @@ export default function IncomeTaxCalculatorPage() {
   const form = useForm<IncomeTaxFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      income: undefined,
+      income: '' as unknown as number,
     },
   });
 

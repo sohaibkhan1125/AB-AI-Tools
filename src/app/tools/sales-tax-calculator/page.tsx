@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -28,8 +29,8 @@ export default function SalesTaxCalculatorPage() {
   const form = useForm<SalesTaxFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      amount: undefined, // Will be treated as empty string by input initially
-      taxRate: undefined,
+      amount: '' as unknown as number, // Initialize as empty string
+      taxRate: '' as unknown as number, // Initialize as empty string
     },
   });
 
