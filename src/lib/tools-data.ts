@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2 } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -148,6 +148,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: ClipboardList,
     href: '/tools/lorem-ipsum-generator',
     keywords: ['lorem ipsum', 'placeholder', 'text', 'generator', 'dummy text', 'latin']
+  },
+  {
+    id: 'csv-to-json-converter',
+    name: 'CSV to JSON Converter',
+    description: 'Convert CSV data to JSON format. Upload a CSV file for conversion.',
+    icon: FileCode2,
+    href: '/tools/csv-to-json',
+    keywords: ['csv', 'json', 'converter', 'data transformation', 'file conversion']
   }
   // Add more tools here in the future
   // Example:
