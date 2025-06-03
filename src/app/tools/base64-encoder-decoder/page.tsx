@@ -179,4 +179,3 @@ export default function Base64EncoderDecoderPage() {
     </div>
   );
 }
-
