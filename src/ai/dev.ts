@@ -5,3 +5,4 @@ import '@/ai/flows/lorem-ipsum-flow';
 import '@/ai/flows/csv-to-json-flow';
 import '@/ai/flows/html-formatter-flow';
 import '@/ai/flows/loan-calculator-flow';
+import '@/ai/flows/age-calculator-flow';
