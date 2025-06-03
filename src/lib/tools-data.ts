@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -196,6 +196,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Cake,
     href: '/tools/age-calculator',
     keywords: ['age', 'birthday', 'date', 'calculator', 'years', 'months', 'days']
+  },
+  {
+    id: 'investment-roi-calculator',
+    name: 'Investment ROI Calculator',
+    description: 'Calculate the Return on Investment (ROI) for an investment.',
+    icon: TrendingUp,
+    href: '/tools/investment-roi-calculator',
+    keywords: ['roi', 'investment', 'return', 'profit', 'loss', 'finance', 'calculator']
   }
   // Add more tools here in the future
   // Example:
