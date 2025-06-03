@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -212,6 +212,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: HeartPulse,
     href: '/tools/bmi-calculator',
     keywords: ['bmi', 'body mass index', 'health', 'weight', 'fitness', 'calculator']
+  },
+  {
+    id: 'salary-converter',
+    name: 'Salary Converter',
+    description: 'Convert between hourly, weekly, monthly, and annual salary rates.',
+    icon: DollarSign,
+    href: '/tools/salary-converter',
+    keywords: ['salary', 'wage', 'income', 'pay', 'converter', 'hourly', 'annual', 'finance']
   }
   // Add more tools here in the future
   // Example:
