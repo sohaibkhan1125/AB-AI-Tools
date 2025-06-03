@@ -7,3 +7,4 @@ import '@/ai/flows/html-formatter-flow';
 import '@/ai/flows/loan-calculator-flow';
 import '@/ai/flows/age-calculator-flow';
 import '@/ai/flows/bmi-calculator-flow';
+import '@/ai/flows/compound-interest-flow';
