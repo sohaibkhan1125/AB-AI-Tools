@@ -1,5 +1,5 @@
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, FileText } from 'lucide-react';
+import { QrCode, FileImage, FileText, Scaling } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -24,9 +24,17 @@ export const TOOLS_DATA: Tool[] = [
     id: 'image-to-pdf',
     name: 'Image to PDF Converter',
     description: 'Convert JPG, PNG, and other image formats to PDF documents.',
-    icon: FileImage, // Using FileImage for simplicity, could be a custom combined icon
+    icon: FileImage, 
     href: '/tools/image-to-pdf',
     keywords: ['image', 'pdf', 'converter', 'jpg', 'png']
+  },
+  {
+    id: 'image-resizer',
+    name: 'Image Resizer',
+    description: 'Resize images to your desired dimensions and format.',
+    icon: Scaling,
+    href: '/tools/image-resizer',
+    keywords: ['image', 'resize', 'dimensions', 'scaler', 'photo']
   },
   // Add more tools here in the future
   // Example:
