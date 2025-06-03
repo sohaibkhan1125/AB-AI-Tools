@@ -12,9 +12,11 @@ import { z } from 'genkit';
 import { PDFDocument } from 'pdf-lib';
 
 const MergePdfsInputSchema = z.object({
-  pdfDataUris: z.array(z.string().startsWith('data:application/pdf;base64,', { message: "Each PDF must be a base64 data URI." }))
+  pdfDataUris: z.array(
+    z.string().regex(/^data:application\/pdf;base64,/, { message: "Each PDF must be a data URI starting with 'data:application/pdf;base64,'." })
+  )
     .min(1, { message: "At least one PDF file is required."})
-    .describe('An array of PDF files, each encoded as a base64 data URI.'),
+    .describe('An array of PDF files, each encoded as a base64 data URI. Must start with data:application/pdf;base64,'),
 });
 export type MergePdfsInput = z.infer<typeof MergePdfsInputSchema>;
 
