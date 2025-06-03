@@ -11,7 +11,7 @@
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
-export const LoremIpsumInputSchema = z.object({
+const LoremIpsumInputSchema = z.object({
   type: z.enum(['paragraphs', 'sentences', 'words'])
     .describe("The type of Lorem Ipsum text to generate: 'paragraphs', 'sentences', or 'words'."),
   count: z.number().int().min(1).max(100) // Max 100 for paragraphs/sentences, higher for words if needed but keep reasonable
@@ -21,7 +21,7 @@ export const LoremIpsumInputSchema = z.object({
 });
 export type LoremIpsumInput = z.infer<typeof LoremIpsumInputSchema>;
 
-export const LoremIpsumOutputSchema = z.object({
+const LoremIpsumOutputSchema = z.object({
   text: z.string().describe('The generated Lorem Ipsum style placeholder text.'),
 });
 export type LoremIpsumOutput = z.infer<typeof LoremIpsumOutputSchema>;
