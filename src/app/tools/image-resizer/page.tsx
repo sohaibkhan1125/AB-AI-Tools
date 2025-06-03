@@ -4,7 +4,7 @@
 import { useState, useRef, ChangeEvent, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { UploadCloud, Download, RefreshCw, AspectRatio, Palette, FileType } from 'lucide-react';
+import { UploadCloud, Download, RefreshCw, Link2, Palette, FileType, Scaling } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -204,7 +204,7 @@ export default function ImageResizerPage() {
                 <div className="flex items-center space-x-2">
                   <Checkbox id="aspectRatio" checked={keepAspectRatio} onCheckedChange={(checked) => setKeepAspectRatio(checked as boolean)} />
                   <Label htmlFor="aspectRatio" className="font-medium flex items-center">
-                    <AspectRatio className="mr-2 h-4 w-4 text-muted-foreground" /> Keep Aspect Ratio
+                    <Link2 className="mr-2 h-4 w-4 text-muted-foreground" /> Keep Aspect Ratio
                   </Label>
                 </div>
                 <div>
