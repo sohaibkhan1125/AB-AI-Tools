@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2 } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -156,6 +156,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileCode2,
     href: '/tools/csv-to-json',
     keywords: ['csv', 'json', 'converter', 'data transformation', 'file conversion']
+  },
+  {
+    id: 'json-formatter-validator',
+    name: 'JSON Formatter & Validator',
+    description: 'Format and validate JSON strings. Beautify your JSON for readability.',
+    icon: Braces,
+    href: '/tools/json-formatter-validator',
+    keywords: ['json', 'formatter', 'validator', 'linter', 'pretty print', 'beautifier', 'viewer']
   }
   // Add more tools here in the future
   // Example:
