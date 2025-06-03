@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calculator, SwitchHorizontal, Trash2 } from 'lucide-react';
+import { Calculator, ArrowRightLeft, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const BASE_OPTIONS = [
@@ -183,7 +183,7 @@ export default function NumberSystemConverterPage() {
           
           <div className="flex items-center justify-center">
              <Button onClick={handleSwapBases} variant="outline" size="icon" aria-label="Swap bases">
-                <SwitchHorizontal className="h-5 w-5" />
+                <ArrowRightLeft className="h-5 w-5" />
              </Button>
           </div>
 
