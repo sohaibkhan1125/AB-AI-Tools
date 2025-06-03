@@ -108,7 +108,7 @@ export default function IpAddressInfoPage() {
     }
 
     try {
-      const response = await fetch(`http://ip-api.com/json/${ipAddress || ''}?fields=status,message,query,country,countryCode,regionName,city,zip,lat,lon,timezone,isp,org,as`);
+      const response = await fetch(`https://ip-api.com/json/${ipAddress || ''}?fields=status,message,query,country,countryCode,regionName,city,zip,lat,lon,timezone,isp,org,as`);
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
       }

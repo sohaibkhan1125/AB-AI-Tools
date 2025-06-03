@@ -10,7 +10,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from "@/components/ui/progress";
 
 
-const TEST_FILE_URL = 'https://bouygues.testdebit.info/5Mo.dat'; // 5MB test file
+const TEST_FILE_URL = 'https://speed.cloudflare.com/__down?bytes=5000000'; // 5MB test file via Cloudflare
 const TEST_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5MB in bytes
 const PING_URL = 'https://ip-api.com/json/?fields=query'; // Small payload for latency test
 
@@ -43,7 +43,9 @@ export default function InternetSpeedTesterPage() {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        receivedLength += value.length;
+        if (value) { // Ensure value is not undefined
+          receivedLength += value.length;
+        }
         setTestProgress((receivedLength / TEST_FILE_SIZE_BYTES) * 100);
       }
 
@@ -52,13 +54,11 @@ export default function InternetSpeedTesterPage() {
       
       if (durationSeconds === 0) return null; // Avoid division by zero
       
-      // Actual file size might be slightly different, using defined size for consistency.
-      // For more accuracy, could use receivedLength if server provides Content-Length and it matches.
       const speedBps = (TEST_FILE_SIZE_BYTES * 8) / durationSeconds; 
       return parseFloat((speedBps / 1_000_000).toFixed(2)); // Convert to Mbps
     } catch (error) {
       console.error('Download speed test error:', error);
-      toast({ variant: 'destructive', title: 'Download Test Failed', description: (error as Error).message });
+      toast({ variant: 'destructive', title: 'Download Test Failed', description: `Could not connect to the test server. ${(error as Error).message}` });
       return null;
     }
   };
@@ -68,13 +68,14 @@ export default function InternetSpeedTesterPage() {
     setTestProgress(0); // Reset progress for this stage
     const startTime = performance.now();
     try {
+      // Perform multiple pings for better accuracy if desired, but one is fine for estimation
       await fetch(PING_URL, { method: 'GET', cache: 'no-store' });
       const endTime = performance.now();
       setTestProgress(100);
       return parseFloat((endTime - startTime).toFixed(2));
     } catch (error) {
       console.error('Latency test error:', error);
-      toast({ variant: 'destructive', title: 'Latency Test Failed', description: (error as Error).message });
+      toast({ variant: 'destructive', title: 'Latency Test Failed', description: `Could not reach ping server. ${(error as Error).message}` });
       return null;
     }
   };
@@ -86,7 +87,7 @@ export default function InternetSpeedTesterPage() {
 
     const latency = await measureLatency();
     let downloadSpeed = null;
-    if (latency !== null) { // Only proceed if latency test didn't fail catastrophically
+    if (latency !== null) { 
         downloadSpeed = await measureDownloadSpeed();
     }
 
@@ -94,7 +95,11 @@ export default function InternetSpeedTesterPage() {
     setIsTesting(false);
     setCurrentTest('');
     setTestProgress(0);
-    toast({ title: 'Speed Test Complete!', description: 'Check your results below.' });
+    if (downloadSpeed !== null || latency !== null) {
+        toast({ title: 'Speed Test Complete!', description: 'Check your results below.' });
+    } else {
+        toast({ variant: 'destructive', title: 'Speed Test Failed', description: 'Could not complete the speed test.' });
+    }
   }, [toast]);
 
   const ResultDisplay: React.FC<{ icon: React.ElementType, label: string, value: number | null, unit: string }> = ({ icon: Icon, label, value, unit }) => (
@@ -162,7 +167,7 @@ export default function InternetSpeedTesterPage() {
 
         </CardContent>
         <CardFooter className="text-center text-xs text-muted-foreground">
-            Test file source: bouygues.testdebit.info. Latency test: ip-api.com.
+            Test file source: Cloudflare. Latency test: ip-api.com.
         </CardFooter>
       </Card>
     </div>
