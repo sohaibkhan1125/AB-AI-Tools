@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -164,6 +164,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Braces,
     href: '/tools/json-formatter-validator',
     keywords: ['json', 'formatter', 'validator', 'linter', 'pretty print', 'beautifier', 'viewer']
+  },
+  {
+    id: 'file-size-calculator',
+    name: 'File Size Calculator',
+    description: 'Convert file sizes between Bytes, KB, MB, GB, TB, and PB (1KB = 1024 Bytes).',
+    icon: HardDrive,
+    href: '/tools/file-size-calculator',
+    keywords: ['file size', 'bytes', 'kb', 'mb', 'gb', 'tb', 'pb', 'converter', 'calculator', 'storage']
   }
   // Add more tools here in the future
   // Example:
