@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -100,6 +100,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: CaseSensitive,
     href: '/tools/text-case-converter',
     keywords: ['text', 'case', 'converter', 'uppercase', 'lowercase', 'title case', 'sentence case']
+  },
+  {
+    id: 'base64-encoder-decoder',
+    name: 'Base64 Encoder/Decoder',
+    description: 'Encode text to Base64 or decode Base64 strings back to text.',
+    icon: Binary,
+    href: '/tools/base64-encoder-decoder',
+    keywords: ['base64', 'encode', 'decode', 'binary', 'text', 'converter', 'ascii', 'utf8']
   }
   // Add more tools here in the future
   // Example:
