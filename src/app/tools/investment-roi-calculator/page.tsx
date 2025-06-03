@@ -32,8 +32,8 @@ export default function InvestmentRoiCalculatorPage() {
   const form = useForm<RoiFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      initialInvestment: undefined,
-      finalValue: undefined,
+      initialInvestment: '' as unknown as number, // Initialize as empty string for controlled input
+      finalValue: '' as unknown as number,        // Initialize as empty string for controlled input
     },
   });
 
@@ -96,7 +96,7 @@ export default function InvestmentRoiCalculatorPage() {
                   <FormItem>
                     <FormLabel>Initial Investment Amount ($)</FormLabel>
                     <FormControl>
-                      <Input type="number" step="0.01" placeholder="e.g., 1000" {...field} />
+                      <Input type="number" step="0.01" placeholder="e.g., 1000" {...field} onChange={e => field.onChange(e.target.value === '' ? '' : parseFloat(e.target.value))} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -109,7 +109,7 @@ export default function InvestmentRoiCalculatorPage() {
                   <FormItem>
                     <FormLabel>Final Value of Investment ($)</FormLabel>
                     <FormControl>
-                      <Input type="number" step="0.01" placeholder="e.g., 1200" {...field} />
+                       <Input type="number" step="0.01" placeholder="e.g., 1200" {...field} onChange={e => field.onChange(e.target.value === '' ? '' : parseFloat(e.target.value))} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
