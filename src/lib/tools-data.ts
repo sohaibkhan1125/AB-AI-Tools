@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -76,6 +76,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Baseline,
     href: '/tools/word-counter',
     keywords: ['text', 'analysis', 'word count', 'character count', 'sentence count', 'paragraph count']
+  },
+  {
+    id: 'voice-to-text',
+    name: 'Voice to Text Converter',
+    description: 'Convert spoken audio into written text using AI.',
+    icon: Mic,
+    href: '/tools/voice-to-text',
+    keywords: ['speech recognition', 'transcription', 'audio', 'dictation']
   }
   // Add more tools here in the future
   // Example:
