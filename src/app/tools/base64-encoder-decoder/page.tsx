@@ -9,39 +9,37 @@ import { Label } from '@/components/ui/label';
 import { Binary, Copy, Trash2, ArrowRightLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-// Helper function to handle Unicode strings for btoa
+// Helper function to convert a UTF-8 string to a Base64 string
 function utf8ToBase64(str: string): string {
   try {
-    return btoa(unescape(encodeURIComponent(str)));
-  } catch (e) {
-    console.error("UTF-8 to Base64 encoding failed:", e);
-    // Fallback for environments where unescape might be deprecated or problematic
-    // This is a more robust way to handle UTF-8
     const encoder = new TextEncoder();
-    const data = encoder.encode(str);
+    const uint8Array = encoder.encode(str);
+    // Convert Uint8Array to binary string
     let binaryString = '';
-    data.forEach((byte) => {
+    uint8Array.forEach((byte) => {
       binaryString += String.fromCharCode(byte);
     });
     return btoa(binaryString);
+  } catch (e) {
+    console.error("UTF-8 to Base64 encoding failed:", e);
+    throw e; // Re-throw the error to be caught by the caller
   }
 }
 
-// Helper function to handle Unicode strings for atob
+// Helper function to convert a Base64 string to a UTF-8 string
 function base64ToUtf8(str: string): string {
   try {
-    return decodeURIComponent(escape(atob(str)));
-  } catch (e) {
-     console.error("Base64 to UTF-8 decoding failed (initial attempt):", e);
-    // Fallback for environments or specific Base64 strings
-    // This is a more robust way to handle UTF-8
     const binaryString = atob(str);
-    const bytes = new Uint8Array(binaryString.length);
+    // Convert binary string to Uint8Array
+    const uint8Array = new Uint8Array(binaryString.length);
     for (let i = 0; i < binaryString.length; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
+      uint8Array[i] = binaryString.charCodeAt(i);
     }
-    const decoder = new TextDecoder();
-    return decoder.decode(bytes);
+    const decoder = new TextDecoder('utf-8'); // Explicitly 'utf-8'
+    return decoder.decode(uint8Array);
+  } catch (e) {
+    console.error("Base64 to UTF-8 decoding failed:", e);
+    throw e; // Re-throw the error to be caught by the caller
   }
 }
 
@@ -64,7 +62,7 @@ export default function Base64EncoderDecoderPage() {
     } catch (error) {
       console.error("Encoding error:", error);
       setOutputText('');
-      toast({ variant: 'destructive', title: 'Encoding Error', description: 'Could not encode the input text. Check console for details.' });
+      toast({ variant: 'destructive', title: 'Encoding Error', description: 'Could not encode the input text. Ensure valid UTF-8 input.' });
     }
   };
 
@@ -81,11 +79,20 @@ export default function Base64EncoderDecoderPage() {
     } catch (error) {
       console.error("Decoding error:", error);
       setOutputText('');
-      toast({
-        variant: 'destructive',
-        title: 'Decoding Error',
-        description: 'Invalid Base64 string or an error occurred during decoding. Check console for details.',
-      });
+      // Check if error is DOMException related to atob (invalid char) or decoding
+      if (error instanceof DOMException && error.name === 'InvalidCharacterError') {
+         toast({
+            variant: 'destructive',
+            title: 'Decoding Error',
+            description: 'Invalid characters in Base64 string. Please check your input.',
+         });
+      } else {
+        toast({
+            variant: 'destructive',
+            title: 'Decoding Error',
+            description: 'Could not decode the Base64 string. It might be malformed or contain invalid characters.',
+        });
+      }
     }
   };
 
