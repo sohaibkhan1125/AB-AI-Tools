@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -60,6 +60,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: KeyRound,
     href: '/tools/password-generator',
     keywords: ['password', 'security', 'generator', 'secure', 'random']
+  },
+  {
+    id: 'ip-address-info',
+    name: 'IP Address Information',
+    description: 'Get information about an IP address, including location and ISP.',
+    icon: Network,
+    href: '/tools/ip-address-info',
+    keywords: ['ip', 'address', 'location', 'isp', 'network', 'geolocation']
   }
   // Add more tools here in the future
   // Example:
