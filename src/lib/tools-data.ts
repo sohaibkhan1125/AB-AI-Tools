@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -132,6 +132,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: ArrowRightLeft,
     href: '/tools/unit-converter',
     keywords: ['unit', 'converter', 'measurement', 'length', 'weight', 'temperature', 'metric', 'imperial']
+  },
+  {
+    id: 'number-system-converter',
+    name: 'Number System Converter',
+    description: 'Convert numbers between binary, octal, decimal, and hexadecimal systems.',
+    icon: Calculator,
+    href: '/tools/number-system-converter',
+    keywords: ['number', 'system', 'converter', 'binary', 'octal', 'decimal', 'hexadecimal', 'base']
   }
   // Add more tools here in the future
   // Example:
@@ -144,3 +152,4 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
+
