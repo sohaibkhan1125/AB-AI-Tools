@@ -11,7 +11,7 @@
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
-export const TranscribeAudioInputSchema = z.object({
+const TranscribeAudioInputSchema = z.object({
   audioDataUri: z
     .string()
     .describe(
@@ -20,7 +20,7 @@ export const TranscribeAudioInputSchema = z.object({
 });
 export type TranscribeAudioInput = z.infer<typeof TranscribeAudioInputSchema>;
 
-export const TranscribeAudioOutputSchema = z.object({
+const TranscribeAudioOutputSchema = z.object({
   transcript: z.string().describe('The transcribed text from the audio.'),
 });
 export type TranscribeAudioOutput = z.infer<typeof TranscribeAudioOutputSchema>;
