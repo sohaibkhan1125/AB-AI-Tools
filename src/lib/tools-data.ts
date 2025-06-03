@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -228,6 +228,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Landmark,
     href: '/tools/compound-interest-calculator',
     keywords: ['compound interest', 'investment', 'savings', 'future value', 'finance', 'calculator', 'interest rate']
+  },
+  {
+    id: 'percentage-calculator',
+    name: 'Percentage Calculator',
+    description: 'Calculate percentages, find what percentage X is of Y, and percentage changes.',
+    icon: Percent,
+    href: '/tools/percentage-calculator',
+    keywords: ['percentage', 'percent', 'calculator', 'math', 'finance', 'discount', 'increase', 'decrease']
   }
   // Add more tools here in the future
   // Example:
