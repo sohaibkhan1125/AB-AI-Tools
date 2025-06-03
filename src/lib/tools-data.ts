@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -108,6 +108,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Binary,
     href: '/tools/base64-encoder-decoder',
     keywords: ['base64', 'encode', 'decode', 'binary', 'text', 'converter', 'ascii', 'utf8']
+  },
+  {
+    id: 'url-encoder-decoder',
+    name: 'URL Encoder / Decoder',
+    description: 'Encode text to URL-safe format or decode URL-encoded strings.',
+    icon: Link,
+    href: '/tools/url-encoder-decoder',
+    keywords: ['url', 'encode', 'decode', 'percent encoding', 'uri', 'query string']
   }
   // Add more tools here in the future
   // Example:
@@ -120,4 +128,3 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
-
