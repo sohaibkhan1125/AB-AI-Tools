@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -68,6 +68,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Network,
     href: '/tools/ip-address-info',
     keywords: ['ip', 'address', 'location', 'isp', 'network', 'geolocation']
+  },
+  {
+    id: 'word-counter',
+    name: 'Word Counter',
+    description: 'Count words, characters, sentences, and paragraphs in your text.',
+    icon: Baseline,
+    href: '/tools/word-counter',
+    keywords: ['text', 'analysis', 'word count', 'character count', 'sentence count', 'paragraph count']
   }
   // Add more tools here in the future
   // Example:
