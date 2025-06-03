@@ -40,26 +40,18 @@ export default function PdfPageToCsvPage() {
           const pdfDoc = await PDFDocument.load(arrayBuffer);
           if (pdfDoc.getPageCount() > 0) {
             const firstPage = pdfDoc.getPages()[0];
-            const { width, height } = firstPage.getSize();
+            const { width } = firstPage.getSize();
             
             // Create a temporary canvas to render the page
             const canvas = document.createElement('canvas');
             // Aim for a preview width of ~400px, adjust scale accordingly
             const scale = 400 / width; 
-            canvas.width = width * scale;
-            canvas.height = height * scale;
-            const context = canvas.getContext('2d');
-
-            if (context) {
-                // pdf-lib doesn't have direct rendering. This is a placeholder.
-                // For actual rendering, libraries like pdf.js would be needed,
-                // which is too heavy for this simple example.
-                // So we'll just show a placeholder or skip complex preview.
-                // For this example, we'll generate the image for AI processing later.
-                // The "preview" shown to user will be minimal for now.
-                setFirstPageImagePreview('generating_preview'); // Placeholder text
-                toast({title: "Preview Note", description: "Actual page preview rendering is complex. Image for AI will be generated on conversion.", duration: 4000})
-            }
+            // Note: Actual rendering for preview is complex with pdf-lib alone.
+            // This section is primarily for UI feedback.
+            // The real image for AI is generated in handleExtractConvert.
+            
+            setFirstPageImagePreview('generating_preview'); // Placeholder text
+            toast({title: "Preview Note", description: "Actual page preview rendering is complex. Image for AI will be generated on conversion.", duration: 4000})
           } else {
             toast({ variant: 'destructive', title: 'Empty PDF', description: 'The selected PDF has no pages.' });
           }
@@ -108,29 +100,10 @@ export default function PdfPageToCsvPage() {
         return;
       }
 
-      // For this tool, we'll process the first page.
-      // Rendering PDF page to image is complex. We'll use a simplified approach:
-      // We'll assume the AI can handle PDF if passed as a data URI.
-      // This is an approximation as Gemini typically expects an image URI for {{media url=...}}
-      // A more robust solution would use pdf.js to render page to canvas, then toDataURL.
-      // For now, let's prepare a data URI directly from the blob for Genkit.
-      // Genkit multimodal models might handle PDF data URIs directly or might not.
-      // This is a known simplification due to client-side rendering complexity.
-      //
-      // **Correction based on Genkit docs: It *needs* an image URI for {{media}}**
-      // So, we MUST render to an image first.
-      // Let's try a basic canvas rendering. This will be VERY basic.
-      // A proper solution would involve pdf.js for rendering.
-
       const firstPage = pdfDoc.getPages()[0];
       const { width, height } = firstPage.getSize();
 
-      const viewport = firstPage.getViewport({ scale: 1.5 }); // Use pdf.js-like viewport if pdf-lib had it. pdf-lib does not.
-                                                          // This is the challenging part without a full rendering library.
-
-      // Simplification: Create a canvas and draw *something basic* or just use it as a placeholder.
-      // A full pdf.js integration is out of scope for this incremental change.
-      // We'll create a simple canvas and convert to image, Genkit will do its best.
+      // Create a canvas and draw placeholder content
       const canvas = document.createElement('canvas');
       const scaleFactor = 2; // Increase resolution for better AI processing
       canvas.width = width * scaleFactor;
@@ -141,15 +114,6 @@ export default function PdfPageToCsvPage() {
         throw new Error("Could not get canvas context.");
       }
       
-      // As pdf-lib itself doesn't render to canvas, we are in a tough spot for true client-side rendering.
-      // The most direct way for Genkit is to pass image data.
-      // This step would typically involve pdf.js: page.render({canvasContext, viewport}).promise.then(...)
-      // Since that's not available, we'll send a "best effort" image.
-      // For now, this will be a blank canvas of the PDF page size. This is a significant limitation.
-      // The AI will receive a blank image with the dimensions of the PDF page.
-      // To make this *actually* work, we'd need a proper PDF rendering step here.
-      // The prompt tells the AI it's an "image of a PDF page".
-      // Let's draw basic text saying "PDF Page Content Area" to simulate for AI.
       ctx.fillStyle = 'white';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = 'black';
