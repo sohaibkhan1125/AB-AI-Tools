@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -28,6 +28,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileImage, 
     href: '/tools/image-to-pdf',
     keywords: ['image', 'pdf', 'converter', 'jpg', 'png']
+  },
+  {
+    id: 'merge-pdf',
+    name: 'Merge PDF Files',
+    description: 'Combine multiple PDF files into a single document. Reorder files as needed.',
+    icon: Combine,
+    href: '/tools/merge-pdf',
+    keywords: ['pdf', 'merge', 'combine', 'join', 'document management']
   },
   {
     id: 'image-resizer',
@@ -184,7 +192,7 @@ export const TOOLS_DATA: Tool[] = [
   {
     id: 'loan-calculator',
     name: 'Loan Calculator',
-    description: 'Calculate monthly payments, total interest, and amortization for loans.',
+    description: 'Estimate your monthly loan payments, total interest, and see an amortization schedule.',
     icon: CircleDollarSign,
     href: '/tools/loan-calculator',
     keywords: ['loan', 'mortgage', 'finance', 'payment', 'interest', 'amortization', 'calculator']
