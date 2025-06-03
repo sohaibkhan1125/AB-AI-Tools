@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link, Palette } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -113,7 +113,7 @@ export const TOOLS_DATA: Tool[] = [
     id: 'url-encoder-decoder',
     name: 'URL Encoder / Decoder',
     description: 'Encode text to URL-safe format or decode URL-encoded strings.',
-    icon: Link,
+    icon: LinkIcon,
     href: '/tools/url-encoder-decoder',
     keywords: ['url', 'encode', 'decode', 'percent encoding', 'uri', 'query string']
   },
@@ -124,6 +124,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Palette,
     href: '/tools/color-converter',
     keywords: ['color', 'converter', 'hex', 'rgb', 'hsl', 'picker', 'palette']
+  },
+  {
+    id: 'unit-converter',
+    name: 'Unit Converter',
+    description: 'Convert various units of measurement like length, weight, temperature.',
+    icon: ArrowRightLeft,
+    href: '/tools/unit-converter',
+    keywords: ['unit', 'converter', 'measurement', 'length', 'weight', 'temperature', 'metric', 'imperial']
   }
   // Add more tools here in the future
   // Example:
