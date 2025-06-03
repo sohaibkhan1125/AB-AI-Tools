@@ -1,5 +1,5 @@
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, FileText, Scaling } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -35,6 +35,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Scaling,
     href: '/tools/image-resizer',
     keywords: ['image', 'resize', 'dimensions', 'scaler', 'photo']
+  },
+  {
+    id: 'png-to-jpg',
+    name: 'PNG to JPG Converter',
+    description: 'Convert PNG images to JPG format with quality adjustment.',
+    icon: Replace,
+    href: '/tools/png-to-jpg',
+    keywords: ['png', 'jpg', 'jpeg', 'converter', 'image format']
   },
   // Add more tools here in the future
   // Example:
