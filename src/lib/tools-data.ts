@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -84,6 +84,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Mic,
     href: '/tools/voice-to-text',
     keywords: ['speech recognition', 'transcription', 'audio', 'dictation']
+  },
+  {
+    id: 'internet-speed-tester',
+    name: 'Internet Speed Test',
+    description: 'Estimate your download speed and network latency. Upload speed test not available.',
+    icon: Gauge,
+    href: '/tools/internet-speed-tester',
+    keywords: ['internet speed', 'download', 'latency', 'ping', 'bandwidth', 'connection test']
   }
   // Add more tools here in the future
   // Example:
