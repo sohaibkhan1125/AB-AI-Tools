@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -236,6 +236,30 @@ export const TOOLS_DATA: Tool[] = [
     icon: Percent,
     href: '/tools/percentage-calculator',
     keywords: ['percentage', 'percent', 'calculator', 'math', 'finance', 'discount', 'increase', 'decrease']
+  },
+  {
+    id: 'sales-tax-calculator',
+    name: 'Sales Tax Calculator',
+    description: 'Calculate sales tax and total price based on amount and tax rate.',
+    icon: Receipt,
+    href: '/tools/sales-tax-calculator',
+    keywords: ['sales tax', 'tax', 'vat', 'gst', 'calculator', 'price', 'finance']
+  },
+  {
+    id: 'income-tax-calculator',
+    name: 'Simple Income Tax Calculator',
+    description: 'Estimate income tax based on a simplified progressive tax bracket system.',
+    icon: FileTextIcon,
+    href: '/tools/income-tax-calculator',
+    keywords: ['income tax', 'tax brackets', 'taxation', 'finance', 'calculator', 'salary']
+  },
+  {
+    id: 'simple-interest-calculator',
+    name: 'Simple Interest Calculator',
+    description: 'Calculate simple interest earned and total amount on a principal.',
+    icon: LineChart,
+    href: '/tools/simple-interest-calculator',
+    keywords: ['simple interest', 'interest', 'finance', 'investment', 'savings', 'calculator']
   }
   // Add more tools here in the future
   // Example:
@@ -248,4 +272,3 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
-

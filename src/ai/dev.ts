@@ -8,3 +8,6 @@ import '@/ai/flows/loan-calculator-flow';
 import '@/ai/flows/age-calculator-flow';
 import '@/ai/flows/bmi-calculator-flow';
 import '@/ai/flows/compound-interest-flow';
+import '@/ai/flows/sales-tax-calculator-flow';
+import '@/ai/flows/income-tax-calculator-flow';
+import '@/ai/flows/simple-interest-calculator-flow';
