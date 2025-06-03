@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -140,6 +140,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Calculator,
     href: '/tools/number-system-converter',
     keywords: ['number', 'system', 'converter', 'binary', 'octal', 'decimal', 'hexadecimal', 'base']
+  },
+  {
+    id: 'lorem-ipsum-generator',
+    name: 'Lorem Ipsum Generator',
+    description: 'Generate Lorem Ipsum style placeholder text for your projects.',
+    icon: ClipboardList,
+    href: '/tools/lorem-ipsum-generator',
+    keywords: ['lorem ipsum', 'placeholder', 'text', 'generator', 'dummy text', 'latin']
   }
   // Add more tools here in the future
   // Example:
@@ -152,4 +160,3 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
-
