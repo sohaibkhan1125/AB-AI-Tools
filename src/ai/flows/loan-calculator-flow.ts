@@ -10,7 +10,7 @@
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
-export const LoanCalculatorInputSchema = z.object({
+const LoanCalculatorInputSchema = z.object({
   loanAmount: z.number().positive({ message: 'Loan amount must be positive.' })
     .describe('The principal amount of the loan.'),
   annualInterestRate: z.number().positive({ message: 'Annual interest rate must be positive.' })
@@ -27,7 +27,7 @@ const AmortizationEntrySchema = z.object({
   remainingBalance: z.number(),
 });
 
-export const LoanCalculatorOutputSchema = z.object({
+const LoanCalculatorOutputSchema = z.object({
   monthlyPayment: z.number().describe('The calculated monthly payment amount.'),
   totalPayment: z.number().describe('The total amount paid over the life of the loan.'),
   totalInterest: z.number().describe('The total interest paid over the life of the loan.'),
