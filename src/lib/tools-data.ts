@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -172,6 +172,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: HardDrive,
     href: '/tools/file-size-calculator',
     keywords: ['file size', 'bytes', 'kb', 'mb', 'gb', 'tb', 'pb', 'converter', 'calculator', 'storage']
+  },
+  {
+    id: 'html-formatter',
+    name: 'HTML Formatter',
+    description: 'Format and beautify your HTML code for better readability.',
+    icon: CodeXml,
+    href: '/tools/html-formatter',
+    keywords: ['html', 'formatter', 'beautifier', 'code', 'markup', 'format', 'pretty print']
   }
   // Add more tools here in the future
   // Example:

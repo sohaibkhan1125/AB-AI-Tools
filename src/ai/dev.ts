@@ -3,3 +3,4 @@
 import '@/ai/flows/transcribe-audio-flow';
 import '@/ai/flows/lorem-ipsum-flow';
 import '@/ai/flows/csv-to-json-flow';
+import '@/ai/flows/html-formatter-flow';
