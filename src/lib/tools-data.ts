@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link, Palette } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -116,6 +116,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Link,
     href: '/tools/url-encoder-decoder',
     keywords: ['url', 'encode', 'decode', 'percent encoding', 'uri', 'query string']
+  },
+  {
+    id: 'color-converter',
+    name: 'Color Converter',
+    description: 'Convert colors between HEX, RGB, and HSL formats.',
+    icon: Palette,
+    href: '/tools/color-converter',
+    keywords: ['color', 'converter', 'hex', 'rgb', 'hsl', 'picker', 'palette']
   }
   // Add more tools here in the future
   // Example:
