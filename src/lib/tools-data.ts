@@ -1,5 +1,6 @@
+
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, ArrowRightLeft } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -40,7 +41,7 @@ export const TOOLS_DATA: Tool[] = [
     id: 'png-to-jpg',
     name: 'PNG to JPG Converter',
     description: 'Convert PNG images to JPG format with quality adjustment.',
-    icon: Replace, // Or ArrowRightLeft
+    icon: Replace, 
     href: '/tools/png-to-jpg',
     keywords: ['png', 'jpg', 'jpeg', 'converter', 'image format']
   },
@@ -48,9 +49,17 @@ export const TOOLS_DATA: Tool[] = [
     id: 'jpg-to-png',
     name: 'JPG to PNG Converter',
     description: 'Convert JPG/JPEG images to PNG format.',
-    icon: Replace, // Or ArrowRightLeft, consider if a different icon is better
+    icon: Replace, 
     href: '/tools/jpg-to-png',
     keywords: ['jpg', 'jpeg', 'png', 'converter', 'image format']
+  },
+  {
+    id: 'password-generator',
+    name: 'Password Generator',
+    description: 'Create strong, random passwords with customizable options.',
+    icon: KeyRound,
+    href: '/tools/password-generator',
+    keywords: ['password', 'security', 'generator', 'secure', 'random']
   }
   // Add more tools here in the future
   // Example:
@@ -63,3 +72,4 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
+
