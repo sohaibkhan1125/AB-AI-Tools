@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -92,6 +92,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Gauge,
     href: '/tools/internet-speed-tester',
     keywords: ['internet speed', 'download', 'latency', 'ping', 'bandwidth', 'connection test']
+  },
+  {
+    id: 'text-case-converter',
+    name: 'Text Case Converter',
+    description: 'Convert text to various cases like uppercase, lowercase, title case, etc.',
+    icon: CaseSensitive,
+    href: '/tools/text-case-converter',
+    keywords: ['text', 'case', 'converter', 'uppercase', 'lowercase', 'title case', 'sentence case']
   }
   // Add more tools here in the future
   // Example:
