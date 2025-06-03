@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -36,6 +36,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Combine,
     href: '/tools/merge-pdf',
     keywords: ['pdf', 'merge', 'combine', 'join', 'document management']
+  },
+  {
+    id: 'pdf-page-to-csv',
+    name: 'PDF Page to CSV Converter',
+    description: 'Extracts tabular data from a single PDF page and converts it to CSV format, ready for Excel.',
+    icon: Sheet,
+    href: '/tools/pdf-page-to-csv',
+    keywords: ['pdf', 'csv', 'excel', 'table extraction', 'data conversion', 'ocr']
   },
   {
     id: 'image-resizer',
