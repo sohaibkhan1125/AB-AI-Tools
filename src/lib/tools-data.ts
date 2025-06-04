@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2 } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -60,6 +60,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: RotateCw,
     href: '/tools/rotate-pdf-pages',
     keywords: ['pdf', 'rotate', 'edit', 'pages', 'orientation', 'document']
+  },
+  {
+    id: 'delete-pdf-pages',
+    name: 'PDF Page Deleter',
+    description: 'Remove specific pages or page ranges from a PDF document.',
+    icon: Trash2, 
+    href: '/tools/pdf-page-deleter',
+    keywords: ['pdf', 'delete pages', 'remove pages', 'edit pdf', 'document management']
   },
   {
     id: 'pdf-page-to-csv',
