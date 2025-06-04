@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -52,6 +52,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileText,
     href: '/tools/pdf-to-word-converter',
     keywords: ['pdf', 'word', 'text extraction', 'converter', 'ocr', 'document']
+  },
+  {
+    id: 'pdf-to-presentation-content-extractor',
+    name: 'PDF to Presentation Content Extractor',
+    description: 'Extracts text from PDF pages (first 5 pages) to help build presentation slides. Does not create a .pptx file.',
+    icon: Presentation,
+    href: '/tools/pdf-to-presentation-content-extractor',
+    keywords: ['pdf', 'powerpoint', 'presentation', 'slides', 'text extraction', 'ocr']
   },
   {
     id: 'image-resizer',
@@ -296,4 +304,3 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
-
