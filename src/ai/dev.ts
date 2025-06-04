@@ -19,3 +19,4 @@ import '@/ai/flows/unlock-pdf-flow';
 import '@/ai/flows/rotate-pdf-pages-flow';
 import '@/ai/flows/delete-pdf-pages-flow';
 import '@/ai/flows/extract-pdf-pages-flow';
+import '@/ai/flows/generate-image-flow';
