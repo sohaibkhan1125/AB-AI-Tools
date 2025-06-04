@@ -134,6 +134,14 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['jpg', 'jpeg', 'png', 'converter', 'image format']
   },
   {
+    id: 'webp-to-jpg',
+    name: 'WEBP to JPG Converter',
+    description: 'Convert WEBP images to JPG format with adjustable quality.',
+    icon: Replace,
+    href: '/tools/webp-to-jpg',
+    keywords: ['webp', 'jpg', 'jpeg', 'converter', 'image format']
+  },
+  {
     id: 'ai-image-generator',
     name: 'AI Image Generator',
     description: 'Create unique images from text prompts using cutting-edge AI.',
@@ -376,3 +384,4 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
+
