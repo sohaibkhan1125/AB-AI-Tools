@@ -11,14 +11,27 @@ import { UploadCloud, Loader2, Presentation, Copy, AlertTriangle, FileText } fro
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { extractTextFromPdfDocument, type PdfToPresentationTextInput, type PdfToPresentationTextOutput } from '@/ai/flows/pdf-to-presentation-text-flow';
+import { PDFDocument } from 'pdf-lib';
+import { extractTextFromPdfPageImage, type PdfToWordTextExtractionInput, type PdfToWordTextExtractionOutput } from '@/ai/flows/pdf-to-word-text-extraction-flow';
 
-const MAX_PAGES_DISPLAY_NOTE = 5; // Should match flow if hardcoded there
+const MAX_PAGES_TO_PROCESS = 5;
+
+interface ExtractedPageData {
+  pageNumber: number;
+  extractedText: string;
+}
+
+interface ExtractionResult {
+  pages: ExtractedPageData[];
+  processedPagesCount: number;
+  totalPagesCount: number;
+  limitApplied: boolean;
+}
 
 export default function PdfToPresentationContentPage() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfFileName, setPdfFileName] = useState<string>('');
-  const [extractionResult, setExtractionResult] = useState<PdfToPresentationTextOutput | null>(null);
+  const [extractionResult, setExtractionResult] = useState<ExtractionResult | null>(null);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
@@ -46,15 +59,6 @@ export default function PdfToPresentationContentPage() {
     }
   };
 
-  const readFileAsDataURL = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = error => reject(error);
-      reader.readAsDataURL(file);
-    });
-  };
-
   const handleExtractContent = async () => {
     if (!pdfFile) {
       toast({ variant: 'destructive', title: 'No File', description: 'Please select a PDF file first.' });
@@ -63,16 +67,79 @@ export default function PdfToPresentationContentPage() {
 
     setIsProcessing(true);
     setExtractionResult(null);
-    toast({ title: 'Processing PDF...', description: 'Extracting text from PDF pages. This may take a while for multiple pages.' });
+    toast({ title: 'Processing PDF...', description: 'Extracting text from PDF pages. This may take a while.' });
 
     try {
-      const pdfDataUri = await readFileAsDataURL(pdfFile);
-      const input: PdfToPresentationTextInput = { pdfDataUri };
-      const result = await extractTextFromPdfDocument(input);
+      const arrayBuffer = await pdfFile.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
       
-      setExtractionResult(result);
-      if (result.pages.length > 0) {
-        toast({ title: 'Content Extraction Complete!', description: `Text extracted from ${result.processedPagesCount} of ${result.totalPagesCount} pages.` });
+      const totalPages = pdfDoc.getPageCount();
+      if (totalPages === 0) {
+        toast({ variant: 'destructive', title: 'Empty PDF', description: 'The PDF has no pages to process.' });
+        setIsProcessing(false);
+        return;
+      }
+
+      const pagesToProcess = Math.min(totalPages, MAX_PAGES_TO_PROCESS);
+      const limitApplied = totalPages > MAX_PAGES_TO_PROCESS;
+      const extractedPagesData: ExtractedPageData[] = [];
+
+      for (let i = 0; i < pagesToProcess; i++) {
+        const page = pdfDoc.getPages()[i];
+        const { width, height } = page.getSize();
+
+        // Create a placeholder image data URI on the client
+        const canvas = document.createElement('canvas');
+        const scaleFactor = 1.5; // Consistent with other tools
+        canvas.width = width * scaleFactor;
+        canvas.height = height * scaleFactor;
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) {
+          console.warn(`Could not get canvas context for page ${i + 1}. Skipping.`);
+          extractedPagesData.push({
+              pageNumber: i + 1,
+              extractedText: "[Error creating image for this page]"
+          });
+          continue;
+        }
+        
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'black';
+        ctx.font = `${Math.min(30 * scaleFactor, canvas.height / 10)}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.fillText(`PDF Page ${i + 1} Content`, canvas.width / 2, canvas.height / 2);
+        
+        const imageDataUri = canvas.toDataURL('image/png');
+        
+        try {
+          const textExtractionInput: PdfToWordTextExtractionInput = { imageDataUri };
+          // Call the single-page text extraction flow
+          const textResult: PdfToWordTextExtractionOutput = await extractTextFromPdfPageImage(textExtractionInput);
+          extractedPagesData.push({
+            pageNumber: i + 1,
+            extractedText: textResult.extractedText,
+          });
+        } catch (e: any) {
+          console.error(`Error extracting text from page ${i + 1}:`, e);
+          extractedPagesData.push({
+            pageNumber: i + 1,
+            extractedText: `[Error extracting text: ${e.message || 'Unknown error'}]`,
+          });
+        }
+      }
+      
+      const finalResult: ExtractionResult = {
+        pages: extractedPagesData,
+        processedPagesCount: pagesToProcess,
+        totalPagesCount: totalPages,
+        limitApplied,
+      };
+      setExtractionResult(finalResult);
+
+      if (finalResult.pages.length > 0) {
+        toast({ title: 'Content Extraction Complete!', description: `Text extracted from ${finalResult.processedPagesCount} of ${finalResult.totalPagesCount} pages.` });
       } else {
         toast({ title: 'No Text Found', description: 'The AI could not extract text from the processed pages, or the PDF is empty.', duration: 5000 });
       }
@@ -163,7 +230,7 @@ export default function PdfToPresentationContentPage() {
               </div>
               <p className="text-sm text-muted-foreground">
                 Processed {extractionResult.processedPagesCount} of {extractionResult.totalPagesCount} total pages. 
-                {extractionResult.limitApplied && ` (Limited to ${MAX_PAGES_DISPLAY_NOTE} pages for this version).`}
+                {extractionResult.limitApplied && ` (Limited to ${MAX_PAGES_TO_PROCESS} pages for this version).`}
               </p>
               {extractionResult.pages.length > 0 ? (
                 <Accordion type="single" collapsible className="w-full">
@@ -199,7 +266,7 @@ export default function PdfToPresentationContentPage() {
               <AlertDescription className="space-y-1">
                   <p>This tool extracts <strong>plain text</strong> from an image representation of each PDF page using AI. It does <strong>not</strong> create a formatted .pptx (PowerPoint) file.</p>
                   <p>The quality of text extraction depends on the PDF's layout, clarity, and the AI's interpretation. Complex layouts or poor quality scans may yield suboptimal results.</p>
-                  <p>Currently, processing is limited to the first <strong>{MAX_PAGES_DISPLAY_NOTE} pages</strong> of the PDF to ensure reasonable performance.</p>
+                  <p>Currently, processing is limited to the first <strong>{MAX_PAGES_TO_PROCESS} pages</strong> of the PDF to ensure reasonable performance.</p>
                   <p>This tool is best for getting textual content to help you manually build your presentation slides.</p>
               </AlertDescription>
           </Alert>
