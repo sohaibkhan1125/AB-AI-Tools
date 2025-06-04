@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -44,6 +44,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Unlock,
     href: '/tools/unlock-pdf',
     keywords: ['pdf', 'unlock', 'remove password', 'decrypt', 'security']
+  },
+  {
+    id: 'rotate-pdf-pages',
+    name: 'Rotate PDF Pages',
+    description: 'Rotate specific pages or all pages in a PDF document by 90, 180, or 270 degrees.',
+    icon: RotateCw,
+    href: '/tools/rotate-pdf-pages',
+    keywords: ['pdf', 'rotate', 'edit', 'pages', 'orientation', 'document']
   },
   {
     id: 'pdf-page-to-csv',
