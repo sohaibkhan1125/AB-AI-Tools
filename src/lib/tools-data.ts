@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -100,6 +100,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Presentation,
     href: '/tools/pdf-to-presentation-content-extractor',
     keywords: ['pdf', 'powerpoint', 'presentation', 'slides', 'text extraction', 'ocr']
+  },
+  {
+    id: 'image-to-text-converter',
+    name: 'Image to Text Converter (OCR)',
+    description: 'Extract text from images (JPG, PNG, etc.) using Optical Character Recognition (OCR).',
+    icon: ScanText,
+    href: '/tools/image-to-text-converter',
+    keywords: ['ocr', 'image to text', 'text extraction', 'scan', 'picture to text']
   },
   {
     id: 'image-resizer',
@@ -360,4 +368,3 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
-
