@@ -24,10 +24,18 @@ export const TOOLS_DATA: Tool[] = [
   {
     id: 'image-to-pdf',
     name: 'Image to PDF Converter',
-    description: 'Convert JPG, PNG, and other image formats to PDF documents.',
+    description: 'Convert JPG, PNG, WEBP, GIF and other image formats to PDF documents.',
     icon: FileImage, 
     href: '/tools/image-to-pdf',
-    keywords: ['image', 'pdf', 'converter', 'jpg', 'png']
+    keywords: ['image', 'pdf', 'converter', 'jpg', 'png', 'webp', 'gif']
+  },
+  {
+    id: 'webp-to-pdf',
+    name: 'WEBP to PDF Converter',
+    description: 'Easily convert your WEBP image files into PDF documents. Supports single or multiple WEBP files.',
+    icon: FileImage,
+    href: '/tools/image-to-pdf', // Points to the existing versatile image to PDF converter
+    keywords: ['webp', 'pdf', 'converter', 'image']
   },
   {
     id: 'merge-pdf',

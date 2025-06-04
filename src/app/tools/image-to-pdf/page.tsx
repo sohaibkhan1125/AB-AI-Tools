@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, ChangeEvent } from 'react';
@@ -53,7 +54,7 @@ export default function ImageToPDFPage() {
           toast({
             variant: 'destructive',
             title: 'Invalid File Type',
-            description: `${file.name} is not a supported image file.`,
+            description: `${file.name} is not a supported image file. Supported types include JPG, PNG, WEBP, GIF.`,
           });
         }
       });
@@ -130,7 +131,12 @@ export default function ImageToPDFPage() {
             if (i > 0) {
               pdf.addPage();
             }
-            pdf.addImage(imageFile.dataUrl, imageFile.file.type.split('/')[1].toUpperCase(), x, y, newWidth, newHeight, undefined, 'FAST', imageQuality);
+            // Determine image type for addImage; default to JPEG if not obvious
+            let imageFormat = imageFile.file.type.split('/')[1]?.toUpperCase() || 'JPEG';
+            if (!['JPEG', 'PNG', 'WEBP'].includes(imageFormat)) {
+                imageFormat = 'JPEG'; // Default for unknown types jsPDF supports
+            }
+            pdf.addImage(imageFile.dataUrl, imageFormat, x, y, newWidth, newHeight, undefined, 'FAST', imageQuality);
             resolve();
           };
           img.onerror = (err) => {
@@ -172,7 +178,7 @@ export default function ImageToPDFPage() {
           </div>
           <CardTitle className="text-3xl font-bold font-headline">Image to PDF Converter</CardTitle>
           <CardDescription className="text-lg text-muted-foreground pt-2">
-            Convert JPG, PNG, and other images into a single PDF document.
+            Convert JPG, PNG, WEBP, GIF and other images into a single PDF document.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-8">
@@ -225,7 +231,7 @@ export default function ImageToPDFPage() {
                 </Select>
             </div>
             <div className="space-y-2">
-                 <Label htmlFor="imageQuality" className="font-medium flex items-center"><Palette className="mr-2 h-4 w-4 text-muted-foreground"/>Image Quality</Label>
+                 <Label htmlFor="imageQuality" className="font-medium flex items-center"><Palette className="mr-2 h-4 w-4 text-muted-foreground"/>Image Quality (for JPG/WEBP)</Label>
                 <div className="flex items-center gap-2">
                     <Slider
                         id="imageQuality"
@@ -280,3 +286,4 @@ export default function ImageToPDFPage() {
     </div>
   );
 }
+
