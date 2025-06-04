@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -44,6 +44,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Sheet,
     href: '/tools/pdf-page-to-csv',
     keywords: ['pdf', 'csv', 'excel', 'table extraction', 'data conversion', 'ocr']
+  },
+  {
+    id: 'pdf-to-word-text-extraction',
+    name: 'PDF to Word (Text Extraction)',
+    description: 'Extracts text from the first page of a PDF using AI. Output is plain text, copyable to Word.',
+    icon: FileText,
+    href: '/tools/pdf-to-word-converter',
+    keywords: ['pdf', 'word', 'text extraction', 'converter', 'ocr', 'document']
   },
   {
     id: 'image-resizer',
@@ -288,3 +296,4 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
+

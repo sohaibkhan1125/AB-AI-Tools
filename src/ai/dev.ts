@@ -13,3 +13,4 @@ import '@/ai/flows/income-tax-calculator-flow';
 import '@/ai/flows/simple-interest-calculator-flow';
 import '@/ai/flows/merge-pdf-flow';
 import '@/ai/flows/pdf-page-to-csv-flow';
+import '@/ai/flows/pdf-to-word-text-extraction-flow';
