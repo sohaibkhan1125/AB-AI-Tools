@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -148,6 +148,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Eraser,
     href: '/tools/image-background-remover',
     keywords: ['background remover', 'transparent background', 'image editing', 'ai', 'png', 'remove bg']
+  },
+  {
+    id: 'ai-image-upscaler',
+    name: 'AI Image Upscaler (Experimental)',
+    description: 'Attempt to increase the resolution and enhance details of your images using AI. Results are experimental and may vary.',
+    icon: ZoomIn,
+    href: '/tools/ai-image-upscaler',
+    keywords: ['ai', 'image', 'upscale', 'super resolution', 'enhance', 'details', 'experimental']
   },
   {
     id: 'password-generator',
