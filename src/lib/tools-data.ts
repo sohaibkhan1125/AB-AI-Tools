@@ -142,6 +142,14 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['webp', 'jpg', 'jpeg', 'converter', 'image format']
   },
   {
+    id: 'webp-to-png',
+    name: 'WEBP to PNG Converter',
+    description: 'Convert your WEBP images to high-quality PNG format, preserving transparency.',
+    icon: Replace,
+    href: '/tools/webp-to-png',
+    keywords: ['webp', 'png', 'converter', 'image format', 'transparency']
+  },
+  {
     id: 'ai-image-generator',
     name: 'AI Image Generator',
     description: 'Create unique images from text prompts using cutting-edge AI.',
