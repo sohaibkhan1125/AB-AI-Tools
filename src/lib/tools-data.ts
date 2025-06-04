@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -132,6 +132,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: ImageIcon,
     href: '/tools/ai-image-generator',
     keywords: ['ai', 'image', 'generator', 'art', 'creative', 'generative art', 'text to image']
+  },
+  {
+    id: 'ai-image-background-remover',
+    name: 'AI Image Background Remover',
+    description: 'Upload an image and let AI attempt to remove its background, making it transparent. Quality may vary.',
+    icon: Eraser,
+    href: '/tools/image-background-remover',
+    keywords: ['background remover', 'transparent background', 'image editing', 'ai', 'png', 'remove bg']
   },
   {
     id: 'password-generator',
@@ -352,3 +360,4 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
+
