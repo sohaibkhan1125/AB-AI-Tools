@@ -15,3 +15,4 @@ import '@/ai/flows/merge-pdf-flow';
 import '@/ai/flows/pdf-page-to-csv-flow';
 import '@/ai/flows/pdf-to-word-text-extraction-flow';
 // import '@/ai/flows/pdf-to-presentation-text-flow'; // Removed as logic moved to client
+import '@/ai/flows/unlock-pdf-flow';

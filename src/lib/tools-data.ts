@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -36,6 +36,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: Combine,
     href: '/tools/merge-pdf',
     keywords: ['pdf', 'merge', 'combine', 'join', 'document management']
+  },
+  {
+    id: 'unlock-pdf',
+    name: 'Unlock PDF',
+    description: 'Remove password protection from a PDF file (password must be known).',
+    icon: Unlock,
+    href: '/tools/unlock-pdf',
+    keywords: ['pdf', 'unlock', 'remove password', 'decrypt', 'security']
   },
   {
     id: 'pdf-page-to-csv',
@@ -304,3 +312,4 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
+
