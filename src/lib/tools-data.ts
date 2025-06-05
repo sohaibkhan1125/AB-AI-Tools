@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, Volume2 } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, Volume2 } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -206,14 +206,6 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['text', 'analysis', 'word count', 'character count', 'sentence count', 'paragraph count']
   },
   {
-    id: 'voice-to-text',
-    name: 'Voice to Text Converter',
-    description: 'Convert spoken audio into written text using AI.',
-    icon: Mic,
-    href: '/tools/voice-to-text',
-    keywords: ['speech recognition', 'transcription', 'audio', 'dictation']
-  },
-  {
     id: 'internet-speed-tester',
     name: 'Internet Speed Test',
     description: 'Estimate your download speed and network latency. Upload speed test not available.',
@@ -284,6 +276,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileCode2,
     href: '/tools/csv-to-json',
     keywords: ['csv', 'json', 'converter', 'data transformation', 'file conversion']
+  },
+  {
+    id: 'csv-to-excel-converter',
+    name: 'CSV to Excel Converter',
+    description: 'Convert CSV files to Excel (.xlsx) format directly in your browser.',
+    icon: FileSpreadsheet,
+    href: '/tools/csv-to-excel',
+    keywords: ['csv', 'excel', 'xlsx', 'converter', 'spreadsheet', 'data conversion']
   },
   {
     id: 'json-formatter-validator',
