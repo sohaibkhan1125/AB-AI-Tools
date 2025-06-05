@@ -444,6 +444,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: LineChart,
     href: '/tools/simple-interest-calculator',
     keywords: ['simple interest', 'interest', 'finance', 'investment', 'savings', 'calculator']
+  },
+  {
+    id: 'split-csv',
+    name: 'Split CSV File',
+    description: 'Split a large CSV file into multiple smaller CSV files based on number of rows.',
+    icon: SplitSquareHorizontal,
+    href: '/tools/split-csv',
+    keywords: ['csv', 'split', 'chunk', 'data processing', 'file utility']
   }
   // Add more tools here in the future
   // Example:
