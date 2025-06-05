@@ -182,14 +182,6 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['ai detector', 'text analysis', 'content authenticity', 'ai writing', 'gpt detector']
   },
   {
-    id: 'text-to-voice-converter',
-    name: 'Text to Voice Converter (with Tone)',
-    description: 'Convert text to speech with a selectable voice tone using AI.',
-    icon: Volume2,
-    href: '/tools/text-to-voice-converter',
-    keywords: ['tts', 'text to speech', 'voice', 'audio', 'tone', 'ai voice']
-  },
-  {
     id: 'password-generator',
     name: 'Password Generator',
     description: 'Create strong, random passwords with customizable options.',
