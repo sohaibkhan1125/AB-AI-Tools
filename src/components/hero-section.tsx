@@ -13,8 +13,8 @@ const HeroSection = () => {
           Your one-stop destination for handy AI-powered online utilities. Boost your productivity with our collection of simple and effective tools.
         </p>
         <div className="relative aspect-video max-w-4xl mx-auto mb-8 rounded-lg overflow-hidden shadow-xl">
-            <Image 
-              src="https://placehold.co/1200x675.png" 
+            <Image
+              src="https://cdn.pixabay.com/photo/2024/05/27/03/47/futuristic-8789975_640.png"
               alt="Abstract representation of AI tools and technology"
               layout="fill"
               objectFit="cover"
