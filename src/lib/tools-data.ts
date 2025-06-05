@@ -318,6 +318,14 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['xml', 'excel', 'xlsx', 'converter', 'data extraction', 'ai', 'table']
   },
   {
+    id: 'excel-to-xml-converter',
+    name: 'Excel to XML Converter (AI Assisted)',
+    description: 'Upload an Excel file. Data from the first sheet will be converted to XML format using AI.',
+    icon: DatabaseZap,
+    href: '/tools/excel-to-xml',
+    keywords: ['excel', 'xml', 'converter', 'data extraction', 'ai', 'table', 'xlsx']
+  },
+  {
     id: 'json-formatter-validator',
     name: 'JSON Formatter & Validator',
     description: 'Format and validate JSON strings. Beautify your JSON for readability.',
