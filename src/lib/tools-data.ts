@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, Volume2 } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -286,6 +286,14 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['csv', 'excel', 'xlsx', 'converter', 'spreadsheet', 'data conversion']
   },
   {
+    id: 'split-excel-file',
+    name: 'Split Excel File by Sheet',
+    description: 'Split an Excel workbook into separate files, one for each sheet.',
+    icon: Scissors, // Using Scissors as a general "split" icon
+    href: '/tools/split-excel-file',
+    keywords: ['excel', 'split', 'sheet', 'workbook', 'xlsx', 'xls', 'separate']
+  },
+  {
     id: 'json-formatter-validator',
     name: 'JSON Formatter & Validator',
     description: 'Format and validate JSON strings. Beautify your JSON for readability.',
@@ -400,3 +408,5 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
+
+    
