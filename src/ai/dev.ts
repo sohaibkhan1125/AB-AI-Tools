@@ -24,3 +24,4 @@ import '@/ai/flows/remove-image-background-flow';
 import '@/ai/flows/upscale-image-flow';
 import '@/ai/flows/ai-detector-flow';
 import '@/ai/flows/xml-to-csv-flow';
+import '@/ai/flows/json-to-xml-flow';

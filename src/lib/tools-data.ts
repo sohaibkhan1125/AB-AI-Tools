@@ -278,6 +278,14 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['csv', 'json', 'converter', 'data transformation', 'file conversion']
   },
   {
+    id: 'json-to-xml-converter',
+    name: 'JSON to XML Converter (AI Assisted)',
+    description: 'Convert JSON data structures into XML format using AI-assisted transformation.',
+    icon: FileCode2,
+    href: '/tools/json-to-xml',
+    keywords: ['json', 'xml', 'converter', 'data transformation', 'ai', 'file conversion']
+  },
+  {
     id: 'csv-to-excel-converter',
     name: 'CSV to Excel Converter',
     description: 'Convert CSV files to Excel (.xlsx) format directly in your browser.',
