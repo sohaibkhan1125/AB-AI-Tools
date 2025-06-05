@@ -294,6 +294,14 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['csv', 'excel', 'xlsx', 'converter', 'spreadsheet', 'data conversion']
   },
   {
+    id: 'excel-to-csv-converter',
+    name: 'Excel to CSV Converter',
+    description: 'Convert sheets from Excel files (.xlsx, .xls) into CSV format.',
+    icon: FileSpreadsheet, 
+    href: '/tools/excel-to-csv',
+    keywords: ['excel', 'csv', 'xlsx', 'xls', 'converter', 'spreadsheet', 'data extraction']
+  },
+  {
     id: 'split-excel-file',
     name: 'Split Excel File by Sheet',
     description: 'Split an Excel workbook into separate files, one for each sheet.',
