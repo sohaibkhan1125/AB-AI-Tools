@@ -48,9 +48,8 @@ Text to read: "${textToSpeak}"`;
         model: 'googleai/gemini-1.5-flash-latest', // Using a model known for multimodal capabilities
         prompt: fullPrompt,
         config: {
-          // It's safer to expect both and pick the audio if available.
-          // If 'AUDIO' only mode caused issues or returned text, this handles it.
-          responseModalities: ['TEXT', 'AUDIO'],
+          // Request only AUDIO modality
+          responseModalities: ['AUDIO'],
         },
       });
       
@@ -79,3 +78,4 @@ Text to read: "${textToSpeak}"`;
 export async function textToVoiceWithTone(input: TextToVoiceInput): Promise<TextToVoiceOutput> {
   return textToVoiceWithToneFlow(input);
 }
+
