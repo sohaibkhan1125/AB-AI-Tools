@@ -48,8 +48,9 @@ Text to read: "${textToSpeak}"`;
         model: 'googleai/gemini-1.5-flash-latest', // Using a model known for multimodal capabilities
         prompt: fullPrompt,
         config: {
-          // Request only AUDIO modality
-          responseModalities: ['AUDIO'],
+          // Request both TEXT and AUDIO modalities, similar to image generation guidance
+          // where both TEXT and IMAGE were required.
+          responseModalities: ['TEXT', 'AUDIO'],
         },
       });
       
@@ -60,7 +61,7 @@ Text to read: "${textToSpeak}"`;
         // This case is if the model unexpectedly returns text instead of audio.
         // Log this for debugging.
         console.warn("Audio generation returned text instead of media. Text:", text);
-        throw new Error('Audio generation failed: AI returned text instead of an audio file. Please try a simpler prompt or text.');
+        throw new Error('Audio generation failed: AI returned text instead of an audio file. The configured model may not support direct audio output as expected. Please try a simpler prompt or text, or check model capabilities.');
       } else {
         throw new Error('Audio generation failed to produce an audio URL or any output.');
       }
@@ -70,6 +71,7 @@ Text to read: "${textToSpeak}"`;
       if (error.message && (error.message.toLowerCase().includes('filtered') || error.message.toLowerCase().includes('safety'))) {
         throw new Error('Audio generation failed due to safety filters. Please try different text or tone.');
       }
+      // This is line 73 where the error is reported from
       throw new Error(error.message || 'Failed to generate audio due to an unexpected error.');
     }
   }
