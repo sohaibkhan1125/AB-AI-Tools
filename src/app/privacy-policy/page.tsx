@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
         </CardHeader>
         <CardContent className="space-y-6 text-foreground/90 leading-relaxed prose prose-sm sm:prose-base max-w-none">
           <p>
-            Welcome to Tool Hub. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our tools. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
+            Welcome to AI Tools Hub. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our tools. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
           </p>
 
           <h2 className="text-xl font-semibold font-headline text-primary">1. Information We Collect</h2>
@@ -25,7 +25,7 @@ export default function PrivacyPolicyPage() {
           </p>
           <ul className="list-disc list-inside space-y-1">
             <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, email address, that you voluntarily give to us when you contact us or use certain features of our tools (e.g., if a tool requires an email to send results).</li>
-            <li><strong>Usage Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, browser type, operating system, access times, and the pages you have viewed directly before and after accessing the Site. For most of our tools, data processed (e.g., images for PDF conversion) is processed client-side or temporarily on our servers and not stored long-term.</li>
+            <li><strong>Usage Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, browser type, operating system, access times, and the pages you have viewed directly before and after accessing the Site. For most of our tools, data processed (e.g., images for PDF conversion, text for AI analysis) is processed client-side or temporarily on our servers and not stored long-term.</li>
           </ul>
 
           <h2 className="text-xl font-semibold font-headline text-primary">2. Use of Your Information</h2>
@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="text-xl font-semibold font-headline text-primary">6. Contact Us</h2>
           <p>
-            If you have questions or comments about this Privacy Policy, please contact us through our contact page or at: <a href="mailto:privacy@toolhub.example.com" className="text-primary hover:underline">privacy@toolhub.example.com</a>.
+            If you have questions or comments about this Privacy Policy, please contact us through our contact page or at: <a href="mailto:privacy@aitoolshub.example.com" className="text-primary hover:underline">privacy@aitoolshub.example.com</a>.
           </p>
         </CardContent>
       </Card>

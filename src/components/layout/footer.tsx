@@ -27,7 +27,7 @@ const Footer = () => {
           </nav>
 
           <p className="text-sm text-muted-foreground text-center md:text-right">
-            &copy; {currentYear} Tool Hub. All rights reserved.
+            &copy; {currentYear} AI Tools Hub. All rights reserved.
           </p>
         </div>
       </div>
