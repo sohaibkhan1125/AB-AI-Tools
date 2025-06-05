@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -5,7 +6,7 @@ import { Menu, X } from 'lucide-react';
 import Logo from './logo';
 import NavLink from './nav-link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet';
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -39,9 +40,11 @@ const Header = () => {
             <SheetContent side="right" className="w-[280px] p-6 bg-card">
               <div className="flex flex-col gap-6">
                 <div className="flex justify-between items-center mb-4">
-                 <div onClick={() => setIsMobileMenuOpen(false)}>
-                    <Logo />
-                  </div>
+                  <SheetTitle asChild>
+                    <div onClick={() => setIsMobileMenuOpen(false)} className="cursor-pointer">
+                      <Logo />
+                    </div>
+                  </SheetTitle>
                   <SheetClose asChild>
                      <Button variant="ghost" size="icon">
                         <X className="h-6 w-6" />
