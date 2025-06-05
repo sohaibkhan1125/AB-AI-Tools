@@ -10,7 +10,7 @@
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
-export const AiDetectorInputSchema = z.object({
+const AiDetectorInputSchema = z.object({
   inputText: z.string()
     .min(50, { message: "Text must be at least 50 characters for meaningful analysis." })
     .max(5000, { message: "Text is too long (max 5000 characters)." })
@@ -18,12 +18,12 @@ export const AiDetectorInputSchema = z.object({
 });
 export type AiDetectorInput = z.infer<typeof AiDetectorInputSchema>;
 
-export const AiDetectorOutputSchema = z.object({
+const AiDetectorOutputSchema = z.object({
   assessmentCategory: z.enum([
-      "Highly Likely AI-Generated", 
-      "Possibly AI-Generated", 
-      "Uncertain", 
-      "Possibly Human-Written", 
+      "Highly Likely AI-Generated",
+      "Possibly AI-Generated",
+      "Uncertain",
+      "Possibly Human-Written",
       "Highly Likely Human-Written"
     ]).describe('The AI model\'s categorized assessment of the text\'s origin.'),
   assessmentReasoning: z.string().describe('A brief explanation for the assessment, highlighting observed patterns or stylistic cues.'),
@@ -73,9 +73,9 @@ const aiDetectorFlow = ai.defineFlow(
     if (!output) {
       throw new Error('AI text detection failed to produce output.');
     }
-    return { 
+    return {
       ...output,
-      originalText: input.inputText 
+      originalText: input.inputText
     };
   }
 );
