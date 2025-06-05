@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -64,7 +64,7 @@ export const TOOLS_DATA: Tool[] = [
   {
     id: 'delete-pdf-pages',
     name: 'PDF Page Deleter',
-    description: 'Remove specific pages or page ranges from a PDF document.',
+    description: 'Remove specific pages from your PDF documents.',
     icon: Trash2, 
     href: '/tools/pdf-page-deleter',
     keywords: ['pdf', 'delete pages', 'remove pages', 'edit pdf', 'document management']
@@ -160,7 +160,7 @@ export const TOOLS_DATA: Tool[] = [
   {
     id: 'ai-image-background-remover',
     name: 'AI Image Background Remover',
-    description: 'Upload an image and let AI attempt to remove its background, making it transparent. Quality may vary.',
+    description: 'Upload an image and let AI attempt to remove its background, making it transparent. Quality may vary based on image complexity.',
     icon: Eraser,
     href: '/tools/image-background-remover',
     keywords: ['background remover', 'transparent background', 'image editing', 'ai', 'png', 'remove bg']
@@ -172,6 +172,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: ZoomIn,
     href: '/tools/ai-image-upscaler',
     keywords: ['ai', 'image', 'upscale', 'super resolution', 'enhance', 'details', 'experimental']
+  },
+  {
+    id: 'ai-detector',
+    name: 'AI Text Detector',
+    description: 'Analyzes text to estimate the likelihood of it being AI-generated. Provides an assessment and reasoning.',
+    icon: ScanSearch,
+    href: '/tools/ai-detector',
+    keywords: ['ai detector', 'text analysis', 'content authenticity', 'ai writing', 'gpt detector']
   },
   {
     id: 'password-generator',
@@ -392,4 +400,3 @@ export const TOOLS_DATA: Tool[] = [
   //   keywords: ['text', 'analysis', 'word count']
   // },
 ];
-
