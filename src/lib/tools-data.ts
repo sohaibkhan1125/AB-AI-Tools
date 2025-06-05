@@ -286,6 +286,14 @@ export const TOOLS_DATA: Tool[] = [
     keywords: ['json', 'xml', 'converter', 'data transformation', 'ai', 'file conversion']
   },
   {
+    id: 'xml-to-json-converter',
+    name: 'XML to JSON Converter (AI Assisted)',
+    description: 'Convert XML data structures into JSON format using AI-assisted transformation.',
+    icon: FileCode2,
+    href: '/tools/xml-to-json',
+    keywords: ['xml', 'json', 'converter', 'data transformation', 'ai', 'file conversion']
+  },
+  {
     id: 'csv-to-xml-converter',
     name: 'CSV to XML Converter (AI Assisted)',
     description: 'Convert CSV data into XML format using AI-assisted transformation. Paste or upload CSV.',
