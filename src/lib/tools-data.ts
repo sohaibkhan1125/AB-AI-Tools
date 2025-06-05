@@ -1,6 +1,6 @@
 
 import type { Tool } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch } from 'lucide-react';
+import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, Volume2 } from 'lucide-react';
 
 // A helper component if we want to combine icons, or use a more complex one.
 // For now, we'll use single icons.
@@ -24,7 +24,7 @@ export const TOOLS_DATA: Tool[] = [
   {
     id: 'image-to-pdf',
     name: 'Image to PDF Converter',
-    description: 'Convert JPG, PNG, WEBP, GIF and other image formats to PDF documents.',
+    description: 'Convert JPG, PNG, WEBP, GIF and other image formats to PDF documents. Handles multiple images.',
     icon: FileImage, 
     href: '/tools/image-to-pdf',
     keywords: ['image', 'pdf', 'converter', 'jpg', 'png', 'webp', 'gif']
@@ -180,6 +180,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: ScanSearch,
     href: '/tools/ai-detector',
     keywords: ['ai detector', 'text analysis', 'content authenticity', 'ai writing', 'gpt detector']
+  },
+  {
+    id: 'text-to-voice-converter',
+    name: 'Text to Voice Converter (with Tone)',
+    description: 'Convert text to speech with a selectable voice tone using AI.',
+    icon: Volume2,
+    href: '/tools/text-to-voice-converter',
+    keywords: ['tts', 'text to speech', 'voice', 'audio', 'tone', 'ai voice']
   },
   {
     id: 'password-generator',
