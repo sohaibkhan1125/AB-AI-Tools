@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Menu, X, Search as SearchIconLucide, Sun, ChevronDown, Share2, Moon } from 'lucide-react';
+import { Menu, X, Search as SearchIconLucide, Moon, ChevronDown, Share2 } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './logo';
 import NavLink from './nav-link';
@@ -14,7 +14,6 @@ import {
   SheetTrigger,
   SheetClose,
   SheetHeader,
-  SheetTitle,
 } from '@/components/ui/sheet';
 import {
   Accordion,
@@ -30,8 +29,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { HEADER_DROPDOWN_CATEGORIES, ALL_TOOLS_CATEGORY_FOR_HEADER, TOOLS_DATA } from '@/lib/tools-data';
-import type { Tool } from '@/types/tool'; // Ensure Tool type is imported
+import { HEADER_DROPDOWN_CATEGORIES, TOOLS_DATA } from '@/lib/tools-data';
+import type { Tool } from '@/types/tool';
 
 interface GroupedTools {
   [category: string]: Tool[];
@@ -48,7 +47,7 @@ const Header = () => {
   
   const groupedToolsForMobile = useMemo(() => {
     return TOOLS_DATA.reduce((acc, tool) => {
-      const category = tool.headerCategory || 'Other'; // Use headerCategory or default
+      const category = tool.headerCategory || 'Other'; 
       if (!acc[category]) {
         acc[category] = [];
       }
@@ -57,23 +56,23 @@ const Header = () => {
     }, {} as GroupedTools);
   }, []);
 
-  const mobileMenuCategories = ['PDF', 'Image', 'Write', 'Video', 'File', 'Other'] as const;
+  // Define the order for mobile menu categories if needed, or use Object.keys(groupedToolsForMobile)
+  const mobileMenuAccordionCategories: Array<Tool['headerCategory'] | 'Other'> = ['PDF', 'Image', 'Write', 'Video', 'File', 'Other'];
 
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Redirect to a dedicated search results page or filter on current page
-      // For now, let's assume a query parameter based filter on homepage
-      window.location.href = `/?q=${encodeURIComponent(searchQuery.trim())}#all-tools-section`;
+      window.location.href = `/?q=${encodeURIComponent(searchQuery.trim())}#popular-tools-section`;
       if(isMobileMenuOpen) setIsMobileMenuOpen(false);
     }
   };
 
   if (!isMounted) {
+    // Simplified skeleton or null during SSR/hydration mismatch prevention
     return (
       <header className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 h-16 sm:h-[70px] flex items-center justify-between">
+        <div className="container mx-auto px-4 h-[70px] flex items-center justify-between">
           <Logo />
           <div className="md:hidden">
             <Button variant="ghost" size="icon">
@@ -99,10 +98,10 @@ const Header = () => {
                   {category.name} <ChevronDown className="ml-1 h-4 w-4 opacity-70" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
+              <DropdownMenuContent className="w-64">
                 <DropdownMenuLabel>{category.name} Tools</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                {category.tools.slice(0, 5).map((tool) => ( // Show first 5 tools
+                {category.tools.slice(0, 7).map((tool) => ( 
                   <DropdownMenuItem key={tool.id} asChild>
                     <Link href={tool.href} className="flex items-center gap-2 text-sm">
                       <tool.icon className="h-4 w-4 text-muted-foreground" />
@@ -110,16 +109,19 @@ const Header = () => {
                     </Link>
                   </DropdownMenuItem>
                 ))}
-                {category.tools.length > 5 && (
+                {category.tools.length > 7 && (
                    <DropdownMenuItem asChild>
-                     <Link href={`/#${category.name.toLowerCase().replace(/\s+/g, '-')}-tools-section`} className="text-primary text-sm font-medium hover:underline p-2 text-center block">
+                     <Link href={`/#popular-tools-section?filter=${category.name}`} className="text-primary text-sm font-medium hover:underline p-2 text-center block">
                        View all {category.name.toLowerCase()} tools...
                      </Link>
                    </DropdownMenuItem>
                 )}
-                 {category.tools.length === 0 && (
+                 {category.tools.length === 0 && category.name !== 'Video' && ( // Show "No tools" except for Video for now
                    <DropdownMenuItem disabled className="text-sm text-muted-foreground p-2">No tools yet</DropdownMenuItem>
                  )}
+                  {category.name === 'Video' && category.tools.length === 0 && (
+                     <DropdownMenuItem disabled className="text-sm text-muted-foreground p-2">Video tools coming soon!</DropdownMenuItem>
+                  )}
               </DropdownMenuContent>
             </DropdownMenu>
           ))}
@@ -138,7 +140,7 @@ const Header = () => {
             <Input
               type="search"
               placeholder="Search..."
-              className="w-full pl-8 pr-3 py-2 h-9 rounded-md bg-muted/50 border-border/70 text-sm focus:bg-background"
+              className="w-full pl-8 pr-3 py-2 h-9 rounded-md bg-secondary text-sm focus:bg-background"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -150,10 +152,7 @@ const Header = () => {
 
         {/* Mobile Menu Trigger */}
         <div className="md:hidden flex items-center gap-2">
-          <Button variant="ghost" size="icon" aria-label="Search (mobile)" onClick={() => { /* Implement mobile search UI separately if needed */ }}>
-            <SearchIconLucide className="h-5 w-5 text-foreground/70" />
-          </Button>
-          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
@@ -163,9 +162,9 @@ const Header = () => {
             <SheetContent side="right" className="w-[300px] p-0 flex flex-col bg-card">
               <SheetHeader className="p-4 border-b">
                  <div className="flex justify-between items-center">
-                   <div onClick={() => setIsMobileMenuOpen(false)} className="cursor-pointer">
+                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)} passHref>
                       <Logo />
-                   </div>
+                    </Link>
                    <SheetClose asChild>
                       <Button variant="ghost" size="icon">
                          <X className="h-6 w-6" />
@@ -186,26 +185,25 @@ const Header = () => {
                     />
                   </form>
                 <Accordion type="multiple" className="w-full">
-                  {mobileMenuCategories.map((categoryName) => {
-                    const tools = groupedToolsForMobile[categoryName] || [];
-                    if (tools.length === 0 && categoryName !== 'Video') return null; // Hide empty cats except Video
+                  {mobileMenuAccordionCategories.map((categoryKey) => {
+                    const categoryTools = groupedToolsForMobile[categoryKey] || [];
+                    if (categoryTools.length === 0 && categoryKey !== 'Video') return null; 
 
                     return (
-                      <AccordionItem value={categoryName} key={categoryName}>
+                      <AccordionItem value={categoryKey || 'other'} key={categoryKey || 'other'}>
                         <AccordionTrigger className="text-base hover:no-underline py-3">
                           <span className="flex items-center">
-                            {categoryName}
+                            {categoryKey} Tools
                           </span>
                         </AccordionTrigger>
                         <AccordionContent className="pt-1 pb-0">
                           <div className="flex flex-col gap-1 pl-4">
-                            {tools.length > 0 ? (
-                              tools.slice(0,10).map((tool) => ( // Limit tools displayed in mobile accordion
-                                <SheetClose key={tool.id} asChild>
+                            {categoryTools.length > 0 ? (
+                              categoryTools.slice(0,10).map((tool) => (
+                                <SheetClose asChild key={tool.id}>
                                   <NavLink
                                     href={tool.href}
                                     className="py-2 text-sm text-muted-foreground hover:text-primary flex items-center gap-2"
-                                    onClick={() => setIsMobileMenuOpen(false)}
                                   >
                                     <tool.icon className="h-4 w-4" />
                                     {tool.name}
@@ -213,14 +211,16 @@ const Header = () => {
                                 </SheetClose>
                               ))
                             ) : (
-                              <p className="py-2 text-sm text-muted-foreground italic">No tools yet.</p>
+                              <p className="py-2 text-sm text-muted-foreground italic">
+                                {categoryKey === 'Video' ? "Video tools coming soon!" : "No tools yet."}
+                              </p>
                             )}
-                             {tools.length > 10 && (
+                             {categoryTools.length > 10 && (
                                <SheetClose asChild>
-                                <NavLink href={`/#${categoryName.toLowerCase().replace(/\s+/g, '-')}-tools-section`}
+                                <NavLink href={`/#popular-tools-section?filter=${categoryKey}`}
                                   className="py-2 text-sm text-primary font-medium hover:underline"
-                                   onClick={() => setIsMobileMenuOpen(false)}>
-                                  View all {categoryName} tools...
+                                  >
+                                  View all {categoryKey} tools...
                                 </NavLink>
                               </SheetClose>
                             )}
@@ -230,16 +230,16 @@ const Header = () => {
                     );
                   })}
                 </Accordion>
-                <div className="mt-6 pt-6 border-t space-y-2">
-                     <SheetClose asChild>
-                        <NavLink href="/" className="block py-2 px-2 text-base hover:bg-accent rounded-md" onClick={() => setIsMobileMenuOpen(false)}>
+                <div className="mt-6 pt-6 border-t space-y-1">
+                    <SheetClose asChild>
+                        <NavLink href="/" className="block py-2.5 px-2 text-base hover:bg-accent rounded-md">
                            Sign In
                         </NavLink>
                     </SheetClose>
-                    <div className="flex items-center gap-2 py-2 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer" aria-label="Toggle theme (visual only)">
+                    <div className="flex items-center gap-2 py-2.5 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer" aria-label="Toggle theme (visual only)">
                         <Moon className="h-5 w-5" /> Theme
                     </div>
-                    <div className="flex items-center gap-2 py-2 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer" aria-label="Share">
+                    <div className="flex items-center gap-2 py-2.5 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer" aria-label="Share">
                         <Share2 className="h-5 w-5" /> Share
                     </div>
                 </div>

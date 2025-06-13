@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,126 +9,154 @@ body {
 
 @layer base {
   :root {
-    /* TinyWow-inspired Theme */
-    --background: 240 5% 96%; /* Light grey */
-    --foreground: 240 10% 3.9%; /* Very dark grey (near black) */
+    /* TinyWow-inspired Theme - Light Mode */
+    --background: 220 20% 98%; /* Very light cool grey */
+    --foreground: 220 15% 25%; /* Dark cool grey */
 
     --card: 0 0% 100%; /* White */
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 220 15% 25%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 220 15% 25%;
 
-    --primary: 217 91% 60%; /* Bright Blue (TinyWow Accent) */
+    --primary: 210 90% 50%; /* Bright Blue */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 240 4.8% 95.9%; /* Lighter grey */
-    --secondary-foreground: 240 5.9% 10%;
+    --secondary: 220 15% 90%; /* Light grey for muted elements like search bg */
+    --secondary-foreground: 220 15% 25%;
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%; /* Grey for muted text */
+    --muted: 220 15% 90%;
+    --muted-foreground: 220 10% 45%; /* Grey for muted text */
 
-    --accent: 217 91% 60%; /* Using primary blue as general accent */
+    --accent: 210 90% 50%; /* Using primary blue as general accent */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 5.9% 90%; /* Light grey border */
-    --input: 240 5.9% 90%; /* Input field background / border */
-    --ring: 217 91% 60%; /* Ring color (blue) */
+    --border: 220 15% 88%; /* Subtle border */
+    --input: 220 15% 94%; /* Input field background / border */
+    --ring: 210 90% 55%; /* Ring color (blue) */
 
     --radius: 0.5rem;
 
-    /* Card specific background colors from TinyWow */
-    --card-pdf: 258 70% 60%; /* Purple */
-    --card-pdf-foreground: 0 0% 100%;
-    --card-image: 26 95% 54%; /* Orange */
-    --card-image-foreground: 0 0% 100%;
-    --card-video: 347 85% 60%; /* Pink-Red */
-    --card-video-foreground: 0 0% 100%;
-    --card-ai-write: 240 60% 65%; /* Blue-Violet */
-    --card-ai-write-foreground: 0 0% 100%;
-    --card-file: 175 70% 45%; /* Teal */
-    --card-file-foreground: 0 0% 100%;
+    /* TinyWow Homepage Category Card Colors */
+    --card-pdf-bg: 258 70% 60%; /* Purple */
+    --card-pdf-fg: 0 0% 100%;
+    --card-image-bg: 26 95% 54%; /* Orange */
+    --card-image-fg: 0 0% 100%;
+    --card-video-bg: 347 85% 60%; /* Pink-Red */
+    --card-video-fg: 0 0% 100%;
+    --card-ai-write-bg: 230 60% 65%; /* Blue-Violet */
+    --card-ai-write-fg: 0 0% 100%;
+    --card-file-bg: 175 70% 45%; /* Teal */
+    --card-file-fg: 0 0% 100%;
     
-    --hero-highlight-bg: 26 95% 54%; /* Orange for "Everything" highlight */
+    /* Hero "Everything" Highlight */
+    --hero-highlight-bg: 26 95% 54%; /* Orange */
     --hero-highlight-fg: 0 0% 100%;
 
-    --chart-1: 217 80% 65%;
-    --chart-2: 200 80% 60%;
-    --chart-3: 220 70% 60%;
-    --chart-4: 190 75% 55%;
-    --chart-5: 210 85% 70%;
+    /* Popular Tool Card specific */
+    --popular-tool-card-bg: 210 60% 97%; /* Very light blue */
+    --popular-tool-card-fg: 220 15% 25%;
+    
+    /* Category Label Colors for Popular Tool Cards */
+    --category-label-pdf: 258 70% 50%;
+    --category-label-image: 26 85% 48%;
+    --category-label-video: 347 75% 50%;
+    --category-label-ai-write: 230 55% 55%;
+    --category-label-file: 175 65% 40%;
+    --category-label-converter: 145 60% 40%; /* Green */
+    --category-label-other: 220 10% 50%; /* Grey */
 
+
+    --chart-1: 210 80% 65%;
+    --chart-2: 190 80% 60%;
+    --chart-3: 230 70% 60%;
+    --chart-4: 180 75% 55%;
+    --chart-5: 220 85% 70%;
+
+    /* Sidebar - can remain or be adjusted if sidebar is used */
     --sidebar-background: 210 20% 94%;
     --sidebar-foreground: 210 10% 23%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary: 210 90% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 100%;
-    --sidebar-accent-foreground: 217 91% 60%;
+    --sidebar-accent-foreground: 210 90% 50%;
     --sidebar-border: 210 20% 90%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-ring: 210 90% 50%;
   }
 
   .dark {
-    /* Define dark theme variables if needed, for now keep it similar or adjust slightly */
-    --background: 240 10% 10%; 
-    --foreground: 240 5% 96%;
+    /* Dark Theme (Basic example, can be expanded) */
+    --background: 220 15% 10%; 
+    --foreground: 220 20% 90%;
 
-    --card: 240 10% 12%;
-    --card-foreground: 240 5% 96%;
+    --card: 220 15% 15%;
+    --card-foreground: 220 20% 90%;
 
-    --popover: 240 10% 10%;
-    --popover-foreground: 240 5% 96%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 220 20% 90%;
 
-    --primary: 217 80% 65%; 
-    --primary-foreground: 240 10% 10%;
+    --primary: 210 85% 60%; 
+    --primary-foreground: 220 15% 10%;
 
-    --secondary: 240 10% 18%; 
-    --secondary-foreground: 240 5% 96%;
+    --secondary: 220 15% 20%; 
+    --secondary-foreground: 220 20% 90%;
 
-    --muted: 240 10% 18%;
-    --muted-foreground: 240 5% 63%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 217 80% 65%;
-    --accent-foreground: 240 10% 10%;
+    --accent: 210 85% 60%;
+    --accent-foreground: 220 15% 10%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 20%; /* Darker input background */
-    --ring: 217 80% 65%;
+    --border: 220 15% 25%;
+    --input: 220 15% 18%; 
+    --ring: 210 85% 60%;
     
-    --card-pdf: 258 60% 50%;
-    --card-pdf-foreground: 0 0% 100%;
-    --card-image: 26 85% 48%;
-    --card-image-foreground: 0 0% 100%;
-    --card-video: 347 75% 50%;
-    --card-video-foreground: 0 0% 100%;
-    --card-ai-write: 240 50% 55%;
-    --card-ai-write-foreground: 0 0% 100%;
-    --card-file: 175 60% 38%;
-    --card-file-foreground: 0 0% 100%;
+    /* TinyWow Homepage Category Card Colors - Dark Mode (Adjusted slightly) */
+    --card-pdf-bg: 258 60% 50%;
+    --card-pdf-fg: 0 0% 100%;
+    --card-image-bg: 26 85% 48%;
+    --card-image-fg: 0 0% 100%;
+    --card-video-bg: 347 75% 50%;
+    --card-video-fg: 0 0% 100%;
+    --card-ai-write-bg: 230 50% 55%;
+    --card-ai-write-fg: 0 0% 100%;
+    --card-file-bg: 175 60% 38%;
+    --card-file-fg: 0 0% 100%;
 
     --hero-highlight-bg: 26 85% 48%; 
     --hero-highlight-fg: 0 0% 100%;
+    
+    --popular-tool-card-bg: 210 30% 18%; 
+    --popular-tool-card-fg: 220 20% 90%;
 
-    --chart-1: 217 70% 70%; 
-    --chart-2: 200 70% 65%; 
-    --chart-3: 220 60% 65%; 
-    --chart-4: 190 65% 60%; 
-    --chart-5: 210 75% 75%;
+    --category-label-pdf: 258 70% 60%;
+    --category-label-image: 26 90% 55%;
+    --category-label-video: 347 80% 60%;
+    --category-label-ai-write: 230 65% 65%;
+    --category-label-file: 175 70% 50%;
+    --category-label-converter: 145 65% 50%;
+    --category-label-other: 220 15% 60%;
+
+    --chart-1: 210 70% 70%; 
+    --chart-2: 190 70% 65%; 
+    --chart-3: 230 60% 65%; 
+    --chart-4: 180 65% 60%; 
+    --chart-5: 220 75% 75%;
 
     --sidebar-background: 210 10% 18%;
     --sidebar-foreground: 210 20% 90%;
-    --sidebar-primary: 217 80% 65%;
+    --sidebar-primary: 210 85% 60%;
     --sidebar-primary-foreground: 210 10% 10%;
     --sidebar-accent: 210 10% 12%;
-    --sidebar-accent-foreground: 217 80% 65%;
+    --sidebar-accent-foreground: 210 85% 60%;
     --sidebar-border: 210 10% 20%;
-    --sidebar-ring: 217 80% 65%;
+    --sidebar-ring: 210 85% 60%;
   }
 }
 

@@ -7,6 +7,8 @@ interface ToolCardProps {
   tool: Tool;
 }
 
+// This is the standard tool card, used if an "All Tools" section is re-added.
+// The current prompt focuses on PopularToolCardV2 for the main display.
 const ToolCard = ({ tool }: ToolCardProps) => {
   const IconComponent = tool.icon;
   return (
