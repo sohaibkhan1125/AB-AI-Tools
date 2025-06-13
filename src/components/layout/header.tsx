@@ -48,9 +48,7 @@ const CATEGORY_ORDER: ToolCategory[] = [
 // Categories to feature with a checkmark
 const FEATURED_CATEGORIES: ToolCategory[] = [
   'PDF Tools',
-  'Image Tools',
-  'Data Converters',
-  'Calculators',
+  'Text & AI Tools',
 ];
 
 const Header = () => {
@@ -101,7 +99,7 @@ const Header = () => {
         <Logo />
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2 flex-grow justify-center">
+        <nav className="hidden md:flex items-center gap-1 lg:gap-0 flex-grow justify-start pl-4">
           {sortedCategories.map((categoryName) => (
             <DropdownMenu key={categoryName}>
               <DropdownMenuTrigger asChild>
@@ -127,18 +125,24 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* Desktop Right Icons */}
+        {/* Desktop Right Links & Icons */}
         <div className="hidden md:flex items-center gap-2">
-          <Button variant="ghost" size="icon" asChild>
-            <Link href="/#tools-section" aria-label="Search tools">
-              <SearchIcon className="h-5 w-5" />
-            </Link>
+          <Button variant="link" asChild className="text-xs px-2 text-foreground/70 hover:text-primary">
+            <Link href="/contact">Want To Remove Ads & Captcha?</Link>
+          </Button>
+          <Button variant="link" asChild className="text-sm px-2">
+            <Link href="/contact">Support Us</Link>
           </Button>
           <Button variant="ghost" size="icon" aria-label="Toggle theme (visual only)">
             <Sun className="h-5 w-5" />
           </Button>
-          <Button variant="link" asChild className="text-sm">
-            <Link href="/contact">Support Us</Link>
+           <Button variant="ghost" size="icon" asChild>
+            <Link href="/#tools-section" aria-label="Search tools">
+              <SearchIcon className="h-5 w-5" />
+            </Link>
+          </Button>
+          <Button variant="outline" asChild className="text-sm px-3 py-1 h-auto">
+            <Link href="/">Sign In</Link>
           </Button>
         </div>
 
@@ -198,16 +202,25 @@ const Header = () => {
                     </AccordionItem>
                   ))}
                 </Accordion>
-                <div className="mt-6 pt-6 border-t">
+                <div className="mt-6 pt-6 border-t space-y-2">
                     <SheetClose asChild>
                         <NavLink href="/#tools-section" className="flex items-center gap-2 py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
                             <SearchIcon className="h-5 w-5" /> Search Tools
                         </NavLink>
                     </SheetClose>
+                    <SheetClose asChild>
+                        <NavLink href="/contact" className="block py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                           Want To Remove Ads & Captcha?
+                        </NavLink>
+                    </SheetClose>
                      <SheetClose asChild>
-                        <NavLink href="/contact" className="flex items-center gap-2 py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
-                           {/* Using a placeholder icon for Support Us */}
-                           <CircleDollarSign className="h-5 w-5" /> Support Us 
+                        <NavLink href="/contact" className="block py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                           Support Us
+                        </NavLink>
+                    </SheetClose>
+                     <SheetClose asChild>
+                        <NavLink href="/" className="block py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                           Sign In
                         </NavLink>
                     </SheetClose>
                     <div className="flex items-center gap-2 py-2 text-base text-foreground/80 cursor-pointer" aria-label="Toggle theme (visual only)">
