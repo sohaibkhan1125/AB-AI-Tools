@@ -1,17 +1,31 @@
 
 import type { Tool, ToolCategory } from '@/types/tool';
 import {
-  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video, Folder, PenTool, Sparkles
+  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video, Folder, PenTool, Sparkles, LayoutGrid, Box, Settings2
 } from 'lucide-react';
 
-// Helper to map "Write" or "AI Write" to "Text & AI Tools" category for consistency
-const mapWriteCategory = (categoryInput: string): ToolCategory => {
-  if (categoryInput.toLowerCase().includes('write')) {
-    return 'Text & AI Tools';
-  }
-  return categoryInput as ToolCategory;
-};
 
+// This function helps map internal detailed categories to broader display categories for the filter bar
+const getDisplayCategory = (internalCategory: ToolCategory): string => {
+  switch (internalCategory) {
+    case 'PDF Tools':
+      return 'Pdf Tools';
+    case 'Image Tools':
+      return 'Image Tools';
+    case 'Text & AI Tools':
+      return 'AI Write';
+    case 'Data Converters':
+      return 'Converter Tools';
+    case 'Video Tools':
+      return 'Video Tools';
+    case 'Calculators':
+    case 'Web Utilities':
+    case 'File Management':
+      return 'Other Tools';
+    default:
+      return internalCategory; // Fallback
+  }
+};
 
 export const TOOLS_DATA: Tool[] = [
   {
@@ -21,6 +35,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: QrCode,
     href: '/tools/qr-code-scanner',
     category: 'Web Utilities',
+    displayCategory: getDisplayCategory('Web Utilities'),
     keywords: ['qr', 'scanner', 'code', 'barcode']
   },
   {
@@ -30,16 +45,18 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileImage,
     href: '/tools/image-to-pdf',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     isFeaturedCategory: true,
     keywords: ['image', 'pdf', 'converter', 'jpg', 'png', 'webp', 'gif']
   },
   {
-    id: 'webp-to-pdf', // Kept for specific searchability, maps to Image to PDF
+    id: 'webp-to-pdf',
     name: 'WEBP to PDF Converter',
     description: 'Easily convert your WEBP image files into PDF documents. Supports single or multiple WEBP files.',
     icon: FileImage,
     href: '/tools/image-to-pdf',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     keywords: ['webp', 'pdf', 'converter', 'image']
   },
   {
@@ -49,6 +66,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Combine,
     href: '/tools/merge-pdf',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     isFeaturedCategory: true,
     keywords: ['pdf', 'merge', 'combine', 'join', 'document management']
   },
@@ -59,6 +77,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Unlock,
     href: '/tools/unlock-pdf',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     keywords: ['pdf', 'unlock', 'remove password', 'decrypt', 'security']
   },
   {
@@ -68,6 +87,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: RotateCw,
     href: '/tools/rotate-pdf-pages',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     keywords: ['pdf', 'rotate', 'edit', 'pages', 'orientation', 'document']
   },
   {
@@ -77,6 +97,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Trash2,
     href: '/tools/pdf-page-deleter',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     keywords: ['pdf', 'delete pages', 'remove pages', 'edit pdf', 'document management']
   },
   {
@@ -86,6 +107,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Scissors,
     href: '/tools/extract-pdf-pages',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     keywords: ['pdf', 'extract', 'split', 'pages', 'select pages', 'document management']
   },
   {
@@ -95,6 +117,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Sheet,
     href: '/tools/pdf-page-to-csv',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     keywords: ['pdf', 'csv', 'excel', 'table extraction', 'data conversion', 'ocr']
   },
   {
@@ -104,6 +127,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileText,
     href: '/tools/pdf-to-word-converter',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     keywords: ['pdf', 'word', 'text extraction', 'converter', 'ocr', 'document']
   },
   {
@@ -113,6 +137,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Presentation,
     href: '/tools/pdf-to-presentation-content-extractor',
     category: 'PDF Tools',
+    displayCategory: getDisplayCategory('PDF Tools'),
     keywords: ['pdf', 'powerpoint', 'presentation', 'slides', 'text extraction', 'ocr']
   },
   {
@@ -122,7 +147,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: ScanText,
     href: '/tools/image-to-text-converter',
     category: 'Image Tools',
-    // isFeaturedCategory: true, // Reverted
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['ocr', 'image to text', 'text extraction', 'scan', 'picture to text']
   },
   {
@@ -132,6 +157,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Scaling,
     href: '/tools/image-resizer',
     category: 'Image Tools',
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['image', 'resize', 'dimensions', 'scaler', 'photo']
   },
   {
@@ -141,6 +167,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Replace,
     href: '/tools/png-to-jpg',
     category: 'Image Tools',
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['png', 'jpg', 'jpeg', 'converter', 'image format']
   },
   {
@@ -150,6 +177,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Replace,
     href: '/tools/jpg-to-png',
     category: 'Image Tools',
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['jpg', 'jpeg', 'png', 'converter', 'image format']
   },
   {
@@ -159,6 +187,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Replace,
     href: '/tools/webp-to-jpg',
     category: 'Image Tools',
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['webp', 'jpg', 'jpeg', 'converter', 'image format']
   },
   {
@@ -168,6 +197,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Replace,
     href: '/tools/webp-to-png',
     category: 'Image Tools',
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['webp', 'png', 'converter', 'image format', 'transparency']
   },
   {
@@ -177,6 +207,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: ImageIcon,
     href: '/tools/ai-image-generator',
     category: 'Image Tools',
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['ai', 'image', 'generator', 'art', 'creative', 'generative art', 'text to image']
   },
   {
@@ -186,6 +217,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Eraser,
     href: '/tools/image-background-remover',
     category: 'Image Tools',
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['background remover', 'transparent background', 'image editing', 'ai', 'png', 'remove bg']
   },
   {
@@ -195,6 +227,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: ZoomIn,
     href: '/tools/ai-image-upscaler',
     category: 'Image Tools',
+    displayCategory: getDisplayCategory('Image Tools'),
     keywords: ['ai', 'image', 'upscale', 'super resolution', 'enhance', 'details', 'experimental']
   },
   {
@@ -204,6 +237,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: ScanSearch,
     href: '/tools/ai-detector',
     category: 'Text & AI Tools',
+    displayCategory: getDisplayCategory('Text & AI Tools'),
     isFeaturedCategory: true,
     keywords: ['ai detector', 'text analysis', 'content authenticity', 'ai writing', 'gpt detector']
   },
@@ -214,6 +248,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Volume2,
     href: '/tools/voice-to-text',
     category: 'Text & AI Tools',
+    displayCategory: getDisplayCategory('Text & AI Tools'),
     keywords: ['speech to text', 'transcription', 'audio', 'voice recognition', 'ai']
   },
   {
@@ -223,6 +258,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: KeyRound,
     href: '/tools/password-generator',
     category: 'Web Utilities',
+    displayCategory: getDisplayCategory('Web Utilities'),
     keywords: ['password', 'security', 'generator', 'secure', 'random']
   },
   {
@@ -232,6 +268,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Network,
     href: '/tools/ip-address-info',
     category: 'Web Utilities',
+    displayCategory: getDisplayCategory('Web Utilities'),
     keywords: ['ip', 'address', 'location', 'isp', 'network', 'geolocation']
   },
   {
@@ -241,6 +278,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Baseline,
     href: '/tools/word-counter',
     category: 'Text & AI Tools',
+    displayCategory: getDisplayCategory('Text & AI Tools'),
     keywords: ['text', 'analysis', 'word count', 'character count', 'sentence count', 'paragraph count']
   },
   {
@@ -250,6 +288,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Gauge,
     href: '/tools/internet-speed-tester',
     category: 'Web Utilities',
+    displayCategory: getDisplayCategory('Web Utilities'),
     keywords: ['internet speed', 'download', 'latency', 'ping', 'bandwidth', 'connection test']
   },
   {
@@ -259,6 +298,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: CaseSensitive,
     href: '/tools/text-case-converter',
     category: 'Text & AI Tools',
+    displayCategory: getDisplayCategory('Text & AI Tools'),
     keywords: ['text', 'case', 'converter', 'uppercase', 'lowercase', 'title case', 'sentence case']
   },
   {
@@ -268,6 +308,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Binary,
     href: '/tools/base64-encoder-decoder',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['base64', 'encode', 'decode', 'binary', 'text', 'converter', 'ascii', 'utf8']
   },
   {
@@ -277,6 +318,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: LinkIcon,
     href: '/tools/url-encoder-decoder',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['url', 'encode', 'decode', 'percent encoding', 'uri', 'query string']
   },
   {
@@ -285,7 +327,8 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert colors between HEX, RGB, and HSL formats.',
     icon: Palette,
     href: '/tools/color-converter',
-    category: 'Web Utilities', 
+    category: 'Web Utilities',
+    displayCategory: getDisplayCategory('Web Utilities'),
     keywords: ['color', 'converter', 'hex', 'rgb', 'hsl', 'picker', 'palette']
   },
   {
@@ -294,7 +337,8 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert between various units of measurement like length, weight, temperature.',
     icon: ArrowRightLeft,
     href: '/tools/unit-converter',
-    category: 'Calculators', 
+    category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['unit', 'converter', 'measurement', 'length', 'weight', 'temperature', 'metric', 'imperial']
   },
   {
@@ -304,6 +348,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Calculator,
     href: '/tools/number-system-converter',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['number', 'system', 'converter', 'binary', 'octal', 'decimal', 'hexadecimal', 'base']
   },
   {
@@ -312,7 +357,8 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Generate Lorem Ipsum style placeholder text for your projects.',
     icon: ClipboardList,
     href: '/tools/lorem-ipsum-generator',
-    category: mapWriteCategory('Write'),
+    category: 'Text & AI Tools',
+    displayCategory: getDisplayCategory('Text & AI Tools'),
     keywords: ['lorem ipsum', 'placeholder', 'text', 'generator', 'dummy text', 'latin']
   },
   {
@@ -322,6 +368,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileCode2,
     href: '/tools/csv-to-json',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['csv', 'json', 'converter', 'data transformation', 'file conversion']
   },
   {
@@ -331,6 +378,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileCode2,
     href: '/tools/json-to-xml',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['json', 'xml', 'converter', 'data transformation', 'ai', 'file conversion']
   },
   {
@@ -340,6 +388,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileCode2,
     href: '/tools/xml-to-json',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['xml', 'json', 'converter', 'data transformation', 'ai', 'file conversion']
   },
   {
@@ -349,6 +398,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileCode2,
     href: '/tools/csv-to-xml',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['csv', 'xml', 'converter', 'data transformation', 'ai', 'file conversion']
   },
   {
@@ -357,7 +407,8 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert CSV files to Excel (.xlsx) format directly in your browser.',
     icon: FileSpreadsheet,
     href: '/tools/csv-to-excel',
-    category: 'Data Converters', 
+    category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['csv', 'excel', 'xlsx', 'converter', 'spreadsheet', 'data conversion']
   },
   {
@@ -366,7 +417,8 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert sheets from Excel files (.xlsx, .xls) into CSV format.',
     icon: FileSpreadsheet,
     href: '/tools/excel-to-csv',
-    category: 'Data Converters', 
+    category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['excel', 'csv', 'xlsx', 'xls', 'converter', 'spreadsheet', 'data extraction']
   },
   {
@@ -376,7 +428,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Scissors,
     href: '/tools/split-excel-file',
     category: 'File Management',
-    // isFeaturedCategory: true, // Reverted
+    displayCategory: getDisplayCategory('File Management'),
     keywords: ['excel', 'split', 'sheet', 'workbook', 'xlsx', 'xls', 'separate']
   },
   {
@@ -386,6 +438,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: DatabaseZap,
     href: '/tools/xml-to-excel',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['xml', 'excel', 'xlsx', 'converter', 'data extraction', 'ai', 'table']
   },
   {
@@ -395,6 +448,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: DatabaseZap,
     href: '/tools/excel-to-xml',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['excel', 'xml', 'converter', 'data extraction', 'ai', 'table', 'xlsx']
   },
   {
@@ -404,6 +458,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Braces,
     href: '/tools/json-formatter-validator',
     category: 'Data Converters',
+    displayCategory: getDisplayCategory('Data Converters'),
     keywords: ['json', 'formatter', 'validator', 'linter', 'pretty print', 'beautifier', 'viewer']
   },
   {
@@ -412,7 +467,8 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert file sizes between Bytes, KB, MB, GB, TB, and PB (1KB = 1024 Bytes).',
     icon: HardDrive,
     href: '/tools/file-size-calculator',
-    category: 'Calculators', 
+    category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['file size', 'bytes', 'kb', 'mb', 'gb', 'tb', 'pb', 'converter', 'calculator', 'storage']
   },
   {
@@ -421,7 +477,8 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Format and beautify your HTML code for better readability.',
     icon: CodeXml,
     href: '/tools/html-formatter',
-    category: mapWriteCategory('Write'),
+    category: 'Text & AI Tools',
+    displayCategory: getDisplayCategory('Text & AI Tools'),
     keywords: ['html', 'formatter', 'beautifier', 'code', 'markup', 'format', 'pretty print']
   },
   {
@@ -431,6 +488,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: CircleDollarSign,
     href: '/tools/loan-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['loan', 'mortgage', 'finance', 'payment', 'interest', 'amortization', 'calculator']
   },
   {
@@ -440,6 +498,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Cake,
     href: '/tools/age-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['age', 'birthday', 'date', 'calculator', 'years', 'months', 'days']
   },
   {
@@ -449,6 +508,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: TrendingUp,
     href: '/tools/investment-roi-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['roi', 'investment', 'return', 'profit', 'loss', 'finance', 'calculator']
   },
   {
@@ -458,6 +518,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: HeartPulse,
     href: '/tools/bmi-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['bmi', 'body mass index', 'health', 'weight', 'fitness', 'calculator']
   },
   {
@@ -467,6 +528,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: DollarSign,
     href: '/tools/salary-converter',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['salary', 'wage', 'income', 'pay', 'converter', 'hourly', 'annual', 'finance']
   },
   {
@@ -476,6 +538,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Landmark,
     href: '/tools/compound-interest-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['compound interest', 'investment', 'savings', 'future value', 'finance', 'calculator', 'interest rate']
   },
   {
@@ -485,6 +548,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Percent,
     href: '/tools/percentage-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['percentage', 'percent', 'calculator', 'math', 'finance', 'discount', 'increase', 'decrease']
   },
   {
@@ -494,6 +558,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Receipt,
     href: '/tools/sales-tax-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['sales tax', 'tax', 'vat', 'gst', 'calculator', 'price', 'finance']
   },
   {
@@ -503,6 +568,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileTextIcon,
     href: '/tools/income-tax-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['income tax', 'tax brackets', 'taxation', 'finance', 'calculator', 'salary']
   },
   {
@@ -512,6 +578,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: LineChart,
     href: '/tools/simple-interest-calculator',
     category: 'Calculators',
+    displayCategory: getDisplayCategory('Calculators'),
     keywords: ['simple interest', 'interest', 'finance', 'investment', 'savings', 'calculator']
   },
   {
@@ -521,6 +588,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: SplitSquareHorizontal,
     href: '/tools/split-csv',
     category: 'File Management',
+    displayCategory: getDisplayCategory('File Management'),
     isFeaturedCategory: true,
     keywords: ['csv', 'split', 'chunk', 'data processing', 'file utility']
   }

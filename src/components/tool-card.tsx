@@ -1,8 +1,7 @@
+
 import Link from 'next/link';
 import type { Tool } from '@/types/tool';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card'; // Removed CardHeader, CardTitle, CardDescription, Button
 
 interface ToolCardProps {
   tool: Tool;
@@ -12,24 +11,24 @@ const ToolCard = ({ tool }: ToolCardProps) => {
   const IconComponent = tool.icon;
   return (
     <Link href={tool.href} className="group block h-full">
-      <Card className="h-full flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out border-border hover:border-primary/50">
-        <CardHeader className="flex flex-row items-start gap-4 space-y-0 pb-4">
-          <div className="bg-primary/10 p-3 rounded-lg">
-            <IconComponent className="h-6 w-6 text-primary" />
+      <Card className="h-full flex flex-col p-4 hover:shadow-md transition-shadow duration-200 ease-in-out border border-border hover:border-primary/30 rounded-lg">
+        <CardContent className="flex items-start gap-3 p-0 flex-grow"> {/* Use items-start for vertical alignment if content heights vary */}
+          <div className="flex-shrink-0 bg-primary/10 p-2.5 rounded-md mt-1"> {/* Adjusted padding and margin */}
+            <IconComponent className="h-5 w-5 text-primary" /> {/* Slightly smaller icon */}
           </div>
           <div className="flex-1">
-            <CardTitle className="text-lg font-semibold group-hover:text-primary transition-colors">
+            <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-tight">
               {tool.name}
-            </CardTitle>
+            </h3>
+            {tool.displayCategory && (
+              <p className="text-xs text-primary/80 mt-0.5 mb-1"> {/* Category below title */}
+                {tool.displayCategory}
+              </p>
+            )}
+            <p className="text-xs text-muted-foreground leading-snug">
+              {tool.description}
+            </p>
           </div>
-        </CardHeader>
-        <CardContent className="flex-grow flex flex-col justify-between">
-          <CardDescription className="text-sm text-muted-foreground mb-4">
-            {tool.description}
-          </CardDescription>
-          <Button variant="ghost" size="sm" className="self-start text-primary p-0 h-auto hover:bg-transparent group-hover:underline">
-            Open Tool <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
         </CardContent>
       </Card>
     </Link>
