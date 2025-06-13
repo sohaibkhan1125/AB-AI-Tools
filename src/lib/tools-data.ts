@@ -1,22 +1,12 @@
 
-import type { Tool, ToolCategory, TinyWowCategoryCardData } from '@/types/tool';
+import type { Tool, ToolCategory, TinyWowCategoryCardData, FunctionalToolCategory, FeaturedStripTool } from '@/types/tool';
 import {
-  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIconLucide, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIconLucide, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video as VideoIconLucide, Folder, PenTool, Sparkles, LayoutGrid, Box, Settings2, Clapperboard, Shuffle, GanttChartSquare, Users, FileCog, Wrench, Grip, Type as TypeIcon, ListFilter
+  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIconLucide, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIconLucide, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video as VideoIconLucide, Folder, PenTool, Sparkles, LayoutGrid, Box, Settings2, Clapperboard, Shuffle, GanttChartSquare, Users, FileCog, Wrench, Grip, Type as TypeIcon, ListFilter, ArrowLeftRight
 } from 'lucide-react';
 
-// Maps to ToolCategory in types/tool.ts for internal categorization
-export type FunctionalToolCategory =
-  | 'PDF Tools'
-  | 'Image Tools'
-  | 'Text & AI Tools'
-  | 'Data Converters'
-  | 'Calculators'
-  | 'Web Utilities'
-  | 'File Management'
-  | 'Video Tools';
 
-interface AppTool extends Omit<Tool, 'category'> {
-  category: FunctionalToolCategory; // Functional category for internal grouping & filtering
+interface AppTool extends Tool {
+  category: FunctionalToolCategory; 
 }
 
 export const TOOLS_DATA: AppTool[] = [
@@ -47,7 +37,7 @@ export const TOOLS_DATA: AppTool[] = [
   },
   {
     id: 'pdf-to-word-text-extraction', name: 'PDF to Word (Text Extraction)', description: 'Extract text from PDF (first page) for Word.', icon: FileText, href: '/tools/pdf-to-word-converter', category: 'PDF Tools', headerCategory: 'PDF',
-    popularCardName: 'PDF to JPG', popularCardDescription: 'Convert PDF to JPG and download each page as an image.', popularDisplayCategory: 'Pdf Tools', categoryLabelColorClass: 'text-[hsl(var(--category-label-pdf))]', iconBgClass: 'bg-purple-100/80 dark:bg-purple-500/20', isPopular: true, // Note: functionality is text extraction, but card text matches prompt.
+    popularCardName: 'PDF to JPG', popularCardDescription: 'Convert PDF to JPG and download each page as an image.', popularDisplayCategory: 'Pdf Tools', categoryLabelColorClass: 'text-[hsl(var(--category-label-pdf))]', iconBgClass: 'bg-purple-100/80 dark:bg-purple-500/20', isPopular: true, 
   },
   {
     id: 'pdf-to-presentation-content-extractor', name: 'PDF to Presentation Content', description: 'Extract text from PDF for presentation slides.', icon: Presentation, href: '/tools/pdf-to-presentation-content-extractor', category: 'PDF Tools', headerCategory: 'PDF',
@@ -87,7 +77,7 @@ export const TOOLS_DATA: AppTool[] = [
   },
   {
     id: 'ai-detector', name: 'AI Text Detector', description: 'Estimate if text is AI-generated.', icon: ScanSearch, href: '/tools/ai-detector', category: 'Text & AI Tools', headerCategory: 'Write',
-    popularCardName: 'Content Improver', popularCardDescription: 'Improve your content.', popularDisplayCategory: 'AI Write', categoryLabelColorClass: 'text-[hsl(var(--category-label-ai-write))]', iconBgClass: 'bg-blue-100/80 dark:bg-blue-500/20', isPopular: true, // Mapping to AI Detector for now
+    popularCardName: 'Content Improver', popularCardDescription: 'Improve your content.', popularDisplayCategory: 'AI Write', categoryLabelColorClass: 'text-[hsl(var(--category-label-ai-write))]', iconBgClass: 'bg-blue-100/80 dark:bg-blue-500/20', isPopular: true, 
   },
   {
     id: 'voice-to-text', name: 'Voice to Text', description: 'Convert speech to text via AI.', icon: Volume2, href: '/tools/voice-to-text', category: 'Text & AI Tools', headerCategory: 'Write',
@@ -100,11 +90,11 @@ export const TOOLS_DATA: AppTool[] = [
   },
   {
     id: 'lorem-ipsum-generator', name: 'Lorem Ipsum Generator', description: 'Generate placeholder text.', icon: ClipboardList, href: '/tools/lorem-ipsum-generator', category: 'Text & AI Tools', headerCategory: 'Write',
-    popularCardName: 'Essay Writer', popularCardDescription: 'Easily create an essay with AI.', popularDisplayCategory: 'AI Write', categoryLabelColorClass: 'text-[hsl(var(--category-label-ai-write))]', iconBgClass: 'bg-blue-100/80 dark:bg-blue-500/20', isPopular: true, // Mapping to Lorem Ipsum for now
+    popularCardName: 'Essay Writer', popularCardDescription: 'Easily create an essay with AI.', popularDisplayCategory: 'AI Write', categoryLabelColorClass: 'text-[hsl(var(--category-label-ai-write))]', iconBgClass: 'bg-blue-100/80 dark:bg-blue-500/20', isPopular: true, 
   },
   {
     id: 'html-formatter', name: 'HTML Formatter', description: 'Format and beautify HTML code.', icon: CodeXml, href: '/tools/html-formatter', category: 'Text & AI Tools', headerCategory: 'Write',
-    popularCardName: 'Paragraph Writer', popularCardDescription: 'Paragraph Writer.', popularDisplayCategory: 'AI Write', categoryLabelColorClass: 'text-[hsl(var(--category-label-ai-write))]', iconBgClass: 'bg-blue-100/80 dark:bg-blue-500/20', isPopular: true, // Mapping to HTML formatter for now
+    popularCardName: 'Paragraph Writer', popularCardDescription: 'Paragraph Writer.', popularDisplayCategory: 'AI Write', categoryLabelColorClass: 'text-[hsl(var(--category-label-ai-write))]', iconBgClass: 'bg-blue-100/80 dark:bg-blue-500/20', isPopular: true, 
   },
   
   // Data Converters
@@ -205,7 +195,7 @@ export const TOOLS_DATA: AppTool[] = [
     id: 'simple-interest-calculator', name: 'Simple Interest Calculator', description: 'Calculate simple interest.', icon: LineChart, href: '/tools/simple-interest-calculator', category: 'Calculators', headerCategory: 'Other',
   },
   {
-    id: 'unit-converter', name: 'Unit Converter', description: 'Convert length, weight, temp.', icon: ArrowRightLeft, href: '/tools/unit-converter', category: 'Calculators', headerCategory: 'Other',
+    id: 'unit-converter', name: 'Unit Converter', description: 'Convert length, weight, temp.', icon: ArrowLeftRight, href: '/tools/unit-converter', category: 'Calculators', headerCategory: 'Other',
   },
   
   // Video Tools - Placeholder example
@@ -236,7 +226,7 @@ export const TINY_WOW_CATEGORIES: TinyWowCategoryCardData[] = [
 ];
 
 // For Header Navigation Dropdowns
-export const HEADER_DROPDOWN_CATEGORIES: Array<{ name: 'PDF' | 'Image' | 'Write' | 'Video' | 'File', tools: AppTool[] }> = [
+export const HEADER_DROPDOWN_CATEGORIES: Array<{ name: Tool['headerCategory'], tools: AppTool[] }> = [
   { name: 'PDF', tools: TOOLS_DATA.filter(tool => tool.headerCategory === 'PDF') },
   { name: 'Image', tools: TOOLS_DATA.filter(tool => tool.headerCategory === 'Image') },
   { name: 'Write', tools: TOOLS_DATA.filter(tool => tool.headerCategory === 'Write') },
@@ -253,4 +243,58 @@ export const POPULAR_TOOLS_FILTER_CATEGORIES = [
   { name: 'Converter Tools', filterKey: 'Converter Tools', icon: Shuffle, mappedCategories: ['Data Converters'] as FunctionalToolCategory[] },
   { name: 'Other Tools', filterKey: 'Other Tools', icon: Settings2, mappedCategories: ['Calculators', 'Web Utilities', 'File Management'] as FunctionalToolCategory[] },
   { name: 'AI Write', filterKey: 'AI Write', icon: PenTool, mappedCategories: ['Text & AI Tools'] as FunctionalToolCategory[] },
+];
+
+// Data for the new "Featured Tools Strip"
+export const FEATURED_TOOLS_STRIP_DATA: FeaturedStripTool[] = [
+  {
+    id: 'image-background-remover', // Maps to existing tool
+    name: 'Photo Cleanup AI',
+    description: 'Use AI to remove unwanted objects or enhance details.',
+    href: '/tools/image-background-remover',
+    imageSrc: 'https://placehold.co/300x200.png',
+    imageAlt: 'Photo Cleanup AI preview',
+    imageBgClass: 'bg-purple-100/70 dark:bg-purple-500/10',
+    dataAiHint: 'photo edit cleanup',
+  },
+  {
+    id: 'delete-pdf-pages', // Maps to existing tool
+    name: 'Advanced PDF Editor',
+    description: 'Easily modify, delete pages, and manage your PDF files.',
+    href: '/tools/pdf-page-deleter',
+    imageSrc: 'https://placehold.co/300x200.png',
+    imageAlt: 'Advanced PDF Editor preview',
+    imageBgClass: 'bg-blue-100/70 dark:bg-blue-500/10',
+    dataAiHint: 'pdf document editor',
+  },
+  {
+    id: 'lorem-ipsum-generator', // Maps to existing tool, presented as AI Writer
+    name: 'Instant AI Writer',
+    description: 'Generate creative text, essays, and articles in seconds.',
+    href: '/tools/lorem-ipsum-generator',
+    imageSrc: 'https://placehold.co/300x200.png',
+    imageAlt: 'Instant AI Writer preview',
+    imageBgClass: 'bg-green-100/70 dark:bg-green-500/10',
+    dataAiHint: 'ai writing assistant',
+  },
+  {
+    id: 'video-converter-placeholder', // Placeholder, as no video converter exists yet
+    name: 'Ultimate Video Converter',
+    description: 'Convert video files between various formats quickly.',
+    href: '#', // Placeholder link
+    imageSrc: 'https://placehold.co/300x200.png',
+    imageAlt: 'Video Converter preview',
+    imageBgClass: 'bg-pink-100/70 dark:bg-pink-500/10',
+    dataAiHint: 'video format conversion',
+  },
+  {
+    id: 'ai-image-generator', 
+    name: 'Creative Image Studio',
+    description: 'Generate stunning visuals and artwork from text prompts.',
+    href: '/tools/ai-image-generator',
+    imageSrc: 'https://placehold.co/300x200.png',
+    imageAlt: 'AI Image Studio preview',
+    imageBgClass: 'bg-orange-100/70 dark:bg-orange-500/10',
+    dataAiHint: 'ai image art',
+  },
 ];

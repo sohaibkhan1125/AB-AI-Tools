@@ -8,18 +8,28 @@ export type ToolCategory =
   | 'Write' // Corresponds to "AI Write Tools" or "Text & AI Tools" functionally
   | 'Video'
   | 'File'  // Corresponds to "File Management" or some "Data Converters"
-  | 'Converter' // New for "Converter Tools" filter
-  | 'Other'     // New for "Other Tools" filter
+  | 'Converter' 
+  | 'Other'     
 
   // Functional categories used in TOOLS_DATA for more precise grouping
   | 'PDF Tools'
   | 'Image Tools'
-  | 'Text & AI Tools' // Maps to "Write" or "AI Write"
-  | 'Data Converters' // Maps to "Converter"
-  | 'Calculators'     // Maps to "Other"
-  | 'Web Utilities'   // Maps to "Other"
-  | 'File Management' // Maps to "File" or "Other"
-  | 'Video Tools';    // Maps to "Video"
+  | 'Text & AI Tools' 
+  | 'Data Converters' 
+  | 'Calculators'     
+  | 'Web Utilities'   
+  | 'File Management' 
+  | 'Video Tools';    
+
+export type FunctionalToolCategory =
+  | 'PDF Tools'
+  | 'Image Tools'
+  | 'Text & AI Tools'
+  | 'Data Converters'
+  | 'Calculators'
+  | 'Web Utilities'
+  | 'File Management'
+  | 'Video Tools';
 
 export interface Tool {
   id: string;
@@ -28,16 +38,16 @@ export interface Tool {
   icon: LucideIcon;
   href: string;
   keywords?: string[];
-  category: ToolCategory; // This should be the more granular functional category
-  headerCategory?: 'PDF' | 'Image' | 'Write' | 'Video' | 'File'; // For top nav dropdowns
+  category: FunctionalToolCategory; 
+  headerCategory?: 'PDF' | 'Image' | 'Write' | 'Video' | 'File' | 'Other';
   
-  // For Popular Tool Card display
-  isPopular?: boolean; // Flag if it's a candidate for "popular" section
-  popularCardName?: string; // Custom name for the popular card
-  popularCardDescription?: string; // Custom description for the popular card
-  popularDisplayCategory?: string; // Text to show on card, e.g., "AI Write", "Pdf Tools"
-  categoryLabelColorClass?: string; // Tailwind class for category label on popular card e.g. text-[hsl(var(--category-label-pdf))]
-  iconBgClass?: string; // Tailwind class for icon background on popular card e.g. bg-purple-100/50
+  // For Popular Tool Card display (TinyWow style grid)
+  isPopular?: boolean; 
+  popularCardName?: string; 
+  popularCardDescription?: string; 
+  popularDisplayCategory?: string; 
+  categoryLabelColorClass?: string; 
+  iconBgClass?: string; 
 }
 
 // Specific type for the 5 homepage category cards (TinyWow style)
@@ -46,9 +56,21 @@ export interface TinyWowCategoryCardData {
   title: string;
   subtitle: string;
   icon: LucideIcon;
-  label: string; // e.g., "45+ tools"
+  label: string; 
   featuredToolName: string;
   href: string; 
   bgColorClass: string; 
   textColorClass: string; 
+}
+
+// Specific type for the "Featured Tools Strip"
+export interface FeaturedStripTool {
+  id: string;
+  name: string;
+  description: string;
+  href: string;
+  imageSrc: string;
+  imageAlt: string;
+  imageBgClass: string; // e.g., 'bg-purple-100/80 dark:bg-purple-500/20'
+  dataAiHint: string;
 }

@@ -4,13 +4,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/input'; // Ensure Input is imported
 import TinyWowCategoryCard from '@/components/tiny-wow-category-card';
-import PopularToolCardV2 from '@/components/popular-tool-card-v2'; // New card
-import { TOOLS_DATA, TINY_WOW_CATEGORIES, POPULAR_TOOLS_FILTER_CATEGORIES } from '@/lib/tools-data';
+import PopularToolCardV2 from '@/components/popular-tool-card-v2'; 
+import FeaturedToolStripCard from '@/components/featured-tool-strip-card'; // Import new card
+import { TOOLS_DATA, TINY_WOW_CATEGORIES, POPULAR_TOOLS_FILTER_CATEGORIES, FEATURED_TOOLS_STRIP_DATA } from '@/lib/tools-data';
 import type { Tool, FunctionalToolCategory } from '@/types/tool';
-import { Users, FileCog, Wrench, Search as SearchIconLucide } from 'lucide-react';
-import React, { useState, useMemo, useEffect } from 'react';
+import { Users, FileCog, Wrench, Search as SearchIconLucide, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 const TopBanner = () => (
@@ -23,11 +24,12 @@ const TopBanner = () => (
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isMounted, setIsMounted] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<string>('all'); // 'all' or a FunctionalToolCategory
+  const [activeFilter, setActiveFilter] = useState<string>('all'); 
+  const featuredStripRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     setIsMounted(true);
-    // Check for filter from URL query param on mount (e.g., from category card click)
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const filterFromUrl = params.get('filter');
@@ -43,7 +45,6 @@ export default function HomePage() {
       if (filterFromUrl || queryFromUrl) {
         const toolsSection = document.getElementById('popular-tools-section');
         if (toolsSection) {
-          // Use requestAnimationFrame to ensure smooth scroll after potential layout shifts
           requestAnimationFrame(() => {
             toolsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           });
@@ -54,8 +55,6 @@ export default function HomePage() {
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // The filtering logic will react to `searchQuery` changes via `filteredPopularTools`
-    // Optionally, scroll to the tools section if a query is entered
     const toolsSection = document.getElementById('popular-tools-section');
     if (toolsSection && searchQuery.trim()) {
         requestAnimationFrame(() => {
@@ -67,19 +66,17 @@ export default function HomePage() {
   const filteredPopularTools = useMemo(() => {
     let toolsToFilter = TOOLS_DATA;
 
-    // Apply category filter first
     if (activeFilter !== 'all') {
       const currentFilterConfig = POPULAR_TOOLS_FILTER_CATEGORIES.find(f => f.filterKey === activeFilter);
       if (currentFilterConfig && currentFilterConfig.mappedCategories.length > 0) {
         toolsToFilter = TOOLS_DATA.filter(tool => 
           currentFilterConfig.mappedCategories.includes(tool.category as FunctionalToolCategory)
         );
-      } else if (currentFilterConfig) { // Handle cases where filterKey directly matches a category
+      } else if (currentFilterConfig) { 
         toolsToFilter = TOOLS_DATA.filter(tool => tool.category === activeFilter);
       }
     }
     
-    // Then apply search query filter
     if (!searchQuery.trim()) {
       return toolsToFilter;
     }
@@ -98,8 +95,14 @@ export default function HomePage() {
     { id: 'tools', label: 'Online Tools', value: `${TOOLS_DATA.length}+`, icon: Wrench },
   ];
 
+  const scrollFeaturedStrip = (direction: 'left' | 'right') => {
+    if (featuredStripRef.current) {
+      const scrollAmount = direction === 'left' ? -300 : 300;
+      featuredStripRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   if (!isMounted) {
-    // Basic skeleton or loader for SSR/initial mount
     return <div className="container mx-auto px-4 py-8 text-center">Loading...</div>;
   }
 
@@ -172,7 +175,6 @@ export default function HomePage() {
             We present the best of the best. All free, no catch.
           </p>
 
-          {/* Category Filters */}
           <div className="flex flex-wrap justify-center gap-2 mb-12">
             {POPULAR_TOOLS_FILTER_CATEGORIES.map((category) => (
               <Button
@@ -190,10 +192,9 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Popular Tools Grid */}
           {filteredPopularTools.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
-              {filteredPopularTools.map((tool: Tool) => ( // Explicitly type tool as Tool
+              {filteredPopularTools.map((tool: Tool) => (
                 <PopularToolCardV2 key={tool.id} tool={tool} />
               ))}
             </div>
@@ -202,6 +203,48 @@ export default function HomePage() {
               No tools found matching "{searchQuery || activeFilter}". Try a different search or filter.
             </p>
           )}
+        </div>
+      </section>
+
+      {/* Featured Tools Strip Section */}
+      <section className="py-16 md:py-20 bg-secondary/20 dark:bg-secondary/10">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-3">
+            Free Tools You’d Usually Pay For
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-xl mx-auto">
+            No Limits, No Sign-Up – Here’s our featured tools
+          </p>
+          <div className="relative">
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-card hover:bg-card/90 shadow-md hidden md:flex"
+              onClick={() => scrollFeaturedStrip('left')}
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </Button>
+            <div 
+              ref={featuredStripRef} 
+              className="flex overflow-x-auto space-x-6 pb-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-muted-foreground/30 scrollbar-track-transparent"
+            >
+              {FEATURED_TOOLS_STRIP_DATA.map((tool) => (
+                <div key={tool.id} className="snap-center shrink-0 first:pl-2 last:pr-2 md:first:pl-0 md:last:pr-0">
+                  <FeaturedToolStripCard tool={tool} />
+                </div>
+              ))}
+            </div>
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-card hover:bg-card/90 shadow-md hidden md:flex"
+              onClick={() => scrollFeaturedStrip('right')}
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </Button>
+          </div>
         </div>
       </section>
 
