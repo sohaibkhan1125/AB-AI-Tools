@@ -8,8 +8,8 @@ export type ToolCategory =
   | 'Data Converters'
   | 'Calculators'
   | 'Web Utilities'
-  | 'File Management'
-  | 'Video Tools'; // Added Video Tools
+  | 'File Management';
+  // Removed 'Video Tools'
 
 export interface Tool {
   id: string;
@@ -19,5 +19,5 @@ export interface Tool {
   href: string;
   keywords?: string[];
   category: ToolCategory;
-  isFeaturedCategory?: boolean; // To determine if the category itself is "featured" for the header checkmark
+  isFeaturedCategory?: boolean;
 }

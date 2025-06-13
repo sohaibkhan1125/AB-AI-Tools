@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Menu, X, Search as SearchIcon, Sun, Check, ChevronDown, FileText as PdfIcon, Image as ImageIcon, Video, Folder as FileIcon, Sparkles as WriteIcon, Settings2 } from 'lucide-react';
+import { Menu, X, Search as SearchIcon, Sun, Check, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './logo';
 import NavLink from './nav-link';
@@ -34,22 +34,18 @@ interface GroupedTools {
   [category: string]: Tool[];
 }
 
-// Define the order of categories for display in the header based on the prompt
+// Reverted category order and featured categories
 const HEADER_CATEGORY_ORDER: ToolCategory[] = [
   'PDF Tools',
   'Image Tools',
-  'Text & AI Tools', // "Write"
-  'Video Tools',
-  'File Management', // "File"
+  'Text & AI Tools',
+  'File Management', 
+  // Removed 'Video Tools' as it was part of the reverted changes
 ];
 
-// Categories to feature with a checkmark in the header, based on the prompt
 const HEADER_FEATURED_CATEGORIES: ToolCategory[] = [
   'PDF Tools',
-  'Image Tools', // Assuming "Image v" was "Image ✓"
-  'Text & AI Tools', // "Write ✓"
-  'Video Tools', // "Video ✓"
-  'File Management', // "File ✓"
+  'Text & AI Tools',
 ];
 
 
@@ -73,7 +69,7 @@ const Header = () => {
   }, []);
 
   const headerCategories = useMemo(() => {
-    return HEADER_CATEGORY_ORDER.filter(categoryName => groupedTools[categoryName] || categoryName === 'Video Tools'); // Include Video Tools even if empty for now
+    return HEADER_CATEGORY_ORDER.filter(categoryName => groupedTools[categoryName] && groupedTools[categoryName].length > 0);
   }, [groupedTools]);
 
 
@@ -131,10 +127,7 @@ const Header = () => {
 
         {/* Desktop Right Links & Icons */}
         <div className="hidden md:flex items-center gap-2 lg:gap-3">
-          <p className="text-xs text-muted-foreground hidden lg:block">Free. No Sign-Up Required. No Limits.</p>
-          <Button variant="link" asChild className="text-xs px-1 lg:px-2 text-foreground/70 hover:text-primary">
-            <Link href="/about">Read More</Link>
-          </Button>
+          {/* Removed "Free. No Sign-Up..." and "Read More" */}
           <Button variant="link" asChild className="text-xs px-1 lg:px-2 text-foreground/70 hover:text-primary">
             <Link href="/contact">Want To Remove Ads & Captcha?</Link>
           </Button>
@@ -215,12 +208,7 @@ const Header = () => {
                   ))}
                 </Accordion>
                 <div className="mt-6 pt-6 border-t space-y-2">
-                    <p className="text-xs text-muted-foreground px-2">Free. No Sign-Up Required. No Limits.</p>
-                    <SheetClose asChild>
-                        <NavLink href="/about" className="block py-2 px-2 text-sm text-primary" onClick={() => setIsMobileMenuOpen(false)}>
-                           Read More
-                        </NavLink>
-                    </SheetClose>
+                    {/* Removed "Free. No Sign-Up..." and "Read More" from mobile */}
                     <SheetClose asChild>
                         <NavLink href="/#tools-section" className="flex items-center gap-2 py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
                             <SearchIcon className="h-5 w-5" /> Search Tools

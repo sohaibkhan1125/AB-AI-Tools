@@ -122,7 +122,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: ScanText,
     href: '/tools/image-to-text-converter',
     category: 'Image Tools',
-    isFeaturedCategory: true,
+    // isFeaturedCategory: true, // Reverted
     keywords: ['ocr', 'image to text', 'text extraction', 'scan', 'picture to text']
   },
   {
@@ -312,7 +312,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Generate Lorem Ipsum style placeholder text for your projects.',
     icon: ClipboardList,
     href: '/tools/lorem-ipsum-generator',
-    category: mapWriteCategory('Write'), // Or 'Text & AI Tools'
+    category: mapWriteCategory('Write'),
     keywords: ['lorem ipsum', 'placeholder', 'text', 'generator', 'dummy text', 'latin']
   },
   {
@@ -376,7 +376,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Scissors,
     href: '/tools/split-excel-file',
     category: 'File Management',
-    isFeaturedCategory: true,
+    // isFeaturedCategory: true, // Reverted
     keywords: ['excel', 'split', 'sheet', 'workbook', 'xlsx', 'xls', 'separate']
   },
   {
@@ -421,7 +421,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Format and beautify your HTML code for better readability.',
     icon: CodeXml,
     href: '/tools/html-formatter',
-    category: mapWriteCategory('Write'), // Or 'Text & AI Tools'
+    category: mapWriteCategory('Write'),
     keywords: ['html', 'formatter', 'beautifier', 'code', 'markup', 'format', 'pretty print']
   },
   {
@@ -521,7 +521,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: SplitSquareHorizontal,
     href: '/tools/split-csv',
     category: 'File Management',
-    isFeaturedCategory: true, // Marked as featured based on prompt "File ✓"
+    isFeaturedCategory: true,
     keywords: ['csv', 'split', 'chunk', 'data processing', 'file utility']
   }
 ];
