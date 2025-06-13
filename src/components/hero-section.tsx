@@ -1,6 +1,6 @@
 
 // This file is no longer used by the homepage and can be safely deleted.
-// The new homepage design in `src/app/page.tsx` directly implements its own header section.
+// The new homepage design in `src/app/page.tsx` directly implements its own header section and popular tools section.
 // Keeping this file temporarily to avoid breaking references if it's used elsewhere,
 // but it should be removed if confirmed unused.
 
