@@ -1,3 +1,4 @@
+
 import type { LucideIcon } from 'lucide-react';
 
 export type ToolCategory =
@@ -7,7 +8,8 @@ export type ToolCategory =
   | 'Data Converters'
   | 'Calculators'
   | 'Web Utilities'
-  | 'File Management'; // Added for Split tools
+  | 'File Management'
+  | 'Video Tools'; // Added Video Tools
 
 export interface Tool {
   id: string;
@@ -17,5 +19,5 @@ export interface Tool {
   href: string;
   keywords?: string[];
   category: ToolCategory;
-  isFeaturedCategory?: boolean; // To determine if the category itself is "featured" for the checkmark in header
+  isFeaturedCategory?: boolean; // To determine if the category itself is "featured" for the header checkmark
 }

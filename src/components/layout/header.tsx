@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Menu, X, Search as SearchIcon, Sun, Check, ChevronDown } from 'lucide-react';
+import { Menu, X, Search as SearchIcon, Sun, Check, ChevronDown, FileText as PdfIcon, Image as ImageIcon, Video, Folder as FileIcon, Sparkles as WriteIcon, Settings2 } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './logo';
 import NavLink from './nav-link';
@@ -34,22 +34,24 @@ interface GroupedTools {
   [category: string]: Tool[];
 }
 
-// Define the order of categories for display
-const CATEGORY_ORDER: ToolCategory[] = [
+// Define the order of categories for display in the header based on the prompt
+const HEADER_CATEGORY_ORDER: ToolCategory[] = [
   'PDF Tools',
   'Image Tools',
-  'Text & AI Tools',
-  'Data Converters',
-  'Calculators',
-  'File Management',
-  'Web Utilities',
+  'Text & AI Tools', // "Write"
+  'Video Tools',
+  'File Management', // "File"
 ];
 
-// Categories to feature with a checkmark
-const FEATURED_CATEGORIES: ToolCategory[] = [
+// Categories to feature with a checkmark in the header, based on the prompt
+const HEADER_FEATURED_CATEGORIES: ToolCategory[] = [
   'PDF Tools',
-  'Text & AI Tools',
+  'Image Tools', // Assuming "Image v" was "Image ✓"
+  'Text & AI Tools', // "Write ✓"
+  'Video Tools', // "Video ✓"
+  'File Management', // "File ✓"
 ];
+
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -70,14 +72,12 @@ const Header = () => {
     }, {} as GroupedTools);
   }, []);
 
-  const sortedCategories = useMemo(() => {
-    return CATEGORY_ORDER.filter(categoryName => groupedTools[categoryName]);
+  const headerCategories = useMemo(() => {
+    return HEADER_CATEGORY_ORDER.filter(categoryName => groupedTools[categoryName] || categoryName === 'Video Tools'); // Include Video Tools even if empty for now
   }, [groupedTools]);
 
 
   if (!isMounted) {
-    // Render a simplified version or null during server render and initial client render
-    // to avoid hydration mismatches with dropdowns/sheet if they depend on client-side state for open/close
     return (
       <header className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
@@ -100,37 +100,45 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1 lg:gap-0 flex-grow justify-start pl-4">
-          {sortedCategories.map((categoryName) => (
+          {headerCategories.map((categoryName) => (
             <DropdownMenu key={categoryName}>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="px-2 lg:px-3 text-sm">
-                  {categoryName}
-                  {FEATURED_CATEGORIES.includes(categoryName as ToolCategory) && (
+                  {categoryName === 'Text & AI Tools' ? 'Write' : categoryName === 'File Management' ? 'File' : categoryName}
+                  {HEADER_FEATURED_CATEGORIES.includes(categoryName as ToolCategory) && (
                     <Check className="ml-1 h-4 w-4 text-green-500" />
                   )}
                   <ChevronDown className="ml-1 h-4 w-4 opacity-70" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56 max-h-96 overflow-y-auto">
-                {groupedTools[categoryName]?.map((tool) => (
-                  <DropdownMenuItem key={tool.id} asChild>
-                    <Link href={tool.href} className="flex items-center gap-2">
-                      <tool.icon className="h-4 w-4 text-muted-foreground" />
-                      {tool.name}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
+                {groupedTools[categoryName]?.length > 0 ? (
+                  groupedTools[categoryName]?.map((tool) => (
+                    <DropdownMenuItem key={tool.id} asChild>
+                      <Link href={tool.href} className="flex items-center gap-2">
+                        <tool.icon className="h-4 w-4 text-muted-foreground" />
+                        {tool.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))
+                ) : (
+                  <DropdownMenuItem disabled>No tools in this category yet.</DropdownMenuItem>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           ))}
         </nav>
 
         {/* Desktop Right Links & Icons */}
-        <div className="hidden md:flex items-center gap-2">
-          <Button variant="link" asChild className="text-xs px-2 text-foreground/70 hover:text-primary">
+        <div className="hidden md:flex items-center gap-2 lg:gap-3">
+          <p className="text-xs text-muted-foreground hidden lg:block">Free. No Sign-Up Required. No Limits.</p>
+          <Button variant="link" asChild className="text-xs px-1 lg:px-2 text-foreground/70 hover:text-primary">
+            <Link href="/about">Read More</Link>
+          </Button>
+          <Button variant="link" asChild className="text-xs px-1 lg:px-2 text-foreground/70 hover:text-primary">
             <Link href="/contact">Want To Remove Ads & Captcha?</Link>
           </Button>
-          <Button variant="link" asChild className="text-sm px-2">
+          <Button variant="link" asChild className="text-sm px-1 lg:px-2">
             <Link href="/contact">Support Us</Link>
           </Button>
           <Button variant="ghost" size="icon" aria-label="Toggle theme (visual only)">
@@ -173,57 +181,67 @@ const Header = () => {
               </SheetHeader>
               <div className="flex-grow overflow-y-auto p-4">
                 <Accordion type="multiple" className="w-full">
-                  {sortedCategories.map((categoryName) => (
+                  {headerCategories.map((categoryName) => (
                     <AccordionItem value={categoryName} key={categoryName}>
                       <AccordionTrigger className="text-base hover:no-underline py-3">
                         <span className="flex items-center">
-                          {categoryName}
-                          {FEATURED_CATEGORIES.includes(categoryName as ToolCategory) && (
+                          {categoryName === 'Text & AI Tools' ? 'Write' : categoryName === 'File Management' ? 'File' : categoryName}
+                          {HEADER_FEATURED_CATEGORIES.includes(categoryName as ToolCategory) && (
                             <Check className="ml-2 h-4 w-4 text-green-500" />
                           )}
                         </span>
                       </AccordionTrigger>
                       <AccordionContent className="pt-1 pb-0">
                         <div className="flex flex-col gap-1 pl-4">
-                          {groupedTools[categoryName]?.map((tool) => (
-                            <SheetClose key={tool.id} asChild>
-                              <NavLink
-                                href={tool.href}
-                                className="py-2 text-sm text-muted-foreground hover:text-primary flex items-center gap-2"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                              >
-                                <tool.icon className="h-4 w-4" />
-                                {tool.name}
-                              </NavLink>
-                            </SheetClose>
-                          ))}
+                          {groupedTools[categoryName]?.length > 0 ? (
+                            groupedTools[categoryName]?.map((tool) => (
+                              <SheetClose key={tool.id} asChild>
+                                <NavLink
+                                  href={tool.href}
+                                  className="py-2 text-sm text-muted-foreground hover:text-primary flex items-center gap-2"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  <tool.icon className="h-4 w-4" />
+                                  {tool.name}
+                                </NavLink>
+                              </SheetClose>
+                            ))
+                          ) : (
+                            <p className="py-2 text-sm text-muted-foreground italic">No tools yet.</p>
+                          )}
                         </div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
                 </Accordion>
                 <div className="mt-6 pt-6 border-t space-y-2">
+                    <p className="text-xs text-muted-foreground px-2">Free. No Sign-Up Required. No Limits.</p>
                     <SheetClose asChild>
-                        <NavLink href="/#tools-section" className="flex items-center gap-2 py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                        <NavLink href="/about" className="block py-2 px-2 text-sm text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                           Read More
+                        </NavLink>
+                    </SheetClose>
+                    <SheetClose asChild>
+                        <NavLink href="/#tools-section" className="flex items-center gap-2 py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
                             <SearchIcon className="h-5 w-5" /> Search Tools
                         </NavLink>
                     </SheetClose>
                     <SheetClose asChild>
-                        <NavLink href="/contact" className="block py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                        <NavLink href="/contact" className="block py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
                            Want To Remove Ads & Captcha?
                         </NavLink>
                     </SheetClose>
                      <SheetClose asChild>
-                        <NavLink href="/contact" className="block py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                        <NavLink href="/contact" className="block py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
                            Support Us
                         </NavLink>
                     </SheetClose>
                      <SheetClose asChild>
-                        <NavLink href="/" className="block py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                        <NavLink href="/" className="block py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
                            Sign In
                         </NavLink>
                     </SheetClose>
-                    <div className="flex items-center gap-2 py-2 text-base text-foreground/80 cursor-pointer" aria-label="Toggle theme (visual only)">
+                    <div className="flex items-center gap-2 py-2 px-2 text-base text-foreground/80 cursor-pointer" aria-label="Toggle theme (visual only)">
                         <Sun className="h-5 w-5" /> Theme (Visual)
                     </div>
                 </div>

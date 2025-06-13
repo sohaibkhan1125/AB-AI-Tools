@@ -1,6 +1,17 @@
 
 import type { Tool, ToolCategory } from '@/types/tool';
-import { QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2 } from 'lucide-react';
+import {
+  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIcon, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video, Folder, PenTool, Sparkles
+} from 'lucide-react';
+
+// Helper to map "Write" or "AI Write" to "Text & AI Tools" category for consistency
+const mapWriteCategory = (categoryInput: string): ToolCategory => {
+  if (categoryInput.toLowerCase().includes('write')) {
+    return 'Text & AI Tools';
+  }
+  return categoryInput as ToolCategory;
+};
+
 
 export const TOOLS_DATA: Tool[] = [
   {
@@ -111,6 +122,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: ScanText,
     href: '/tools/image-to-text-converter',
     category: 'Image Tools',
+    isFeaturedCategory: true,
     keywords: ['ocr', 'image to text', 'text extraction', 'scan', 'picture to text']
   },
   {
@@ -120,7 +132,6 @@ export const TOOLS_DATA: Tool[] = [
     icon: Scaling,
     href: '/tools/image-resizer',
     category: 'Image Tools',
-    isFeaturedCategory: true,
     keywords: ['image', 'resize', 'dimensions', 'scaler', 'photo']
   },
   {
@@ -166,7 +177,6 @@ export const TOOLS_DATA: Tool[] = [
     icon: ImageIcon,
     href: '/tools/ai-image-generator',
     category: 'Image Tools',
-    isFeaturedCategory: true,
     keywords: ['ai', 'image', 'generator', 'art', 'creative', 'generative art', 'text to image']
   },
   {
@@ -194,13 +204,14 @@ export const TOOLS_DATA: Tool[] = [
     icon: ScanSearch,
     href: '/tools/ai-detector',
     category: 'Text & AI Tools',
+    isFeaturedCategory: true,
     keywords: ['ai detector', 'text analysis', 'content authenticity', 'ai writing', 'gpt detector']
   },
   {
     id: 'voice-to-text',
     name: 'Voice to Text Converter',
     description: 'Record your voice and convert it into text using AI transcription.',
-    icon: Volume2, // Changed from Mic to Volume2
+    icon: Volume2,
     href: '/tools/voice-to-text',
     category: 'Text & AI Tools',
     keywords: ['speech to text', 'transcription', 'audio', 'voice recognition', 'ai']
@@ -274,7 +285,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert colors between HEX, RGB, and HSL formats.',
     icon: Palette,
     href: '/tools/color-converter',
-    category: 'Web Utilities', // Or a new "Design Tools" category if more are added
+    category: 'Web Utilities', 
     keywords: ['color', 'converter', 'hex', 'rgb', 'hsl', 'picker', 'palette']
   },
   {
@@ -283,7 +294,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert between various units of measurement like length, weight, temperature.',
     icon: ArrowRightLeft,
     href: '/tools/unit-converter',
-    category: 'Calculators', // Could also be "Utilities"
+    category: 'Calculators', 
     keywords: ['unit', 'converter', 'measurement', 'length', 'weight', 'temperature', 'metric', 'imperial']
   },
   {
@@ -301,7 +312,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Generate Lorem Ipsum style placeholder text for your projects.',
     icon: ClipboardList,
     href: '/tools/lorem-ipsum-generator',
-    category: 'Text & AI Tools',
+    category: mapWriteCategory('Write'), // Or 'Text & AI Tools'
     keywords: ['lorem ipsum', 'placeholder', 'text', 'generator', 'dummy text', 'latin']
   },
   {
@@ -311,7 +322,6 @@ export const TOOLS_DATA: Tool[] = [
     icon: FileCode2,
     href: '/tools/csv-to-json',
     category: 'Data Converters',
-    isFeaturedCategory: true,
     keywords: ['csv', 'json', 'converter', 'data transformation', 'file conversion']
   },
   {
@@ -347,7 +357,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert CSV files to Excel (.xlsx) format directly in your browser.',
     icon: FileSpreadsheet,
     href: '/tools/csv-to-excel',
-    category: 'Data Converters', // Or "File Management"
+    category: 'Data Converters', 
     keywords: ['csv', 'excel', 'xlsx', 'converter', 'spreadsheet', 'data conversion']
   },
   {
@@ -356,7 +366,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert sheets from Excel files (.xlsx, .xls) into CSV format.',
     icon: FileSpreadsheet,
     href: '/tools/excel-to-csv',
-    category: 'Data Converters', // Or "File Management"
+    category: 'Data Converters', 
     keywords: ['excel', 'csv', 'xlsx', 'xls', 'converter', 'spreadsheet', 'data extraction']
   },
   {
@@ -366,6 +376,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: Scissors,
     href: '/tools/split-excel-file',
     category: 'File Management',
+    isFeaturedCategory: true,
     keywords: ['excel', 'split', 'sheet', 'workbook', 'xlsx', 'xls', 'separate']
   },
   {
@@ -401,7 +412,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Convert file sizes between Bytes, KB, MB, GB, TB, and PB (1KB = 1024 Bytes).',
     icon: HardDrive,
     href: '/tools/file-size-calculator',
-    category: 'Calculators', // Or "Utilities"
+    category: 'Calculators', 
     keywords: ['file size', 'bytes', 'kb', 'mb', 'gb', 'tb', 'pb', 'converter', 'calculator', 'storage']
   },
   {
@@ -410,7 +421,7 @@ export const TOOLS_DATA: Tool[] = [
     description: 'Format and beautify your HTML code for better readability.',
     icon: CodeXml,
     href: '/tools/html-formatter',
-    category: 'Text & AI Tools', // Or "Web Utilities"
+    category: mapWriteCategory('Write'), // Or 'Text & AI Tools'
     keywords: ['html', 'formatter', 'beautifier', 'code', 'markup', 'format', 'pretty print']
   },
   {
@@ -420,7 +431,6 @@ export const TOOLS_DATA: Tool[] = [
     icon: CircleDollarSign,
     href: '/tools/loan-calculator',
     category: 'Calculators',
-    isFeaturedCategory: true,
     keywords: ['loan', 'mortgage', 'finance', 'payment', 'interest', 'amortization', 'calculator']
   },
   {
@@ -511,6 +521,7 @@ export const TOOLS_DATA: Tool[] = [
     icon: SplitSquareHorizontal,
     href: '/tools/split-csv',
     category: 'File Management',
+    isFeaturedCategory: true, // Marked as featured based on prompt "File ✓"
     keywords: ['csv', 'split', 'chunk', 'data processing', 'file utility']
   }
 ];
