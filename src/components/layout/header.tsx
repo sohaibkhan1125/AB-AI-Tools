@@ -1,34 +1,148 @@
 
 'use client';
 
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { useState, useMemo, useEffect } from 'react';
+import { Menu, X, Search as SearchIcon, Sun, Check, ChevronDown } from 'lucide-react';
+import Link from 'next/link';
 import Logo from './logo';
 import NavLink from './nav-link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { TOOLS_DATA } from '@/lib/tools-data';
+import type { Tool, ToolCategory } from '@/types/tool';
 
-const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/privacy-policy', label: 'Privacy Policy' },
+interface GroupedTools {
+  [category: string]: Tool[];
+}
+
+// Define the order of categories for display
+const CATEGORY_ORDER: ToolCategory[] = [
+  'PDF Tools',
+  'Image Tools',
+  'Text & AI Tools',
+  'Data Converters',
+  'Calculators',
+  'File Management',
+  'Web Utilities',
+];
+
+// Categories to feature with a checkmark
+const FEATURED_CATEGORIES: ToolCategory[] = [
+  'PDF Tools',
+  'Image Tools',
+  'Data Converters',
+  'Calculators',
 ];
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const groupedTools = useMemo(() => {
+    return TOOLS_DATA.reduce((acc, tool) => {
+      const category = tool.category;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(tool);
+      return acc;
+    }, {} as GroupedTools);
+  }, []);
+
+  const sortedCategories = useMemo(() => {
+    return CATEGORY_ORDER.filter(categoryName => groupedTools[categoryName]);
+  }, [groupedTools]);
+
+
+  if (!isMounted) {
+    // Render a simplified version or null during server render and initial client render
+    // to avoid hydration mismatches with dropdowns/sheet if they depend on client-side state for open/close
+    return (
+      <header className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
+          <Logo />
+          <div className="md:hidden">
+            <Button variant="ghost" size="icon">
+              <Menu className="h-6 w-6" />
+            </Button>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
 
   return (
     <header className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
         <Logo />
-        <nav className="hidden md:flex items-center gap-6">
-          {navItems.map((item) => (
-            <NavLink key={item.href} href={item.href}>
-              {item.label}
-            </NavLink>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1 lg:gap-2 flex-grow justify-center">
+          {sortedCategories.map((categoryName) => (
+            <DropdownMenu key={categoryName}>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="px-2 lg:px-3 text-sm">
+                  {categoryName}
+                  {FEATURED_CATEGORIES.includes(categoryName as ToolCategory) && (
+                    <Check className="ml-1 h-4 w-4 text-green-500" />
+                  )}
+                  <ChevronDown className="ml-1 h-4 w-4 opacity-70" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-56 max-h-96 overflow-y-auto">
+                {groupedTools[categoryName]?.map((tool) => (
+                  <DropdownMenuItem key={tool.id} asChild>
+                    <Link href={tool.href} className="flex items-center gap-2">
+                      <tool.icon className="h-4 w-4 text-muted-foreground" />
+                      {tool.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           ))}
         </nav>
+
+        {/* Desktop Right Icons */}
+        <div className="hidden md:flex items-center gap-2">
+          <Button variant="ghost" size="icon" asChild>
+            <Link href="/#tools-section" aria-label="Search tools">
+              <SearchIcon className="h-5 w-5" />
+            </Link>
+          </Button>
+          <Button variant="ghost" size="icon" aria-label="Toggle theme (visual only)">
+            <Sun className="h-5 w-5" />
+          </Button>
+          <Button variant="link" asChild className="text-sm">
+            <Link href="/contact">Support Us</Link>
+          </Button>
+        </div>
+
+        {/* Mobile Menu Trigger */}
         <div className="md:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
@@ -37,28 +151,69 @@ const Header = () => {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] p-6 bg-card">
-              <div className="flex flex-col gap-6">
-                <div className="flex justify-between items-center mb-4">
-                  <SheetTitle asChild>
-                    <div onClick={() => setIsMobileMenuOpen(false)} className="cursor-pointer">
-                      <Logo />
+            <SheetContent side="right" className="w-[300px] p-0 flex flex-col bg-card">
+              <SheetHeader className="p-4 border-b">
+                <SheetTitle asChild>
+                   <div className="flex justify-between items-center">
+                     <div onClick={() => setIsMobileMenuOpen(false)} className="cursor-pointer">
+                        <Logo />
+                     </div>
+                     <SheetClose asChild>
+                        <Button variant="ghost" size="icon">
+                           <X className="h-6 w-6" />
+                           <span className="sr-only">Close menu</span>
+                         </Button>
+                     </SheetClose>
+                   </div>
+                </SheetTitle>
+              </SheetHeader>
+              <div className="flex-grow overflow-y-auto p-4">
+                <Accordion type="multiple" className="w-full">
+                  {sortedCategories.map((categoryName) => (
+                    <AccordionItem value={categoryName} key={categoryName}>
+                      <AccordionTrigger className="text-base hover:no-underline py-3">
+                        <span className="flex items-center">
+                          {categoryName}
+                          {FEATURED_CATEGORIES.includes(categoryName as ToolCategory) && (
+                            <Check className="ml-2 h-4 w-4 text-green-500" />
+                          )}
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent className="pt-1 pb-0">
+                        <div className="flex flex-col gap-1 pl-4">
+                          {groupedTools[categoryName]?.map((tool) => (
+                            <SheetClose key={tool.id} asChild>
+                              <NavLink
+                                href={tool.href}
+                                className="py-2 text-sm text-muted-foreground hover:text-primary flex items-center gap-2"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                <tool.icon className="h-4 w-4" />
+                                {tool.name}
+                              </NavLink>
+                            </SheetClose>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+                <div className="mt-6 pt-6 border-t">
+                    <SheetClose asChild>
+                        <NavLink href="/#tools-section" className="flex items-center gap-2 py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                            <SearchIcon className="h-5 w-5" /> Search Tools
+                        </NavLink>
+                    </SheetClose>
+                     <SheetClose asChild>
+                        <NavLink href="/contact" className="flex items-center gap-2 py-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
+                           {/* Using a placeholder icon for Support Us */}
+                           <CircleDollarSign className="h-5 w-5" /> Support Us 
+                        </NavLink>
+                    </SheetClose>
+                    <div className="flex items-center gap-2 py-2 text-base text-foreground/80 cursor-pointer" aria-label="Toggle theme (visual only)">
+                        <Sun className="h-5 w-5" /> Theme (Visual)
                     </div>
-                  </SheetTitle>
-                  <SheetClose asChild>
-                     <Button variant="ghost" size="icon">
-                        <X className="h-6 w-6" />
-                        <span className="sr-only">Close menu</span>
-                      </Button>
-                  </SheetClose>
                 </div>
-                {navItems.map((item) => (
-                  <SheetClose key={item.href} asChild>
-                    <NavLink href={item.href} className="text-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                      {item.label}
-                    </NavLink>
-                  </SheetClose>
-                ))}
               </div>
             </SheetContent>
           </Sheet>
