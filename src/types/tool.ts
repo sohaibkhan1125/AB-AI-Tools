@@ -5,12 +5,11 @@ export type ToolCategory =
   | 'PDF Tools'
   | 'Image Tools'
   | 'Text & AI Tools'
-  | 'Data Converters' // Will be displayed as "Converter Tools" in UI
-  | 'Calculators'     // Will be grouped under "Other Tools" in UI
-  | 'Web Utilities'   // Will be grouped under "Other Tools" in UI
-  | 'File Management' // Will be grouped under "Other Tools" in UI
-  | 'Video Tools'     // New category from image
-  | 'Other Tools';    // New catch-all category for UI
+  | 'Data Converters'
+  | 'Calculators'
+  | 'Web Utilities'
+  | 'File Management'
+  | 'Video Tools'; // Kept from a previous state that this revert shouldn't affect negatively
 
 export interface Tool {
   id: string;
@@ -19,8 +18,6 @@ export interface Tool {
   icon: LucideIcon;
   href: string;
   keywords?: string[];
-  category: ToolCategory; // Keep existing detailed categories for data
-  displayCategory?: string; // For UI display, e.g. "AI Write"
+  category: ToolCategory;
   isFeaturedCategory?: boolean;
 }
-

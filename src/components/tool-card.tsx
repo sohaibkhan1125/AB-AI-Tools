@@ -1,7 +1,8 @@
 
 import Link from 'next/link';
 import type { Tool } from '@/types/tool';
-import { Card, CardContent } from '@/components/ui/card'; // Removed CardHeader, CardTitle, CardDescription, Button
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 interface ToolCardProps {
   tool: Tool;
@@ -10,28 +11,25 @@ interface ToolCardProps {
 const ToolCard = ({ tool }: ToolCardProps) => {
   const IconComponent = tool.icon;
   return (
-    <Link href={tool.href} className="group block h-full">
-      <Card className="h-full flex flex-col p-4 hover:shadow-md transition-shadow duration-200 ease-in-out border border-border hover:border-primary/30 rounded-lg">
-        <CardContent className="flex items-start gap-3 p-0 flex-grow"> {/* Use items-start for vertical alignment if content heights vary */}
-          <div className="flex-shrink-0 bg-primary/10 p-2.5 rounded-md mt-1"> {/* Adjusted padding and margin */}
-            <IconComponent className="h-5 w-5 text-primary" /> {/* Slightly smaller icon */}
-          </div>
-          <div className="flex-1">
-            <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-tight">
-              {tool.name}
-            </h3>
-            {tool.displayCategory && (
-              <p className="text-xs text-primary/80 mt-0.5 mb-1"> {/* Category below title */}
-                {tool.displayCategory}
-              </p>
-            )}
-            <p className="text-xs text-muted-foreground leading-snug">
-              {tool.description}
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+    <Card className="flex flex-col h-full hover:shadow-lg transition-shadow duration-200 ease-in-out">
+      <CardHeader className="flex-row items-center gap-4 pb-4">
+        <div className="bg-primary/10 p-3 rounded-full">
+          <IconComponent className="h-6 w-6 text-primary" />
+        </div>
+        <CardTitle className="text-lg font-semibold leading-tight">{tool.name}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex-grow">
+        <CardDescription className="text-sm line-clamp-3">{tool.description}</CardDescription>
+        <p className="text-xs text-muted-foreground mt-2 pt-2 border-t">
+            Category: {tool.category}
+        </p>
+      </CardContent>
+      <CardFooter className="pt-0">
+        <Button variant="outline" asChild className="w-full">
+          <Link href={tool.href}>Open Tool &rarr;</Link>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 
