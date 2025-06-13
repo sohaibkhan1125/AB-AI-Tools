@@ -1,3 +1,9 @@
+
+// This file is no longer used by the homepage and can be safely deleted.
+// The new homepage design in `src/app/page.tsx` directly implements its own header section.
+// Keeping this file temporarily to avoid breaking references if it's used elsewhere,
+// but it should be removed if confirmed unused.
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -14,7 +20,7 @@ const HeroSection = () => {
         </p>
         <div className="relative aspect-video max-w-4xl mx-auto mb-8 rounded-lg overflow-hidden shadow-xl">
             <Image
-              src="https://cdn.pixabay.com/photo/2024/05/27/03/47/futuristic-8789975_640.png"
+              src="https://placehold.co/1200x675.png"
               alt="Abstract representation of AI tools and technology"
               layout="fill"
               objectFit="cover"
