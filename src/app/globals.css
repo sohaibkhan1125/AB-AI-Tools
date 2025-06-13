@@ -8,97 +8,95 @@ body {
 
 @layer base {
   :root {
-    --background: 220 20% 96%; /* Light Grayish Blue */
-    --foreground: 220 10% 25%; /* Dark Gray */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 220 10% 25%; /* Dark Gray */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
 
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 220 10% 25%; /* Dark Gray */
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
-    --primary: 250 70% 60%; /* Vibrant Purple-Blue */
-    --primary-foreground: 210 40% 98%; /* Light Gray for contrast */
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 15% 90%; /* Lighter Gray */
-    --secondary-foreground: 220 10% 20%; /* Dark Gray */
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
 
-    --muted: 220 15% 90%; /* Lighter Gray */
-    --muted-foreground: 220 10% 45%; /* Medium Gray */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 250 70% 65%; /* Slightly Lighter Purple-Blue */
-    --accent-foreground: 210 40% 98%; /* Light Gray for contrast */
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
 
-    --destructive: 0 75% 55%; /* A clear red for destructive actions */
-    --destructive-foreground: 0 0% 98%; /* Light for contrast */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 88%; /* Light Gray Border */
-    --input: 220 15% 92%; /* Slightly off-white/very light gray for input */
-    --ring: 250 70% 60%; /* Ring color same as primary */
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%; 
 
     --radius: 0.5rem;
 
-    --chart-1: 250 70% 60%; /* Primary */
-    --chart-2: 220 60% 65%; /* Secondary Blueish */
-    --chart-3: 270 60% 70%; /* Lighter Purple */
-    --chart-4: 200 70% 55%; /* Tealish Blue */
-    --chart-5: 300 65% 60%; /* Magenta/Pinkish Purple */
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 340 70% 55%;
+    --chart-4: 40 80% 50%;
+    --chart-5: 280 65% 60%;
 
-    /* Sidebar variables - adjusted to match new theme */
-    --sidebar-background: 0 0% 100%; /* White sidebar */
-    --sidebar-foreground: 220 10% 35%; /* Dark gray text */
-    --sidebar-primary: 250 70% 60%; /* Primary color for active/hover states */
+    --sidebar-background: 240 4.8% 95.9%;
+    --sidebar-foreground: 240 5.9% 10%;
+    --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 220 20% 94%; /* Light gray for hover backgrounds */
-    --sidebar-accent-foreground: 250 70% 60%; /* Primary color for text on accent hover */
-    --sidebar-border: 220 15% 88%;
-    --sidebar-ring: 250 70% 60%;
+    --sidebar-accent: 0 0% 100%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 240 5.9% 10%;
   }
 
   .dark {
-    --background: 220 15% 12%; /* Dark Blue-Gray */
-    --foreground: 220 15% 92%; /* Light Gray */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 220 15% 15%; /* Slightly Lighter Dark Blue-Gray */
-    --card-foreground: 220 15% 92%; /* Light Gray */
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 15% 10%; /* Darker Popover */
-    --popover-foreground: 220 15% 92%; /* Light Gray */
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 250 70% 65%; /* Vibrant Purple-Blue (slightly lighter for dark mode) */
-    --primary-foreground: 220 15% 12%; /* Dark for contrast on primary buttons */
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
 
-    --secondary: 220 15% 25%; /* Darker Muted Gray */
-    --secondary-foreground: 220 15% 85%; /* Lighter Gray */
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 20%; /* Dark Muted Gray */
-    --muted-foreground: 220 15% 65%; /* Medium-Light Gray */
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 250 70% 70%; /* Lighter Purple-Blue for Accent */
-    --accent-foreground: 220 15% 12%; /* Dark for contrast on accent */
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 65% 50%; /* Slightly desaturated red for dark mode */
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 25%; /* Darker Border */
-    --input: 220 15% 18%; /* Dark Input Background */
-    --ring: 250 70% 65%; /* Ring color based on primary */
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
     
-    --chart-1: 250 70% 65%; /* Primary */
-    --chart-2: 220 60% 70%; /* Secondary Blueish */
-    --chart-3: 270 60% 75%; /* Lighter Purple */
-    --chart-4: 200 70% 60%; /* Tealish Blue */
-    --chart-5: 300 65% 65%; /* Magenta/Pinkish Purple */
+    --chart-1: 210 60% 50%;
+    --chart-2: 150 70% 40%;
+    --chart-3: 330 65% 60%;
+    --chart-4: 50 75% 55%;
+    --chart-5: 270 60% 65%;
 
-    /* Sidebar variables - dark theme */
-    --sidebar-background: 220 15% 10%; /* Very Dark Blue-Gray */
-    --sidebar-foreground: 220 15% 80%; /* Medium-Light Gray Text */
-    --sidebar-primary: 250 70% 65%; /* Primary color for active/hover */
-    --sidebar-primary-foreground: 220 15% 95%;
-    --sidebar-accent: 220 15% 18%; /* Dark hover background */
-    --sidebar-accent-foreground: 250 70% 65%; /* Primary color text on accent hover */
-    --sidebar-border: 220 15% 22%;
-    --sidebar-ring: 250 70% 65%;
+    --sidebar-background: 240 3.7% 15.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 240 5.9% 10%;
+    --sidebar-accent: 240 10% 3.9%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 240 4.9% 83.9%;
   }
 }
 
