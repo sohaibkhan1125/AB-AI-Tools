@@ -1,10 +1,10 @@
 
-import type { Tool, ToolCategory } from '@/types/tool';
+import type { Tool, ToolCategory, TinyWowCategoryCardData } from '@/types/tool';
 import {
-  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIconLucide, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video as VideoIconLucide, Folder, PenTool, Sparkles, LayoutGrid, Box, Settings2, Clapperboard, Shuffle, GanttChartSquare, Users, FileCog, Wrench
+  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIconLucide, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIconLucide, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video as VideoIconLucide, Folder, PenTool, Sparkles, LayoutGrid, Box, Settings2, Clapperboard, Shuffle, GanttChartSquare, Users, FileCog, Wrench, Grip, Type as TypeIcon
 } from 'lucide-react';
 
-// Define a more granular set of functional categories
+// Maps to ToolCategory in types/tool.ts for internal categorization
 type FunctionalToolCategory =
   | 'PDF Tools'
   | 'Image Tools'
@@ -13,526 +13,203 @@ type FunctionalToolCategory =
   | 'Calculators'
   | 'Web Utilities'
   | 'File Management'
-  | 'Video Tools'; // Ensure this is part of ToolCategory in types/tool.ts
+  | 'Video Tools';
 
-// This type will be used for the `category` field in TOOLS_DATA
-// It ensures we use the functional categories for internal logic.
-interface FunctionalTool extends Omit<Tool, 'category' | 'isFeaturedCategory'> {
+interface FunctionalTool extends Omit<Tool, 'category'> {
   category: FunctionalToolCategory;
-  // isFeaturedCategory is now managed by HEADER_CATEGORY_ORDER
+  // Header category for dropdowns (PDF, Image, Write, Video, File)
+  headerCategory: 'PDF' | 'Image' | 'Write' | 'Video' | 'File' | 'Other';
 }
 
 
 export const TOOLS_DATA: FunctionalTool[] = [
+  // PDF Tools
   {
-    id: 'qr-code-scanner',
-    name: 'QR Code Scanner',
-    description: 'Scan QR codes quickly and easily using your device camera.',
-    icon: QrCode,
-    href: '/tools/qr-code-scanner',
-    category: 'Web Utilities',
-    keywords: ['qr', 'scanner', 'code', 'barcode']
+    id: 'image-to-pdf', name: 'Image to PDF Converter', description: 'Convert JPG, PNG, etc. to PDF.', icon: FileImage, href: '/tools/image-to-pdf', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['image', 'pdf', 'converter'],
   },
   {
-    id: 'image-to-pdf',
-    name: 'Image to PDF Converter',
-    description: 'Convert JPG, PNG, WEBP, GIF and other image formats to PDF documents. Handles multiple images.',
-    icon: FileImage,
-    href: '/tools/image-to-pdf',
-    category: 'PDF Tools',
-    keywords: ['image', 'pdf', 'converter', 'jpg', 'png', 'webp', 'gif'],
+    id: 'merge-pdf', name: 'Merge PDF Files', description: 'Combine multiple PDF files into one.', icon: Combine, href: '/tools/merge-pdf', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['pdf', 'merge'],
   },
   {
-    id: 'webp-to-pdf',
-    name: 'WEBP to PDF Converter',
-    description: 'Easily convert your WEBP image files into PDF documents. Supports single or multiple WEBP files.',
-    icon: FileImage,
-    href: '/tools/image-to-pdf', // Intentionally points to the general image-to-pdf tool
-    category: 'PDF Tools',
-    keywords: ['webp', 'pdf', 'converter', 'image']
+    id: 'unlock-pdf', name: 'Unlock PDF', description: 'Remove password protection (password must be known).', icon: Unlock, href: '/tools/unlock-pdf', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['pdf', 'unlock'],
   },
   {
-    id: 'merge-pdf',
-    name: 'Merge PDF Files',
-    description: 'Combine multiple PDF files into a single document. Reorder files as needed.',
-    icon: Combine,
-    href: '/tools/merge-pdf',
-    category: 'PDF Tools',
-    keywords: ['pdf', 'merge', 'combine', 'join', 'document management'],
+    id: 'rotate-pdf-pages', name: 'Rotate PDF Pages', description: 'Rotate pages in a PDF document.', icon: RotateCw, href: '/tools/rotate-pdf-pages', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['pdf', 'rotate'],
   },
   {
-    id: 'unlock-pdf',
-    name: 'Unlock PDF',
-    description: 'Remove password protection from a PDF file (password must be known).',
-    icon: Unlock,
-    href: '/tools/unlock-pdf',
-    category: 'PDF Tools',
-    keywords: ['pdf', 'unlock', 'remove password', 'decrypt', 'security']
+    id: 'delete-pdf-pages', name: 'PDF Page Deleter', description: 'Remove specific pages from your PDF.', icon: Trash2, href: '/tools/pdf-page-deleter', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['pdf', 'delete pages'],
   },
   {
-    id: 'rotate-pdf-pages',
-    name: 'Rotate PDF Pages',
-    description: 'Rotate specific pages or all pages in a PDF document by 90, 180, or 270 degrees.',
-    icon: RotateCw,
-    href: '/tools/rotate-pdf-pages',
-    category: 'PDF Tools',
-    keywords: ['pdf', 'rotate', 'edit', 'pages', 'orientation', 'document']
+    id: 'extract-pdf-pages', name: 'Extract PDF Pages', description: 'Extract pages from a PDF into a new document.', icon: Scissors, href: '/tools/extract-pdf-pages', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['pdf', 'extract'],
   },
   {
-    id: 'delete-pdf-pages',
-    name: 'PDF Page Deleter',
-    description: 'Remove specific pages from your PDF documents.',
-    icon: Trash2,
-    href: '/tools/pdf-page-deleter',
-    category: 'PDF Tools',
-    keywords: ['pdf', 'delete pages', 'remove pages', 'edit pdf', 'document management'],
+    id: 'pdf-page-to-csv', name: 'PDF Page to CSV', description: 'Extract table from first PDF page to CSV.', icon: Sheet, href: '/tools/pdf-page-to-csv', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['pdf', 'csv', 'table'],
   },
   {
-    id: 'extract-pdf-pages',
-    name: 'Extract PDF Pages',
-    description: 'Select and extract specific pages or page ranges from a PDF into a new document.',
-    icon: Scissors,
-    href: '/tools/extract-pdf-pages',
-    category: 'PDF Tools',
-    keywords: ['pdf', 'extract', 'split', 'pages', 'select pages', 'document management']
+    id: 'pdf-to-word-text-extraction', name: 'PDF to Word (Text Extraction)', description: 'Extract text from PDF (first page) for Word.', icon: FileText, href: '/tools/pdf-to-word-converter', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['pdf', 'word', 'text'],
   },
   {
-    id: 'pdf-page-to-csv',
-    name: 'PDF Page to CSV Converter',
-    description: 'Extracts tabular data from a single PDF page and converts it to CSV format, ready for Excel.',
-    icon: Sheet,
-    href: '/tools/pdf-page-to-csv',
-    category: 'PDF Tools', 
-    keywords: ['pdf', 'csv', 'excel', 'table extraction', 'data conversion', 'ocr']
+    id: 'pdf-to-presentation-content-extractor', name: 'PDF to Presentation Content', description: 'Extract text from PDF for presentation slides.', icon: Presentation, href: '/tools/pdf-to-presentation-content-extractor', category: 'PDF Tools', headerCategory: 'PDF', keywords: ['pdf', 'slides'],
+  },
+
+  // Image Tools
+  {
+    id: 'image-resizer', name: 'Image Resizer', description: 'Adjust dimensions of your images.', icon: Scaling, href: '/tools/image-resizer', category: 'Image Tools', headerCategory: 'Image', keywords: ['image', 'resize'],
   },
   {
-    id: 'pdf-to-word-text-extraction',
-    name: 'PDF to Word (Text Extraction)',
-    description: 'Extracts text from the first page of a PDF using AI. Output is plain text, copyable to Word.',
-    icon: FileText,
-    href: '/tools/pdf-to-word-converter',
-    category: 'PDF Tools', 
-    keywords: ['pdf', 'word', 'text extraction', 'converter', 'ocr', 'document']
+    id: 'png-to-jpg', name: 'PNG to JPG', description: 'Convert PNG images to JPG format.', icon: Replace, href: '/tools/png-to-jpg', category: 'Image Tools', headerCategory: 'Image', keywords: ['png', 'jpg', 'converter'],
   },
   {
-    id: 'pdf-to-presentation-content-extractor',
-    name: 'PDF to Presentation Content Extractor',
-    description: 'Extracts text from PDF pages (first 5 pages) to help build presentation slides.',
-    icon: Presentation,
-    href: '/tools/pdf-to-presentation-content-extractor',
-    category: 'PDF Tools', 
-    keywords: ['pdf', 'powerpoint', 'presentation', 'slides', 'text extraction', 'ocr']
+    id: 'jpg-to-png', name: 'JPG to PNG', description: 'Convert JPG images to PNG format.', icon: Replace, href: '/tools/jpg-to-png', category: 'Image Tools', headerCategory: 'Image', keywords: ['jpg', 'png', 'converter'],
   },
   {
-    id: 'image-to-text-converter',
-    name: 'Image to Text Converter (OCR)',
-    description: 'Extract text from images (JPG, PNG, etc.) using Optical Character Recognition (OCR).',
-    icon: ScanText,
-    href: '/tools/image-to-text-converter',
-    category: 'Text & AI Tools', 
-    keywords: ['ocr', 'image to text', 'text extraction', 'scan', 'picture to text']
+    id: 'webp-to-jpg', name: 'WEBP to JPG', description: 'Convert WEBP images to JPG format.', icon: Replace, href: '/tools/webp-to-jpg', category: 'Image Tools', headerCategory: 'Image', keywords: ['webp', 'jpg', 'converter'],
   },
   {
-    id: 'image-resizer',
-    name: 'Image Resizer',
-    description: 'Resize images to your desired dimensions and format.',
-    icon: Scaling,
-    href: '/tools/image-resizer',
-    category: 'Image Tools',
-    keywords: ['image', 'resize', 'dimensions', 'scaler', 'photo']
+    id: 'webp-to-png', name: 'WEBP to PNG', description: 'Convert WEBP images to PNG format.', icon: Replace, href: '/tools/webp-to-png', category: 'Image Tools', headerCategory: 'Image', keywords: ['webp', 'png', 'converter'],
   },
   {
-    id: 'png-to-jpg',
-    name: 'PNG to JPG Converter',
-    description: 'Convert PNG images to JPG format with quality adjustment.',
-    icon: Replace,
-    href: '/tools/png-to-jpg',
-    category: 'Image Tools', 
-    keywords: ['png', 'jpg', 'jpeg', 'converter', 'image format']
+    id: 'ai-image-generator', name: 'AI Image Generator', description: 'Create unique images from text prompts.', icon: ImageIconLucide, href: '/tools/ai-image-generator', category: 'Image Tools', headerCategory: 'Image', keywords: ['ai', 'image', 'generator'],
   },
   {
-    id: 'jpg-to-png',
-    name: 'JPG to PNG Converter',
-    description: 'Convert JPG/JPEG images to PNG format.',
-    icon: Replace,
-    href: '/tools/jpg-to-png',
-    category: 'Image Tools', 
-    keywords: ['jpg', 'jpeg', 'png', 'converter', 'image format']
+    id: 'image-background-remover', name: 'AI Background Remover', description: 'Remove background from images using AI.', icon: Eraser, href: '/tools/image-background-remover', category: 'Image Tools', headerCategory: 'Image', keywords: ['background remover', 'ai'],
   },
   {
-    id: 'webp-to-jpg',
-    name: 'WEBP to JPG Converter',
-    description: 'Convert WEBP images to JPG format with adjustable quality.',
-    icon: Replace,
-    href: '/tools/webp-to-jpg',
-    category: 'Image Tools', 
-    keywords: ['webp', 'jpg', 'jpeg', 'converter', 'image format']
+    id: 'ai-image-upscaler', name: 'AI Image Upscaler', description: 'Increase image resolution with AI (Experimental).', icon: ZoomIn, href: '/tools/ai-image-upscaler', category: 'Image Tools', headerCategory: 'Image', keywords: ['ai', 'upscale', 'image'],
+  },
+
+  // Text & AI Tools (mapped to "Write" in header)
+  {
+    id: 'image-to-text-converter', name: 'Image to Text (OCR)', description: 'Extract text from images.', icon: ScanText, href: '/tools/image-to-text-converter', category: 'Text & AI Tools', headerCategory: 'Write', keywords: ['ocr', 'text extraction'],
   },
   {
-    id: 'webp-to-png',
-    name: 'WEBP to PNG Converter',
-    description: 'Convert your WEBP images to high-quality PNG format, preserving transparency.',
-    icon: Replace,
-    href: '/tools/webp-to-png',
-    category: 'Image Tools', 
-    keywords: ['webp', 'png', 'converter', 'image format', 'transparency']
+    id: 'ai-detector', name: 'AI Text Detector', description: 'Estimate if text is AI-generated.', icon: ScanSearch, href: '/tools/ai-detector', category: 'Text & AI Tools', headerCategory: 'Write', keywords: ['ai detector', 'gpt'],
   },
   {
-    id: 'ai-image-generator',
-    name: 'AI Image Generator',
-    description: 'Create unique images from text prompts using cutting-edge AI.',
-    icon: ImageIconLucide,
-    href: '/tools/ai-image-generator',
-    category: 'Image Tools',
-    keywords: ['ai', 'image', 'generator', 'art', 'creative', 'generative art', 'text to image'],
+    id: 'voice-to-text', name: 'Voice to Text', description: 'Convert speech to text via AI.', icon: Volume2, href: '/tools/voice-to-text', category: 'Text & AI Tools', headerCategory: 'Write', keywords: ['speech to text', 'transcription'],
   },
   {
-    id: 'image-background-remover',
-    name: 'AI Image Background Remover',
-    description: 'Upload an image and let AI attempt to remove its background, making it transparent.',
-    icon: Eraser,
-    href: '/tools/image-background-remover',
-    category: 'Image Tools',
-    keywords: ['background remover', 'transparent background', 'image editing', 'ai', 'png', 'remove bg'],
+    id: 'word-counter', name: 'Word Counter', description: 'Count words, characters, etc.', icon: Baseline, href: '/tools/word-counter', category: 'Text & AI Tools', headerCategory: 'Write', keywords: ['word count', 'text analysis'],
   },
   {
-    id: 'ai-image-upscaler',
-    name: 'AI Image Upscaler (Experimental)',
-    description: 'Attempt to increase the resolution and enhance details of your images using AI. Results are experimental and may vary.',
-    icon: ZoomIn,
-    href: '/tools/ai-image-upscaler',
-    category: 'Image Tools',
-    keywords: ['ai', 'image', 'upscale', 'super resolution', 'enhance', 'details', 'experimental']
+    id: 'text-case-converter', name: 'Text Case Converter', description: 'Convert text to different cases.', icon: CaseSensitive, href: '/tools/text-case-converter', category: 'Text & AI Tools', headerCategory: 'Write', keywords: ['case converter', 'text tools'],
   },
   {
-    id: 'ai-detector',
-    name: 'AI Text Detector',
-    description: 'Analyzes text to estimate the likelihood of it being AI-generated. Provides an assessment and reasoning.',
-    icon: ScanSearch,
-    href: '/tools/ai-detector',
-    category: 'Text & AI Tools',
-    keywords: ['ai detector', 'text analysis', 'content authenticity', 'ai writing', 'gpt detector'],
+    id: 'lorem-ipsum-generator', name: 'Lorem Ipsum Generator', description: 'Generate placeholder text.', icon: ClipboardList, href: '/tools/lorem-ipsum-generator', category: 'Text & AI Tools', headerCategory: 'Write', keywords: ['lorem ipsum', 'placeholder'],
   },
   {
-    id: 'voice-to-text',
-    name: 'Voice to Text Converter',
-    description: 'Record your voice and convert it into text using AI transcription.',
-    icon: Volume2,
-    href: '/tools/voice-to-text',
-    category: 'Text & AI Tools',
-    keywords: ['speech to text', 'transcription', 'audio', 'voice recognition', 'ai']
+    id: 'html-formatter', name: 'HTML Formatter', description: 'Format and beautify HTML code.', icon: CodeXml, href: '/tools/html-formatter', category: 'Text & AI Tools', headerCategory: 'Write', keywords: ['html', 'formatter', 'code'],
+  },
+
+  // Data Converters (mapped to "File" or "Other" in header for simplicity, or its own category)
+  {
+    id: 'base64-encoder-decoder', name: 'Base64 Encoder/Decoder', description: 'Encode/Decode Base64 strings.', icon: Binary, href: '/tools/base64-encoder-decoder', category: 'Data Converters', headerCategory: 'File', keywords: ['base64', 'converter'],
   },
   {
-    id: 'password-generator',
-    name: 'Password Generator',
-    description: 'Create strong, random passwords with customizable options.',
-    icon: KeyRound,
-    href: '/tools/password-generator',
-    category: 'Web Utilities',
-    keywords: ['password', 'security', 'generator', 'secure', 'random']
+    id: 'url-encoder-decoder', name: 'URL Encoder/Decoder', description: 'Encode/Decode URL strings.', icon: LinkIcon, href: '/tools/url-encoder-decoder', category: 'Data Converters', headerCategory: 'File', keywords: ['url', 'converter'],
   },
   {
-    id: 'ip-address-info',
-    name: 'IP Address Information',
-    description: 'Get information about an IP address, including location and ISP.',
-    icon: Network,
-    href: '/tools/ip-address-info',
-    category: 'Web Utilities',
-    keywords: ['ip', 'address', 'location', 'isp', 'network', 'geolocation']
+    id: 'number-system-converter', name: 'Number System Converter', description: 'Convert between number systems.', icon: Calculator, href: '/tools/number-system-converter', category: 'Data Converters', headerCategory: 'File', keywords: ['number system', 'binary', 'hex'],
   },
   {
-    id: 'word-counter',
-    name: 'Word Counter',
-    description: 'Count words, characters, sentences, and paragraphs in your text.',
-    icon: Baseline,
-    href: '/tools/word-counter',
-    category: 'Text & AI Tools',
-    keywords: ['text', 'analysis', 'word count', 'character count', 'sentence count', 'paragraph count']
+    id: 'csv-to-json-converter', name: 'CSV to JSON', description: 'Convert CSV data to JSON.', icon: FileCode2, href: '/tools/csv-to-json', category: 'Data Converters', headerCategory: 'File', keywords: ['csv', 'json', 'converter'],
   },
   {
-    id: 'internet-speed-tester',
-    name: 'Internet Speed Test',
-    description: 'Estimate your download speed and network latency. Upload speed test not available.',
-    icon: Gauge,
-    href: '/tools/internet-speed-tester',
-    category: 'Web Utilities',
-    keywords: ['internet speed', 'download', 'latency', 'ping', 'bandwidth', 'connection test']
+    id: 'json-to-xml-converter', name: 'JSON to XML (AI)', description: 'Convert JSON to XML using AI.', icon: FileCode2, href: '/tools/json-to-xml', category: 'Data Converters', headerCategory: 'File', keywords: ['json', 'xml', 'ai'],
   },
   {
-    id: 'text-case-converter',
-    name: 'Text Case Converter',
-    description: 'Convert text to various cases like uppercase, lowercase, title case, etc.',
-    icon: CaseSensitive,
-    href: '/tools/text-case-converter',
-    category: 'Text & AI Tools',
-    keywords: ['text', 'case', 'converter', 'uppercase', 'lowercase', 'title case', 'sentence case']
+    id: 'xml-to-json-converter', name: 'XML to JSON (AI)', description: 'Convert XML to JSON using AI.', icon: FileCode2, href: '/tools/xml-to-json', category: 'Data Converters', headerCategory: 'File', keywords: ['xml', 'json', 'ai'],
   },
   {
-    id: 'base64-encoder-decoder',
-    name: 'Base64 Encoder/Decoder',
-    description: 'Encode text to Base64 or decode Base64 strings back to text.',
-    icon: Binary,
-    href: '/tools/base64-encoder-decoder',
-    category: 'Data Converters',
-    keywords: ['base64', 'encode', 'decode', 'binary', 'text', 'converter', 'ascii', 'utf8']
+    id: 'csv-to-xml-converter', name: 'CSV to XML (AI)', description: 'Convert CSV to XML using AI.', icon: FileCode2, href: '/tools/csv-to-xml', category: 'Data Converters', headerCategory: 'File', keywords: ['csv', 'xml', 'ai'],
   },
   {
-    id: 'url-encoder-decoder',
-    name: 'URL Encoder / Decoder',
-    description: 'Encode text to URL-safe format or decode URL-encoded strings.',
-    icon: LinkIcon,
-    href: '/tools/url-encoder-decoder',
-    category: 'Data Converters',
-    keywords: ['url', 'encode', 'decode', 'percent encoding', 'uri', 'query string']
+    id: 'csv-to-excel-converter', name: 'CSV to Excel', description: 'Convert CSV to Excel (.xlsx).', icon: FileSpreadsheet, href: '/tools/csv-to-excel', category: 'Data Converters', headerCategory: 'File', keywords: ['csv', 'excel', 'xlsx'],
   },
   {
-    id: 'color-converter',
-    name: 'Color Converter',
-    description: 'Convert colors between HEX, RGB, and HSL formats.',
-    icon: Palette,
-    href: '/tools/color-converter',
-    category: 'Web Utilities',
-    keywords: ['color', 'converter', 'hex', 'rgb', 'hsl', 'picker', 'palette']
+    id: 'excel-to-csv-converter', name: 'Excel to CSV', description: 'Convert Excel sheets to CSV.', icon: FileSpreadsheet, href: '/tools/excel-to-csv', category: 'Data Converters', headerCategory: 'File', keywords: ['excel', 'csv', 'xlsx'],
   },
   {
-    id: 'unit-converter',
-    name: 'Unit Converter',
-    description: 'Convert between various units of measurement like length, weight, temperature.',
-    icon: ArrowRightLeft,
-    href: '/tools/unit-converter',
-    category: 'Calculators',
-    keywords: ['unit', 'converter', 'measurement', 'length', 'weight', 'temperature', 'metric', 'imperial']
+    id: 'xml-to-excel-converter', name: 'XML to Excel (AI)', description: 'Convert XML to Excel via AI.', icon: DatabaseZap, href: '/tools/xml-to-excel', category: 'Data Converters', headerCategory: 'File', keywords: ['xml', 'excel', 'ai'],
   },
   {
-    id: 'number-system-converter',
-    name: 'Number System Converter',
-    description: 'Convert numbers between binary, octal, decimal, and hexadecimal systems.',
-    icon: Calculator,
-    href: '/tools/number-system-converter',
-    category: 'Data Converters',
-    keywords: ['number', 'system', 'converter', 'binary', 'octal', 'decimal', 'hexadecimal', 'base']
+    id: 'excel-to-xml-converter', name: 'Excel to XML (AI)', description: 'Convert Excel to XML via AI.', icon: DatabaseZap, href: '/tools/excel-to-xml', category: 'Data Converters', headerCategory: 'File', keywords: ['excel', 'xml', 'ai'],
   },
   {
-    id: 'lorem-ipsum-generator',
-    name: 'Lorem Ipsum Generator',
-    description: 'Generate Lorem Ipsum style placeholder text for your projects.',
-    icon: ClipboardList,
-    href: '/tools/lorem-ipsum-generator',
-    category: 'Text & AI Tools',
-    keywords: ['lorem ipsum', 'placeholder', 'text', 'generator', 'dummy text', 'latin'],
+    id: 'json-formatter-validator', name: 'JSON Formatter', description: 'Format & Validate JSON strings.', icon: Braces, href: '/tools/json-formatter-validator', category: 'Data Converters', headerCategory: 'File', keywords: ['json', 'formatter'],
+  },
+
+  // File Management
+  {
+    id: 'split-excel-file', name: 'Split Excel File by Sheet', description: 'Split Excel into separate files per sheet.', icon: Scissors, href: '/tools/split-excel-file', category: 'File Management', headerCategory: 'File', keywords: ['excel', 'split sheet'],
   },
   {
-    id: 'csv-to-json-converter',
-    name: 'CSV to JSON Converter',
-    description: 'Convert CSV data to JSON format. Upload a CSV file for conversion.',
-    icon: FileCode2,
-    href: '/tools/csv-to-json',
-    category: 'Data Converters',
-    keywords: ['csv', 'json', 'converter', 'data transformation', 'file conversion']
+    id: 'split-csv', name: 'Split CSV File', description: 'Split large CSV into smaller files.', icon: SplitSquareHorizontal, href: '/tools/split-csv', category: 'File Management', headerCategory: 'File', keywords: ['csv', 'split file'],
+  },
+
+  // Web Utilities (mapped to "Other" in header)
+  {
+    id: 'qr-code-scanner', name: 'QR Code Scanner', description: 'Scan QR codes with your camera.', icon: QrCode, href: '/tools/qr-code-scanner', category: 'Web Utilities', headerCategory: 'Other', keywords: ['qr code', 'scanner'],
   },
   {
-    id: 'json-to-xml-converter',
-    name: 'JSON to XML Converter (AI Assisted)',
-    description: 'Convert JSON data structures into XML format using AI-assisted transformation.',
-    icon: FileCode2,
-    href: '/tools/json-to-xml',
-    category: 'Data Converters',
-    keywords: ['json', 'xml', 'converter', 'data transformation', 'ai', 'file conversion']
+    id: 'password-generator', name: 'Password Generator', description: 'Create strong, random passwords.', icon: KeyRound, href: '/tools/password-generator', category: 'Web Utilities', headerCategory: 'Other', keywords: ['password', 'security'],
   },
   {
-    id: 'xml-to-json-converter',
-    name: 'XML to JSON Converter (AI Assisted)',
-    description: 'Convert XML data structures into JSON format using AI-assisted transformation.',
-    icon: FileCode2,
-    href: '/tools/xml-to-json',
-    category: 'Data Converters',
-    keywords: ['xml', 'json', 'converter', 'data transformation', 'ai', 'file conversion']
+    id: 'ip-address-info', name: 'IP Address Information', description: 'Get info about an IP address.', icon: Network, href: '/tools/ip-address-info', category: 'Web Utilities', headerCategory: 'Other', keywords: ['ip address', 'geolocation'],
   },
   {
-    id: 'csv-to-xml-converter',
-    name: 'CSV to XML Converter (AI Assisted)',
-    description: 'Convert CSV data into XML format using AI-assisted transformation. Paste or upload CSV.',
-    icon: FileCode2,
-    href: '/tools/csv-to-xml',
-    category: 'Data Converters',
-    keywords: ['csv', 'xml', 'converter', 'data transformation', 'ai', 'file conversion']
+    id: 'internet-speed-tester', name: 'Internet Speed Test', description: 'Estimate your internet speed.', icon: Gauge, href: '/tools/internet-speed-tester', category: 'Web Utilities', headerCategory: 'Other', keywords: ['speed test', 'internet'],
   },
   {
-    id: 'csv-to-excel-converter',
-    name: 'CSV to Excel Converter',
-    description: 'Convert CSV files to Excel (.xlsx) format directly in your browser.',
-    icon: FileSpreadsheet,
-    href: '/tools/csv-to-excel',
-    category: 'Data Converters',
-    keywords: ['csv', 'excel', 'xlsx', 'converter', 'spreadsheet', 'data conversion']
+    id: 'color-converter', name: 'Color Converter', description: 'Convert HEX, RGB, HSL colors.', icon: Palette, href: '/tools/color-converter', category: 'Web Utilities', headerCategory: 'Other', keywords: ['color', 'converter', 'hex', 'rgb'],
+  },
+
+  // Calculators (mapped to "Other" in header)
+  {
+    id: 'file-size-calculator', name: 'File Size Calculator', description: 'Convert B, KB, MB, GB, TB.', icon: HardDrive, href: '/tools/file-size-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['file size', 'bytes'],
   },
   {
-    id: 'excel-to-csv-converter',
-    name: 'Excel to CSV Converter',
-    description: 'Convert sheets from Excel files (.xlsx, .xls) into CSV format.',
-    icon: FileSpreadsheet,
-    href: '/tools/excel-to-csv',
-    category: 'Data Converters',
-    keywords: ['excel', 'csv', 'xlsx', 'xls', 'converter', 'spreadsheet', 'data extraction']
+    id: 'loan-calculator', name: 'Loan Calculator', description: 'Estimate loan payments.', icon: CircleDollarSign, href: '/tools/loan-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['loan', 'amortization'],
   },
   {
-    id: 'split-excel-file',
-    name: 'Split Excel File by Sheet',
-    description: 'Split an Excel workbook into separate files, one for each sheet.',
-    icon: Scissors,
-    href: '/tools/split-excel-file',
-    category: 'File Management',
-    keywords: ['excel', 'split', 'sheet', 'workbook', 'xlsx', 'xls', 'separate']
+    id: 'age-calculator', name: 'Age Calculator', description: 'Calculate age from birth date.', icon: Cake, href: '/tools/age-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['age', 'birthday'],
   },
   {
-    id: 'xml-to-excel-converter',
-    name: 'XML to Excel Converter (AI Assisted)',
-    description: 'Upload XML. AI attempts to extract tabular data, which is then converted to an Excel (.xlsx) file.',
-    icon: DatabaseZap,
-    href: '/tools/xml-to-excel',
-    category: 'Data Converters',
-    keywords: ['xml', 'excel', 'xlsx', 'converter', 'data extraction', 'ai', 'table']
+    id: 'investment-roi-calculator', name: 'Investment ROI Calculator', description: 'Calculate Return on Investment.', icon: TrendingUp, href: '/tools/investment-roi-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['roi', 'investment'],
   },
   {
-    id: 'excel-to-xml-converter',
-    name: 'Excel to XML Converter (AI Assisted)',
-    description: 'Upload an Excel file. Data from the first sheet will be converted to XML format using AI.',
-    icon: DatabaseZap,
-    href: '/tools/excel-to-xml',
-    category: 'Data Converters',
-    keywords: ['excel', 'xml', 'converter', 'data extraction', 'ai', 'table', 'xlsx']
+    id: 'bmi-calculator', name: 'BMI Calculator', description: 'Calculate Body Mass Index.', icon: HeartPulse, href: '/tools/bmi-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['bmi', 'health'],
   },
   {
-    id: 'json-formatter-validator',
-    name: 'JSON Formatter & Validator',
-    description: 'Format and validate JSON strings. Beautify your JSON for readability.',
-    icon: Braces,
-    href: '/tools/json-formatter-validator',
-    category: 'Data Converters',
-    keywords: ['json', 'formatter', 'validator', 'linter', 'pretty print', 'beautifier', 'viewer']
+    id: 'salary-converter', name: 'Salary Converter', description: 'Convert hourly to annual salary.', icon: DollarSign, href: '/tools/salary-converter', category: 'Calculators', headerCategory: 'Other', keywords: ['salary', 'wage'],
   },
   {
-    id: 'file-size-calculator',
-    name: 'File Size Calculator',
-    description: 'Convert file sizes between Bytes, KB, MB, GB, TB, and PB (1KB = 1024 Bytes).',
-    icon: HardDrive,
-    href: '/tools/file-size-calculator',
-    category: 'Calculators',
-    keywords: ['file size', 'bytes', 'kb', 'mb', 'gb', 'tb', 'pb', 'converter', 'calculator', 'storage']
+    id: 'compound-interest-calculator', name: 'Compound Interest Calculator', description: 'Calculate compound interest.', icon: Landmark, href: '/tools/compound-interest-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['compound interest', 'savings'],
   },
   {
-    id: 'html-formatter',
-    name: 'HTML Formatter',
-    description: 'Format and beautify your HTML code for better readability.',
-    icon: CodeXml,
-    href: '/tools/html-formatter',
-    category: 'Text & AI Tools',
-    keywords: ['html', 'formatter', 'beautifier', 'code', 'markup', 'format', 'pretty print']
+    id: 'percentage-calculator', name: 'Percentage Calculator', description: 'Calculate various percentages.', icon: Percent, href: '/tools/percentage-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['percentage', 'math'],
   },
   {
-    id: 'loan-calculator',
-    name: 'Loan Calculator',
-    description: 'Estimate your monthly loan payments, total interest, and see an amortization schedule.',
-    icon: CircleDollarSign,
-    href: '/tools/loan-calculator',
-    category: 'Calculators',
-    keywords: ['loan', 'mortgage', 'finance', 'payment', 'interest', 'amortization', 'calculator']
+    id: 'sales-tax-calculator', name: 'Sales Tax Calculator', description: 'Calculate sales tax and total.', icon: Receipt, href: '/tools/sales-tax-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['sales tax', 'price'],
   },
   {
-    id: 'age-calculator',
-    name: 'Age Calculator',
-    description: 'Calculate age based on a given birth date, showing years, months, and days.',
-    icon: Cake,
-    href: '/tools/age-calculator',
-    category: 'Calculators',
-    keywords: ['age', 'birthday', 'date', 'calculator', 'years', 'months', 'days']
+    id: 'income-tax-calculator', name: 'Income Tax Calculator', description: 'Estimate income tax (simplified).', icon: FileTextIconLucide, href: '/tools/income-tax-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['income tax', 'finance'],
   },
   {
-    id: 'investment-roi-calculator',
-    name: 'Investment ROI Calculator',
-    description: 'Calculate the Return on Investment (ROI) for an investment.',
-    icon: TrendingUp,
-    href: '/tools/investment-roi-calculator',
-    category: 'Calculators',
-    keywords: ['roi', 'investment', 'return', 'profit', 'loss', 'finance', 'calculator']
+    id: 'simple-interest-calculator', name: 'Simple Interest Calculator', description: 'Calculate simple interest.', icon: LineChart, href: '/tools/simple-interest-calculator', category: 'Calculators', headerCategory: 'Other', keywords: ['simple interest', 'finance'],
   },
   {
-    id: 'bmi-calculator',
-    name: 'BMI Calculator',
-    description: 'Calculate your Body Mass Index (BMI) and understand your weight category.',
-    icon: HeartPulse,
-    href: '/tools/bmi-calculator',
-    category: 'Calculators',
-    keywords: ['bmi', 'body mass index', 'health', 'weight', 'fitness', 'calculator']
+    id: 'unit-converter', name: 'Unit Converter', description: 'Convert length, weight, temp.', icon: ArrowRightLeft, href: '/tools/unit-converter', category: 'Calculators', headerCategory: 'Other', keywords: ['unit converter', 'measurement'],
   },
-  {
-    id: 'salary-converter',
-    name: 'Salary Converter',
-    description: 'Convert between hourly, weekly, monthly, and annual salary rates.',
-    icon: DollarSign,
-    href: '/tools/salary-converter',
-    category: 'Calculators',
-    keywords: ['salary', 'wage', 'income', 'pay', 'converter', 'hourly', 'annual', 'finance']
-  },
-  {
-    id: 'compound-interest-calculator',
-    name: 'Compound Interest Calculator',
-    description: 'Calculate the future value of an investment with compound interest and optional annual contributions.',
-    icon: Landmark,
-    href: '/tools/compound-interest-calculator',
-    category: 'Calculators',
-    keywords: ['compound interest', 'investment', 'savings', 'future value', 'finance', 'calculator', 'interest rate']
-  },
-  {
-    id: 'percentage-calculator',
-    name: 'Percentage Calculator',
-    description: 'Calculate percentages, find what percentage X is of Y, and percentage changes.',
-    icon: Percent,
-    href: '/tools/percentage-calculator',
-    category: 'Calculators',
-    keywords: ['percentage', 'percent', 'calculator', 'math', 'finance', 'discount', 'increase', 'decrease']
-  },
-  {
-    id: 'sales-tax-calculator',
-    name: 'Sales Tax Calculator',
-    description: 'Calculate sales tax and total price based on amount and tax rate.',
-    icon: Receipt,
-    href: '/tools/sales-tax-calculator',
-    category: 'Calculators',
-    keywords: ['sales tax', 'tax', 'vat', 'gst', 'calculator', 'price', 'finance']
-  },
-  {
-    id: 'income-tax-calculator',
-    name: 'Simple Income Tax Calculator',
-    description: 'Estimate income tax based on a simplified progressive tax bracket system.',
-    icon: FileTextIcon,
-    href: '/tools/income-tax-calculator',
-    category: 'Calculators',
-    keywords: ['income tax', 'tax brackets', 'taxation', 'finance', 'calculator', 'salary']
-  },
-  {
-    id: 'simple-interest-calculator',
-    name: 'Simple Interest Calculator',
-    description: 'Calculate simple interest earned and total amount on a principal.',
-    icon: LineChart,
-    href: '/tools/simple-interest-calculator',
-    category: 'Calculators',
-    keywords: ['simple interest', 'interest', 'finance', 'investment', 'savings', 'calculator']
-  },
-  {
-    id: 'split-csv',
-    name: 'Split CSV File',
-    description: 'Split a large CSV file into multiple smaller CSV files based on number of rows.',
-    icon: SplitSquareHorizontal,
-    href: '/tools/split-csv',
-    category: 'File Management',
-    keywords: ['csv', 'split', 'chunk', 'data processing', 'file utility']
-  }
+  
+  // Video Tools (Placeholder - to be populated)
+  // {
+  //   id: 'video-compressor', name: 'Video Compressor', description: 'Reduce video file size.', icon: VideoIconLucide, href: '/tools/video-compressor', category: 'Video Tools', headerCategory: 'Video', keywords: ['video', 'compress'],
+  // },
 ];
 
 
-// For Header Navigation Dropdowns (if any) - simplified for the new design
-export const HEADER_CATEGORY_ORDER: FunctionalToolCategory[] = [
+export const HEADER_CATEGORY_ORDER: ToolCategory[] = [
   'PDF Tools',
   'Image Tools',
   'Text & AI Tools',
@@ -543,18 +220,73 @@ export const HEADER_CATEGORY_ORDER: FunctionalToolCategory[] = [
   'Web Utilities'
 ];
 
-// Configuration for the "Popular Tools" section and homepage filter bar from the previous prompt
-// This will be REMOVED/ADAPTED for the new design.
-// Keeping it here temporarily for reference during the merge.
-export const POPULAR_TOOLS_CONFIG: Tool[] = []; // Will be populated by the new logic if needed for "Most Popular" button
-export const FILTER_CATEGORIES_CONFIG = []; // Not used in the new design
+// Data for TinyWow-style homepage category cards
+export const TINY_WOW_CATEGORIES: TinyWowCategoryCardData[] = [
+  {
+    id: 'pdf',
+    title: 'PDF Tools',
+    subtitle: 'Solve Your PDF Problems',
+    icon: FileText, // Lucide icon for PDF
+    label: '45+ tools', // Matches TinyWow style
+    featuredToolName: 'PDF Creator',
+    href: '/#pdf-tools-section', // Placeholder link, could link to a filtered view or section
+    bgColorClass: 'bg-[hsl(var(--card-pdf))]',
+    textColorClass: 'text-[hsl(var(--card-pdf-foreground))]'
+  },
+  {
+    id: 'image',
+    title: 'Image Tools',
+    subtitle: 'Solve Your Image Problems',
+    icon: ImageIconLucide, // Lucide icon for Image
+    label: '30+ tools',
+    featuredToolName: 'Remove Background',
+    href: '/#image-tools-section',
+    bgColorClass: 'bg-[hsl(var(--card-image))]',
+    textColorClass: 'text-[hsl(var(--card-image-foreground))]'
+  },
+  {
+    id: 'video',
+    title: 'Video Tools',
+    subtitle: 'Solve Your Video Problems',
+    icon: VideoIconLucide, // Lucide icon for Video
+    label: '10+ tools',
+    featuredToolName: 'Mute Video',
+    href: '/#video-tools-section',
+    bgColorClass: 'bg-[hsl(var(--card-video))]',
+    textColorClass: 'text-[hsl(var(--card-video-foreground))]'
+  },
+  {
+    id: 'ai-write',
+    title: 'AI Write Tools',
+    subtitle: 'Solve Your Text Problems',
+    icon: TypeIcon, // Lucide icon for Writing/Text
+    label: '10+ tools',
+    featuredToolName: 'Essay Writer',
+    href: '/#ai-write-tools-section',
+    bgColorClass: 'bg-[hsl(var(--card-ai-write))]',
+    textColorClass: 'text-[hsl(var(--card-ai-write-foreground))]'
+  },
+  {
+    id: 'file',
+    title: 'File Tools',
+    subtitle: 'Solve Your File Problems',
+    icon: Folder, // Lucide icon for Files
+    label: '15+ tools',
+    featuredToolName: 'Split Excel',
+    href: '/#file-tools-section',
+    bgColorClass: 'bg-[hsl(var(--card-file))]',
+    textColorClass: 'text-[hsl(var(--card-file-foreground))]'
+  },
+];
 
-// Featured tools mapping for the new homepage section.
-// We map IDs to existing TOOLS_DATA entries.
-export const FEATURED_TOOLS_MAPPING: Record<string, { id: string; name?: string; description?: string; icon?: LucideIcon }> = {
-  'pdf-creator': { id: 'image-to-pdf', name: 'PDF Creator', description: 'Create PDFs from images or other formats.' },
-  'remove-bg': { id: 'image-background-remover' },
-  'mute-video': { id: 'video-mute-placeholder', name: 'Mute Video', description: 'Remove audio from your videos.' }, // Placeholder ID
-  'paragraph-writer': { id: 'lorem-ipsum-generator', name: 'Paragraph Writer', description: 'Generate paragraphs with AI.'},
-  'split-excel': { id: 'split-excel-file' },
-};
+// For Header Navigation Dropdowns - using simplified categories from prompt
+export const HEADER_DROPDOWN_CATEGORIES: Array<{ name: 'PDF' | 'Image' | 'Write' | 'Video' | 'File', tools: FunctionalTool[] }> = [
+  { name: 'PDF', tools: TOOLS_DATA.filter(tool => tool.headerCategory === 'PDF') },
+  { name: 'Image', tools: TOOLS_DATA.filter(tool => tool.headerCategory === 'Image') },
+  { name: 'Write', tools: TOOLS_DATA.filter(tool => tool.headerCategory === 'Write') },
+  { name: 'Video', tools: TOOLS_DATA.filter(tool => tool.headerCategory === 'Video') }, // Will be empty if no video tools
+  { name: 'File', tools: TOOLS_DATA.filter(tool => tool.headerCategory === 'File') },
+];
+
+export const ALL_TOOLS_CATEGORY_FOR_HEADER = { name: 'All Tools', tools: TOOLS_DATA };
+
