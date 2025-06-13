@@ -5,14 +5,11 @@ export type ToolCategory =
   | 'PDF Tools'
   | 'Image Tools'
   | 'Text & AI Tools'
-  | 'Data Converters' // Main category for filter
-  | 'Converter Tools'   // Display category for card
+  | 'Data Converters'
   | 'Calculators'
   | 'Web Utilities'
   | 'File Management'
-  | 'Video Tools'
-  | 'Other Tools'       // Display category for card & filter for grouped tools
-  | 'AI Write';         // Display category for card
+  | 'Video Tools'; // Added Video Tools for completeness
 
 export interface Tool {
   id: string;
@@ -22,6 +19,5 @@ export interface Tool {
   href: string;
   keywords?: string[];
   category: ToolCategory; // Primary functional category
-  displayCategory?: ToolCategory; // For display on cards, matching prompt
-  isFeaturedCategory?: boolean;
+  isFeaturedCategory?: boolean; // Used for header checkmarks
 }
