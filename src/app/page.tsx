@@ -10,6 +10,7 @@ import type { Tool, ToolCategory, TinyWowCategoryCardData } from '@/types/tool';
 import { Users, FileCog, Wrench, Search, FileText, ImageIcon as ImageIconLucide, Video as VideoIconLucide, Type as TypeIcon, Folder } from 'lucide-react';
 import React, { useState, useMemo, useEffect } from 'react';
 import ToolCard from '@/components/tool-card'; // For the "All Tools" section
+import { Input } from '@/components/ui/input'; // Added this import
 
 const TopBanner = () => (
   <div className="bg-primary text-primary-foreground py-2.5 text-center text-sm font-medium">
