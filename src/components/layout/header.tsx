@@ -2,11 +2,12 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Menu, X, Search as SearchIcon, Sun, Check, ChevronDown } from 'lucide-react';
+import { Menu, X, Search as SearchIconLucide, Sun, ChevronDown } from 'lucide-react'; // Renamed Search to avoid conflict
 import Link from 'next/link';
 import Logo from './logo';
 import NavLink from './nav-link';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Sheet,
   SheetContent,
@@ -16,42 +17,22 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { TOOLS_DATA } from '@/lib/tools-data';
+import { TOOLS_DATA, HEADER_CATEGORY_ORDER as importedHeaderCategories } from '@/lib/tools-data';
 import type { Tool, ToolCategory } from '@/types/tool';
 
 interface GroupedTools {
   [category: string]: Tool[];
 }
 
-// Reverted category order and featured categories
-const HEADER_CATEGORY_ORDER: ToolCategory[] = [
-  'PDF Tools',
-  'Image Tools',
-  'Text & AI Tools',
-  'File Management', 
-  // Removed 'Video Tools' as it was part of the reverted changes
-];
-
-const HEADER_FEATURED_CATEGORIES: ToolCategory[] = [
-  'PDF Tools',
-  'Text & AI Tools',
-];
-
-
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     setIsMounted(true);
@@ -67,13 +48,27 @@ const Header = () => {
       return acc;
     }, {} as GroupedTools);
   }, []);
-
-  const headerCategories = useMemo(() => {
-    return HEADER_CATEGORY_ORDER.filter(categoryName => groupedTools[categoryName] && groupedTools[categoryName].length > 0);
+  
+  // Use importedHeaderCategories directly
+  const headerCategoriesForMobile = useMemo(() => {
+    return importedHeaderCategories.filter(categoryName => groupedTools[categoryName] && groupedTools[categoryName].length > 0);
   }, [groupedTools]);
 
 
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // For now, this will just log or you can redirect to a search results page if you build one
+      // Or, if on homepage, it could trigger a filter. Since this is a global header,
+      // a redirect or dedicated search page is more appropriate.
+      // Let's link to the homepage tools section for now.
+      window.location.href = `/#tools-section?q=${encodeURIComponent(searchQuery.trim())}`;
+    }
+  };
+
+
   if (!isMounted) {
+    // Basic skeleton or simplified header for SSR/initial mount
     return (
       <header className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
@@ -91,58 +86,29 @@ const Header = () => {
 
   return (
     <header className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-16 sm:h-20 flex items-center justify-between gap-4">
         <Logo />
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-0 flex-grow justify-start pl-4">
-          {headerCategories.map((categoryName) => (
-            <DropdownMenu key={categoryName}>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-2 lg:px-3 text-sm">
-                  {categoryName === 'Text & AI Tools' ? 'Write' : categoryName === 'File Management' ? 'File' : categoryName}
-                  {HEADER_FEATURED_CATEGORIES.includes(categoryName as ToolCategory) && (
-                    <Check className="ml-1 h-4 w-4 text-green-500" />
-                  )}
-                  <ChevronDown className="ml-1 h-4 w-4 opacity-70" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-56 max-h-96 overflow-y-auto">
-                {groupedTools[categoryName]?.length > 0 ? (
-                  groupedTools[categoryName]?.map((tool) => (
-                    <DropdownMenuItem key={tool.id} asChild>
-                      <Link href={tool.href} className="flex items-center gap-2">
-                        <tool.icon className="h-4 w-4 text-muted-foreground" />
-                        {tool.name}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))
-                ) : (
-                  <DropdownMenuItem disabled>No tools in this category yet.</DropdownMenuItem>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ))}
-        </nav>
+        {/* Desktop: Centered Search Bar */}
+        <div className="hidden md:flex flex-grow justify-center items-center max-w-xl">
+          <form onSubmit={handleSearchSubmit} className="w-full relative">
+            <SearchIconLucide className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search tools..."
+              className="w-full pl-10 pr-4 py-2 rounded-md shadow-sm bg-background"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </form>
+        </div>
 
-        {/* Desktop Right Links & Icons */}
-        <div className="hidden md:flex items-center gap-2 lg:gap-3">
-          {/* Removed "Free. No Sign-Up..." and "Read More" */}
-          <Button variant="link" asChild className="text-xs px-1 lg:px-2 text-foreground/70 hover:text-primary">
-            <Link href="/contact">Want To Remove Ads & Captcha?</Link>
-          </Button>
-          <Button variant="link" asChild className="text-sm px-1 lg:px-2">
-            <Link href="/contact">Support Us</Link>
-          </Button>
+        {/* Desktop: Right side elements */}
+        <div className="hidden md:flex items-center gap-3">
           <Button variant="ghost" size="icon" aria-label="Toggle theme (visual only)">
             <Sun className="h-5 w-5" />
           </Button>
-           <Button variant="ghost" size="icon" asChild>
-            <Link href="/#tools-section" aria-label="Search tools">
-              <SearchIcon className="h-5 w-5" />
-            </Link>
-          </Button>
-          <Button variant="outline" asChild className="text-sm px-3 py-1 h-auto">
+          <Button variant="default" asChild>
             <Link href="/">Sign In</Link>
           </Button>
         </div>
@@ -173,15 +139,22 @@ const Header = () => {
                 </SheetTitle>
               </SheetHeader>
               <div className="flex-grow overflow-y-auto p-4">
+                 <form onSubmit={handleSearchSubmit} className="w-full relative mb-4">
+                    <SearchIconLucide className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                    <Input
+                      type="search"
+                      placeholder="Search tools..."
+                      className="w-full pl-10 pr-4 py-2 rounded-md shadow-sm bg-background"
+                       value={searchQuery}
+                       onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </form>
                 <Accordion type="multiple" className="w-full">
-                  {headerCategories.map((categoryName) => (
+                  {headerCategoriesForMobile.map((categoryName) => (
                     <AccordionItem value={categoryName} key={categoryName}>
                       <AccordionTrigger className="text-base hover:no-underline py-3">
                         <span className="flex items-center">
-                          {categoryName === 'Text & AI Tools' ? 'Write' : categoryName === 'File Management' ? 'File' : categoryName}
-                          {HEADER_FEATURED_CATEGORIES.includes(categoryName as ToolCategory) && (
-                            <Check className="ml-2 h-4 w-4 text-green-500" />
-                          )}
+                          {categoryName}
                         </span>
                       </AccordionTrigger>
                       <AccordionContent className="pt-1 pb-0">
@@ -208,22 +181,6 @@ const Header = () => {
                   ))}
                 </Accordion>
                 <div className="mt-6 pt-6 border-t space-y-2">
-                    {/* Removed "Free. No Sign-Up..." and "Read More" from mobile */}
-                    <SheetClose asChild>
-                        <NavLink href="/#tools-section" className="flex items-center gap-2 py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
-                            <SearchIcon className="h-5 w-5" /> Search Tools
-                        </NavLink>
-                    </SheetClose>
-                    <SheetClose asChild>
-                        <NavLink href="/contact" className="block py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
-                           Want To Remove Ads & Captcha?
-                        </NavLink>
-                    </SheetClose>
-                     <SheetClose asChild>
-                        <NavLink href="/contact" className="block py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
-                           Support Us
-                        </NavLink>
-                    </SheetClose>
                      <SheetClose asChild>
                         <NavLink href="/" className="block py-2 px-2 text-base" onClick={() => setIsMobileMenuOpen(false)}>
                            Sign In

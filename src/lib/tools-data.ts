@@ -1,7 +1,7 @@
 
 import type { Tool, ToolCategory } from '@/types/tool';
 import {
-  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIconLucide, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video as VideoIconLucide, Folder, PenTool, Sparkles, LayoutGrid, Box, Settings2, Clapperboard, Shuffle, GanttChartSquare
+  QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIcon, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIconLucide, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video as VideoIconLucide, Folder, PenTool, Sparkles, LayoutGrid, Box, Settings2, Clapperboard, Shuffle, GanttChartSquare, Users, FileCog, Wrench
 } from 'lucide-react';
 
 // Define a more granular set of functional categories
@@ -13,12 +13,13 @@ type FunctionalToolCategory =
   | 'Calculators'
   | 'Web Utilities'
   | 'File Management'
-  | 'Video Tools';
+  | 'Video Tools'; // Ensure this is part of ToolCategory in types/tool.ts
 
 // This type will be used for the `category` field in TOOLS_DATA
 // It ensures we use the functional categories for internal logic.
-interface FunctionalTool extends Omit<Tool, 'category'> {
+interface FunctionalTool extends Omit<Tool, 'category' | 'isFeaturedCategory'> {
   category: FunctionalToolCategory;
+  // isFeaturedCategory is now managed by HEADER_CATEGORY_ORDER
 }
 
 
@@ -39,19 +40,14 @@ export const TOOLS_DATA: FunctionalTool[] = [
     icon: FileImage,
     href: '/tools/image-to-pdf',
     category: 'PDF Tools',
-    isFeaturedCategory: true,
     keywords: ['image', 'pdf', 'converter', 'jpg', 'png', 'webp', 'gif'],
-    isPopular: true, // Example: PDF to JPG in prompt
-    cardName: 'PDF to JPG',
-    cardDescription: 'Convert PDF to JPG and download each page as an image.', // This is still image to pdf, desc is misleading from prompt
-    displayCategory: 'Pdf Tools',
   },
   {
     id: 'webp-to-pdf',
     name: 'WEBP to PDF Converter',
     description: 'Easily convert your WEBP image files into PDF documents. Supports single or multiple WEBP files.',
     icon: FileImage,
-    href: '/tools/image-to-pdf',
+    href: '/tools/image-to-pdf', // Intentionally points to the general image-to-pdf tool
     category: 'PDF Tools',
     keywords: ['webp', 'pdf', 'converter', 'image']
   },
@@ -62,12 +58,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     icon: Combine,
     href: '/tools/merge-pdf',
     category: 'PDF Tools',
-    isFeaturedCategory: true,
     keywords: ['pdf', 'merge', 'combine', 'join', 'document management'],
-    isPopular: true,
-    cardName: 'Merge PDF',
-    cardDescription: 'Merge 2 or more PDF files into a single PDF file',
-    displayCategory: 'Pdf Tools',
   },
   {
     id: 'unlock-pdf',
@@ -95,10 +86,6 @@ export const TOOLS_DATA: FunctionalTool[] = [
     href: '/tools/pdf-page-deleter',
     category: 'PDF Tools',
     keywords: ['pdf', 'delete pages', 'remove pages', 'edit pdf', 'document management'],
-    isPopular: true, // For "Edit PDF"
-    cardName: 'Edit PDF',
-    cardDescription: 'Free PDF Editor',
-    displayCategory: 'Pdf Tools',
   },
   {
     id: 'extract-pdf-pages',
@@ -115,7 +102,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     description: 'Extracts tabular data from a single PDF page and converts it to CSV format, ready for Excel.',
     icon: Sheet,
     href: '/tools/pdf-page-to-csv',
-    category: 'PDF Tools', // Could also be Data Converters
+    category: 'PDF Tools', 
     keywords: ['pdf', 'csv', 'excel', 'table extraction', 'data conversion', 'ocr']
   },
   {
@@ -124,7 +111,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     description: 'Extracts text from the first page of a PDF using AI. Output is plain text, copyable to Word.',
     icon: FileText,
     href: '/tools/pdf-to-word-converter',
-    category: 'PDF Tools', // Could be Text & AI Tools
+    category: 'PDF Tools', 
     keywords: ['pdf', 'word', 'text extraction', 'converter', 'ocr', 'document']
   },
   {
@@ -133,7 +120,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     description: 'Extracts text from PDF pages (first 5 pages) to help build presentation slides.',
     icon: Presentation,
     href: '/tools/pdf-to-presentation-content-extractor',
-    category: 'PDF Tools', // Could be Text & AI Tools
+    category: 'PDF Tools', 
     keywords: ['pdf', 'powerpoint', 'presentation', 'slides', 'text extraction', 'ocr']
   },
   {
@@ -142,7 +129,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     description: 'Extract text from images (JPG, PNG, etc.) using Optical Character Recognition (OCR).',
     icon: ScanText,
     href: '/tools/image-to-text-converter',
-    category: 'Image Tools', // Or Text & AI
+    category: 'Text & AI Tools', 
     keywords: ['ocr', 'image to text', 'text extraction', 'scan', 'picture to text']
   },
   {
@@ -152,7 +139,6 @@ export const TOOLS_DATA: FunctionalTool[] = [
     icon: Scaling,
     href: '/tools/image-resizer',
     category: 'Image Tools',
-    isFeaturedCategory: true,
     keywords: ['image', 'resize', 'dimensions', 'scaler', 'photo']
   },
   {
@@ -161,7 +147,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     description: 'Convert PNG images to JPG format with quality adjustment.',
     icon: Replace,
     href: '/tools/png-to-jpg',
-    category: 'Image Tools', // Could be Data Converters
+    category: 'Image Tools', 
     keywords: ['png', 'jpg', 'jpeg', 'converter', 'image format']
   },
   {
@@ -170,7 +156,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     description: 'Convert JPG/JPEG images to PNG format.',
     icon: Replace,
     href: '/tools/jpg-to-png',
-    category: 'Image Tools', // Could be Data Converters
+    category: 'Image Tools', 
     keywords: ['jpg', 'jpeg', 'png', 'converter', 'image format']
   },
   {
@@ -179,7 +165,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     description: 'Convert WEBP images to JPG format with adjustable quality.',
     icon: Replace,
     href: '/tools/webp-to-jpg',
-    category: 'Image Tools', // Could be Data Converters
+    category: 'Image Tools', 
     keywords: ['webp', 'jpg', 'jpeg', 'converter', 'image format']
   },
   {
@@ -188,7 +174,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     description: 'Convert your WEBP images to high-quality PNG format, preserving transparency.',
     icon: Replace,
     href: '/tools/webp-to-png',
-    category: 'Image Tools', // Could be Data Converters
+    category: 'Image Tools', 
     keywords: ['webp', 'png', 'converter', 'image format', 'transparency']
   },
   {
@@ -199,10 +185,6 @@ export const TOOLS_DATA: FunctionalTool[] = [
     href: '/tools/ai-image-generator',
     category: 'Image Tools',
     keywords: ['ai', 'image', 'generator', 'art', 'creative', 'generative art', 'text to image'],
-    isPopular: true,
-    cardName: 'AI Image Generator',
-    cardDescription: 'AI Image Generator', // Prompt is short here
-    displayCategory: 'Image Tools',
   },
   {
     id: 'image-background-remover',
@@ -212,10 +194,6 @@ export const TOOLS_DATA: FunctionalTool[] = [
     href: '/tools/image-background-remover',
     category: 'Image Tools',
     keywords: ['background remover', 'transparent background', 'image editing', 'ai', 'png', 'remove bg'],
-    isPopular: true,
-    cardName: 'Remove Background...',
-    cardDescription: 'Easily Remove the Background from an image',
-    displayCategory: 'Image Tools',
   },
   {
     id: 'ai-image-upscaler',
@@ -233,12 +211,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     icon: ScanSearch,
     href: '/tools/ai-detector',
     category: 'Text & AI Tools',
-    isFeaturedCategory: true,
     keywords: ['ai detector', 'text analysis', 'content authenticity', 'ai writing', 'gpt detector'],
-    isPopular: true,
-    cardName: 'Content Improver', // Mapping to this for prompt
-    cardDescription: 'Improve your content',
-    displayCategory: 'AI Write',
   },
   {
     id: 'voice-to-text',
@@ -346,11 +319,7 @@ export const TOOLS_DATA: FunctionalTool[] = [
     icon: ClipboardList,
     href: '/tools/lorem-ipsum-generator',
     category: 'Text & AI Tools',
-    isFeaturedCategory: true,
     keywords: ['lorem ipsum', 'placeholder', 'text', 'generator', 'dummy text', 'latin'],
-    isPopular: true, // For Essay Writer & Paragraph Writer
-    // Card name/desc will be specific for each in POPULAR_TOOLS_CONFIG if needed, or use this as base.
-    // For prompt matching, we'll create specific entries in POPULAR_TOOLS_CONFIG
   },
   {
     id: 'csv-to-json-converter',
@@ -561,129 +530,31 @@ export const TOOLS_DATA: FunctionalTool[] = [
   }
 ];
 
-// Configuration for the "Popular Tools" section based on the prompt
-export const POPULAR_TOOLS_CONFIG: Tool[] = [
-  {
-    id: 'lorem-ipsum-generator-essay', // Unique ID for this popular instance
-    name: 'Essay Writer',
-    cardName: 'Essay Writer',
-    description: 'Easily create an essay with AI',
-    icon: Sparkles, // Using Sparkles for AI Write tools
-    href: '/tools/lorem-ipsum-generator', // Maps to lorem ipsum for now
-    category: 'Text & AI Tools', // Functional category
-    displayCategory: 'AI Write', // Display category for the card
-    isPopular: true,
-  },
-  {
-    id: 'ai-detector-improver', // Unique ID
-    name: 'Content Improver',
-    cardName: 'Content Improver',
-    description: 'Improve your content',
-    icon: Sparkles,
-    href: '/tools/ai-detector', // Maps to AI detector for now
-    category: 'Text & AI Tools',
-    displayCategory: 'AI Write',
-    isPopular: true,
-  },
-  {
-    id: 'lorem-ipsum-generator-paragraph', // Unique ID
-    name: 'Paragraph Writer',
-    cardName: 'Paragraph Writer',
-    description: 'Paragraph Writer', // Prompt's desc is same as name
-    icon: Sparkles,
-    href: '/tools/lorem-ipsum-generator',
-    category: 'Text & AI Tools',
-    displayCategory: 'AI Write',
-    isPopular: true,
-  },
-  {
-    id: 'image-background-remover', // Use existing ID
-    name: 'Remove Background...', // Name from prompt
-    cardName: 'Remove Background...',
-    description: 'Easily Remove the Background from an image',
-    icon: Eraser,
-    href: '/tools/image-background-remover',
-    category: 'Image Tools',
-    displayCategory: 'Image Tools',
-    isPopular: true,
-  },
-  {
-    id: 'merge-pdf', // Use existing ID
-    name: 'Merge PDF',
-    cardName: 'Merge PDF',
-    description: 'Merge 2 or more PDF files into a single PDF file',
-    icon: Combine,
-    href: '/tools/merge-pdf',
-    category: 'PDF Tools',
-    displayCategory: 'Pdf Tools',
-    isPopular: true,
-  },
-  {
-    id: 'delete-pdf-pages', // Map "Edit PDF" to page deleter
-    name: 'Edit PDF',
-    cardName: 'Edit PDF',
-    description: 'Free PDF Editor',
-    icon: Settings2, // Or PenTool
-    href: '/tools/pdf-page-deleter',
-    category: 'PDF Tools',
-    displayCategory: 'Pdf Tools',
-    isPopular: true,
-  },
-  {
-    id: 'ai-image-generator', // Use existing ID
-    name: 'AI Image Generator',
-    cardName: 'AI Image Generator',
-    description: 'AI Image Generator', // Prompt's desc is same as name
-    icon: ImageIconLucide,
-    href: '/tools/ai-image-generator',
-    category: 'Image Tools',
-    displayCategory: 'Image Tools',
-    isPopular: true,
-  },
-  {
-    id: 'pdf-to-word-text-extraction', // Map "PDF to JPG" to this due to text extraction capabilities
-    name: 'PDF to JPG',
-    cardName: 'PDF to JPG',
-    description: 'Convert PDF to JPG and download each page as an image.', // This description is for a tool that doesn't exist yet.
-    icon: FileText,
-    href: '/tools/pdf-to-word-converter', // This tool extracts text, not JPGs per page.
-    category: 'PDF Tools',
-    displayCategory: 'Pdf Tools',
-    isPopular: true,
-  },
-];
 
-
-// For Header Navigation Dropdowns
+// For Header Navigation Dropdowns (if any) - simplified for the new design
 export const HEADER_CATEGORY_ORDER: FunctionalToolCategory[] = [
   'PDF Tools',
   'Image Tools',
-  'Text & AI Tools', // Corresponds to "Write"
-  'Video Tools',    // Empty for now
-  'File Management',// Corresponds to "File"
-];
-
-export const HEADER_FEATURED_CATEGORIES: FunctionalToolCategory[] = [
-  'PDF Tools',
-  'Text & AI Tools', // "Write"
+  'Text & AI Tools',
   'Video Tools',
-  'File Management', // "File"
-  'Image Tools', // "Image" also has a check in prompt
+  'File Management',
+  'Data Converters',
+  'Calculators',
+  'Web Utilities'
 ];
 
+// Configuration for the "Popular Tools" section and homepage filter bar from the previous prompt
+// This will be REMOVED/ADAPTED for the new design.
+// Keeping it here temporarily for reference during the merge.
+export const POPULAR_TOOLS_CONFIG: Tool[] = []; // Will be populated by the new logic if needed for "Most Popular" button
+export const FILTER_CATEGORIES_CONFIG = []; // Not used in the new design
 
-// For Homepage Filter Bar
-export const FILTER_CATEGORIES_CONFIG: Array<{
-  label: string;
-  icon: LucideIcon;
-  filterValue: 'all' | FunctionalToolCategory | 'AI Write Filter' | 'Converter Tools Filter' | 'Other Tools Filter';
-  mappedCategories?: FunctionalToolCategory[]; // Functional categories this filter maps to
-}> = [
-  { label: 'All Tools', icon: LayoutGrid, filterValue: 'all' },
-  { label: 'Pdf Tools', icon: FileTextIcon, filterValue: 'PDF Tools' },
-  { label: 'Video Tools', icon: Clapperboard, filterValue: 'Video Tools' }, // Will be empty
-  { label: 'Image Tools', icon: ImageIconLucide, filterValue: 'Image Tools' },
-  { label: 'Converter Tools', icon: Shuffle, filterValue: 'Converter Tools Filter', mappedCategories: ['Data Converters'] },
-  { label: 'Other Tools', icon: Box, filterValue: 'Other Tools Filter', mappedCategories: ['Calculators', 'Web Utilities', 'File Management'] },
-  { label: 'AI Write', icon: Sparkles, filterValue: 'AI Write Filter', mappedCategories: ['Text & AI Tools'] },
-];
+// Featured tools mapping for the new homepage section.
+// We map IDs to existing TOOLS_DATA entries.
+export const FEATURED_TOOLS_MAPPING: Record<string, { id: string; name?: string; description?: string; icon?: LucideIcon }> = {
+  'pdf-creator': { id: 'image-to-pdf', name: 'PDF Creator', description: 'Create PDFs from images or other formats.' },
+  'remove-bg': { id: 'image-background-remover' },
+  'mute-video': { id: 'video-mute-placeholder', name: 'Mute Video', description: 'Remove audio from your videos.' }, // Placeholder ID
+  'paragraph-writer': { id: 'lorem-ipsum-generator', name: 'Paragraph Writer', description: 'Generate paragraphs with AI.'},
+  'split-excel': { id: 'split-excel-file' },
+};

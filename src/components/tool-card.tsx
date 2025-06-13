@@ -1,8 +1,7 @@
 
 import Link from 'next/link';
 import type { Tool } from '@/types/tool';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card'; // Removed unused Card components
 
 interface ToolCardProps {
   tool: Tool;
@@ -11,25 +10,23 @@ interface ToolCardProps {
 const ToolCard = ({ tool }: ToolCardProps) => {
   const IconComponent = tool.icon;
   return (
-    <Card className="flex flex-col h-full hover:shadow-lg transition-shadow duration-200 ease-in-out">
-      <CardHeader className="flex-row items-center gap-4 pb-4">
-        <div className="bg-primary/10 p-3 rounded-full">
-          <IconComponent className="h-6 w-6 text-primary" />
-        </div>
-        <CardTitle className="text-lg font-semibold leading-tight">{tool.name}</CardTitle>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <CardDescription className="text-sm line-clamp-3">{tool.description}</CardDescription>
-        <p className="text-xs text-muted-foreground mt-2 pt-2 border-t">
-            Category: {tool.category}
-        </p>
-      </CardContent>
-      <CardFooter className="pt-0">
-        <Button variant="outline" asChild className="w-full">
-          <Link href={tool.href}>Open Tool &rarr;</Link>
-        </Button>
-      </CardFooter>
-    </Card>
+    <Link href={tool.href} passHref legacyBehavior>
+      <a className="block group h-full">
+        <Card className="h-full hover:shadow-lg transition-shadow duration-200 ease-in-out overflow-hidden border border-border/70">
+          <CardContent className="p-4 flex flex-col items-start text-left h-full">
+            <div className="bg-primary/10 p-2 rounded-md inline-flex mb-3">
+              <IconComponent className="h-5 w-5 text-primary" />
+            </div>
+            <h3 className="text-md font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+              {tool.name}
+            </h3>
+            <p className="text-xs text-muted-foreground line-clamp-2 flex-grow">
+              {tool.description}
+            </p>
+          </CardContent>
+        </Card>
+      </a>
+    </Link>
   );
 };
 
