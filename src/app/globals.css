@@ -9,41 +9,41 @@ body {
 
 @layer base {
   :root {
-    /* TinyWow-inspired Theme - Light Mode */
-    --background: 220 20% 98%; /* Very light cool grey */
-    --foreground: 220 15% 25%; /* Dark cool grey */
+    /* Sunset Glow Theme - Light Mode */
+    --background: 30 50% 98%; /* Very light cream */
+    --foreground: 30 30% 20%; /* Dark warm brown */
 
     --card: 0 0% 100%; /* White */
-    --card-foreground: 220 15% 25%;
+    --card-foreground: 30 30% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 25%;
+    --popover-foreground: 30 30% 20%;
 
-    --primary: 210 90% 50%; /* Bright Blue */
+    --primary: 25 95% 60%; /* Vibrant Coral/Orange */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 220 15% 90%; /* Light grey for muted elements like search bg */
-    --secondary-foreground: 220 15% 25%;
+    --secondary: 30 40% 92%; /* Light cream/beige for muted elements */
+    --secondary-foreground: 30 30% 20%;
 
-    --muted: 220 15% 90%;
-    --muted-foreground: 220 10% 45%; /* Grey for muted text */
+    --muted: 30 40% 92%;
+    --muted-foreground: 30 20% 45%; /* Muted brown */
 
-    --accent: 210 90% 50%; /* Using primary blue as general accent */
-    --accent-foreground: 0 0% 100%;
+    --accent: 45 90% 65%; /* Soft Gold/Yellow */
+    --accent-foreground: 30 30% 15%; /* Dark brown for contrast on yellow */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 88%; /* Subtle border */
-    --input: 220 15% 94%; /* Input field background / border */
-    --ring: 210 90% 55%; /* Ring color (blue) */
+    --border: 30 30% 88%; /* Subtle warm border */
+    --input: 30 40% 95%; /* Input field background / border */
+    --ring: 25 95% 65%; /* Ring color (primary orange) */
 
     --radius: 0.5rem;
 
-    /* TinyWow Homepage Category Card Colors */
+    /* TinyWow Homepage Category Card Colors - These might need adjustment based on the new theme if they clash */
     --card-pdf-bg: 258 70% 60%; /* Purple */
     --card-pdf-fg: 0 0% 100%;
-    --card-image-bg: 26 95% 54%; /* Orange */
+    --card-image-bg: 26 95% 54%; /* Orange (overlaps with new primary, might be good or need differentiation) */
     --card-image-fg: 0 0% 100%;
     --card-video-bg: 347 85% 60%; /* Pink-Red */
     --card-video-fg: 0 0% 100%;
@@ -52,72 +52,72 @@ body {
     --card-file-bg: 175 70% 45%; /* Teal */
     --card-file-fg: 0 0% 100%;
     
-    /* Hero "Everything" Highlight */
-    --hero-highlight-bg: 26 95% 54%; /* Orange */
+    /* Hero "Everything" Highlight - Orange, aligns with new primary theme */
+    --hero-highlight-bg: 26 95% 54%; 
     --hero-highlight-fg: 0 0% 100%;
 
-    /* Popular Tool Card specific */
-    --popular-tool-card-bg: 210 60% 97%; /* Very light blue */
-    --popular-tool-card-fg: 220 15% 25%;
+    /* Popular Tool Card specific - Adjusted for new background */
+    --popular-tool-card-bg: 30 50% 97%; /* Very light cream, slightly different from main bg */
+    --popular-tool-card-fg: 30 30% 20%;
     
-    /* Category Label Colors for Popular Tool Cards */
+    /* Category Label Colors for Popular Tool Cards - These might need adjustment */
     --category-label-pdf: 258 70% 50%;
     --category-label-image: 26 85% 48%;
     --category-label-video: 347 75% 50%;
     --category-label-ai-write: 230 55% 55%;
     --category-label-file: 175 65% 40%;
     --category-label-converter: 145 60% 40%; /* Green */
-    --category-label-other: 220 10% 50%; /* Grey */
+    --category-label-other: 30 10% 50%; /* Warm Grey */
 
 
-    --chart-1: 210 80% 65%;
-    --chart-2: 190 80% 60%;
-    --chart-3: 230 70% 60%;
-    --chart-4: 180 75% 55%;
-    --chart-5: 220 85% 70%;
+    --chart-1: 25 80% 65%; /* Orange series */
+    --chart-2: 40 80% 60%; /* Gold series */
+    --chart-3: 15 70% 60%; /* Softer Orange/Red series */
+    --chart-4: 30 75% 55%; /* Brownish Orange series */
+    --chart-5: 20 85% 70%; /* Lighter Orange series */
 
-    /* Sidebar - can remain or be adjusted if sidebar is used */
-    --sidebar-background: 210 20% 94%;
-    --sidebar-foreground: 210 10% 23%;
-    --sidebar-primary: 210 90% 50%;
+    /* Sidebar - Adjusted for new theme */
+    --sidebar-background: 30 40% 94%; /* Light cream */
+    --sidebar-foreground: 30 25% 23%; /* Dark warm brown */
+    --sidebar-primary: 25 95% 60%;    /* Coral/Orange */
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 100%;
-    --sidebar-accent-foreground: 210 90% 50%;
-    --sidebar-border: 210 20% 90%;
-    --sidebar-ring: 210 90% 50%;
+    --sidebar-accent: 0 0% 100%;       /* White accent on sidebar */
+    --sidebar-accent-foreground: 25 95% 60%; /* Coral/Orange text on white accent */
+    --sidebar-border: 30 30% 90%;
+    --sidebar-ring: 25 95% 60%;
   }
 
   .dark {
-    /* Dark Theme (Basic example, can be expanded) */
-    --background: 220 15% 10%; 
-    --foreground: 220 20% 90%;
+    /* Sunset Glow Theme - Dark Mode */
+    --background: 30 15% 10%; /* Dark warm brown */
+    --foreground: 30 50% 90%; /* Light cream/off-white */
 
-    --card: 220 15% 15%;
-    --card-foreground: 220 20% 90%;
+    --card: 30 15% 15%;
+    --card-foreground: 30 50% 90%;
 
-    --popover: 220 15% 10%;
-    --popover-foreground: 220 20% 90%;
+    --popover: 30 15% 10%;
+    --popover-foreground: 30 50% 90%;
 
-    --primary: 210 85% 60%; 
-    --primary-foreground: 220 15% 10%;
+    --primary: 25 90% 65%; /* Brighter Coral/Orange for dark mode */
+    --primary-foreground: 30 15% 10%; /* Dark text on primary */
 
-    --secondary: 220 15% 20%; 
-    --secondary-foreground: 220 20% 90%;
+    --secondary: 30 15% 20%; 
+    --secondary-foreground: 30 50% 90%;
 
-    --muted: 220 15% 20%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 30 15% 20%;
+    --muted-foreground: 30 30% 60%; /* Muted light cream */
 
-    --accent: 210 85% 60%;
-    --accent-foreground: 220 15% 10%;
+    --accent: 45 85% 70%; /* Brighter Gold/Yellow */
+    --accent-foreground: 30 15% 10%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 25%;
-    --input: 220 15% 18%; 
-    --ring: 210 85% 60%;
+    --border: 30 15% 25%;
+    --input: 30 15% 18%; 
+    --ring: 25 90% 65%;
     
-    /* TinyWow Homepage Category Card Colors - Dark Mode (Adjusted slightly) */
+    /* TinyWow Homepage Category Card Colors - Dark Mode (Keep as is or adjust if they clash) */
     --card-pdf-bg: 258 60% 50%;
     --card-pdf-fg: 0 0% 100%;
     --card-image-bg: 26 85% 48%;
@@ -132,31 +132,33 @@ body {
     --hero-highlight-bg: 26 85% 48%; 
     --hero-highlight-fg: 0 0% 100%;
     
-    --popular-tool-card-bg: 210 30% 18%; 
-    --popular-tool-card-fg: 220 20% 90%;
+    --popular-tool-card-bg: 30 20% 18%; /* Darker warm shade */
+    --popular-tool-card-fg: 30 50% 90%;
 
+    /* Category Labels for Dark Mode - Adjust if needed */
     --category-label-pdf: 258 70% 60%;
     --category-label-image: 26 90% 55%;
     --category-label-video: 347 80% 60%;
     --category-label-ai-write: 230 65% 65%;
     --category-label-file: 175 70% 50%;
     --category-label-converter: 145 65% 50%;
-    --category-label-other: 220 15% 60%;
+    --category-label-other: 30 15% 60%; /* Lighter warm grey */
 
-    --chart-1: 210 70% 70%; 
-    --chart-2: 190 70% 65%; 
-    --chart-3: 230 60% 65%; 
-    --chart-4: 180 65% 60%; 
-    --chart-5: 220 75% 75%;
+    --chart-1: 25 70% 70%; 
+    --chart-2: 40 70% 65%; 
+    --chart-3: 15 60% 65%; 
+    --chart-4: 30 65% 60%; 
+    --chart-5: 20 75% 75%;
 
-    --sidebar-background: 210 10% 18%;
-    --sidebar-foreground: 210 20% 90%;
-    --sidebar-primary: 210 85% 60%;
-    --sidebar-primary-foreground: 210 10% 10%;
-    --sidebar-accent: 210 10% 12%;
-    --sidebar-accent-foreground: 210 85% 60%;
-    --sidebar-border: 210 10% 20%;
-    --sidebar-ring: 210 85% 60%;
+    /* Sidebar Dark - Adjusted for new theme */
+    --sidebar-background: 30 10% 18%; /* Dark warm brown for sidebar */
+    --sidebar-foreground: 30 40% 90%; /* Light cream text */
+    --sidebar-primary: 25 90% 65%;    /* Brighter Coral/Orange */
+    --sidebar-primary-foreground: 30 10% 10%;
+    --sidebar-accent: 30 10% 12%;      /* Very dark accent for sidebar */
+    --sidebar-accent-foreground: 25 90% 65%; /* Primary color on accent */
+    --sidebar-border: 30 10% 20%;
+    --sidebar-ring: 25 90% 65%;
   }
 }
 
