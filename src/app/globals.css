@@ -40,10 +40,10 @@ body {
 
     --radius: 0.5rem;
 
-    /* TinyWow Homepage Category Card Colors - These might need adjustment based on the new theme if they clash */
+    /* TinyWow Homepage Category Card Colors */
     --card-pdf-bg: 258 70% 60%; /* Purple */
     --card-pdf-fg: 0 0% 100%;
-    --card-image-bg: 26 95% 54%; /* Orange (overlaps with new primary, might be good or need differentiation) */
+    --card-image-bg: 26 95% 54%; /* Orange */
     --card-image-fg: 0 0% 100%;
     --card-video-bg: 347 85% 60%; /* Pink-Red */
     --card-video-fg: 0 0% 100%;
@@ -52,13 +52,14 @@ body {
     --card-file-bg: 175 70% 45%; /* Teal */
     --card-file-fg: 0 0% 100%;
     
-    /* Hero "Everything" Highlight - Orange, aligns with new primary theme */
-    --hero-highlight-bg: 26 95% 54%; 
+    /* Hero "Everything" Highlight */
+    --hero-highlight-bg: 26 95% 54%; /* Orange, aligns with new primary theme */
     --hero-highlight-fg: 0 0% 100%;
 
-    /* Popular Tool Card specific - Adjusted for new background */
-    --popular-tool-card-bg: 30 50% 97%; /* Very light cream, slightly different from main bg */
-    --popular-tool-card-fg: 30 30% 20%;
+    /* Popular Tool Card specific - Adjusted for Sunset Glow theme */
+    --popular-tool-card-bg: 25 95% 96%; /* Very light coral/orange tint */
+    --popular-tool-card-fg: 30 30% 20%; /* Dark warm brown (same as main foreground) */
+    --popular-tool-card-border-color: 45 70% 80%; /* Softer Gold/Yellow for border */
     
     /* Category Label Colors for Popular Tool Cards - These might need adjustment */
     --category-label-pdf: 258 70% 50%;
@@ -117,7 +118,7 @@ body {
     --input: 30 15% 18%; 
     --ring: 25 90% 65%;
     
-    /* TinyWow Homepage Category Card Colors - Dark Mode (Keep as is or adjust if they clash) */
+    /* TinyWow Homepage Category Card Colors - Dark Mode */
     --card-pdf-bg: 258 60% 50%;
     --card-pdf-fg: 0 0% 100%;
     --card-image-bg: 26 85% 48%;
@@ -132,8 +133,10 @@ body {
     --hero-highlight-bg: 26 85% 48%; 
     --hero-highlight-fg: 0 0% 100%;
     
-    --popular-tool-card-bg: 30 20% 18%; /* Darker warm shade */
-    --popular-tool-card-fg: 30 50% 90%;
+    /* Popular Tool Card specific - Adjusted for Sunset Glow theme */
+    --popular-tool-card-bg: 25 30% 20%; /* Dark, desaturated coral/brown */
+    --popular-tool-card-fg: 30 50% 90%; /* Light cream/off-white (same as main foreground) */
+    --popular-tool-card-border-color: 45 60% 45%; /* Darker, muted gold for border */
 
     /* Category Labels for Dark Mode - Adjust if needed */
     --category-label-pdf: 258 70% 60%;

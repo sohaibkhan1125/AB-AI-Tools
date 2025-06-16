@@ -21,7 +21,11 @@ const PopularToolCardV2 = ({ tool }: PopularToolCardProps) => {
   return (
     <Link href={tool.href} passHref legacyBehavior>
       <a className="block group h-full">
-        <Card className="flex flex-col h-full bg-[hsl(var(--popular-tool-card-bg))] text-[hsl(var(--popular-tool-card-fg))] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 ease-in-out overflow-hidden">
+        <Card className={cn(
+          "flex flex-col h-full text-[hsl(var(--popular-tool-card-fg))] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 ease-in-out overflow-hidden",
+          "bg-[hsl(var(--popular-tool-card-bg))]", // Apply new background
+          "border border-[hsl(var(--popular-tool-card-border-color))]" // Apply new border color
+        )}>
           <CardContent className="p-4 flex-grow">
             <div className="flex items-center mb-2.5">
               <div className={cn(
