@@ -39,36 +39,36 @@ body {
     --ring: 25 95% 65%; /* Ring color (primary orange) */
 
     --radius: 0.5rem;
-
-    /* TinyWow Homepage Category Card Colors */
-    --card-pdf-bg: 258 70% 60%; /* Purple */
-    --card-pdf-fg: 0 0% 100%;
-    --card-image-bg: 26 95% 54%; /* Orange */
-    --card-image-fg: 0 0% 100%;
-    --card-video-bg: 347 85% 60%; /* Pink-Red */
-    --card-video-fg: 0 0% 100%;
-    --card-ai-write-bg: 230 60% 65%; /* Blue-Violet */
-    --card-ai-write-fg: 0 0% 100%;
-    --card-file-bg: 175 70% 45%; /* Teal */
-    --card-file-fg: 0 0% 100%;
     
     /* Hero "Everything" Highlight */
-    --hero-highlight-bg: 26 95% 54%; /* Orange, aligns with new primary theme */
-    --hero-highlight-fg: 0 0% 100%;
+    --hero-highlight-bg-hsl: 26 95% 54%; /* Orange */
+    --hero-highlight-fg-hsl: 0 0% 100%;
 
-    /* Popular Tool Card specific - Now blue themed */
-    --popular-tool-card-bg: 210 100% 96%; /* Very light blue */
-    --popular-tool-card-fg: 210 30% 25%;  /* Darker blue for text */
-    --popular-tool-card-border-color: 210 90% 88%; /* Light blue border */
-    
-    /* Category Label Colors for Popular Tool Cards - These might need adjustment */
-    --category-label-pdf: 258 70% 50%;
-    --category-label-image: 26 85% 48%;
-    --category-label-video: 347 75% 50%;
-    --category-label-ai-write: 230 55% 55%;
-    --category-label-file: 175 65% 40%;
-    --category-label-converter: 145 60% 40%; /* Green */
-    --category-label-other: 30 10% 50%; /* Warm Grey */
+    /* Category Specific Accent Colors - Light Mode */
+    /* PDF Tools: Purple #7B61FF */
+    --category-pdf-main-hsl: 251 100% 69%;
+    --category-pdf-bg-light-hsl: 251 100% 96%; 
+    --category-pdf-text-hsl: var(--category-pdf-main-hsl);
+
+    /* Image Tools: Orange-Red #FF5722 */
+    --category-image-main-hsl: 14 100% 57%;
+    --category-image-bg-light-hsl: 14 100% 95%;
+    --category-image-text-hsl: var(--category-image-main-hsl);
+
+    /* Video Tools: Pink-Red #FF4E8E */
+    --category-video-main-hsl: 339 100% 65%;
+    --category-video-bg-light-hsl: 339 100% 96%;
+    --category-video-text-hsl: var(--category-video-main-hsl);
+
+    /* AI Write Tools: Blue-Violet #6C63FF */
+    --category-ai-write-main-hsl: 242 100% 69%;
+    --category-ai-write-bg-light-hsl: 242 100% 96%;
+    --category-ai-write-text-hsl: var(--category-ai-write-main-hsl);
+
+    /* Other Tools / File Tools: Teal #00BCD4 */
+    --category-other-main-hsl: 187 100% 42%;
+    --category-other-bg-light-hsl: 187 100% 93%; /* slightly less pale for better contrast on white cards */
+    --category-other-text-hsl: var(--category-other-main-hsl);
 
 
     --chart-1: 25 80% 65%; /* Orange series */
@@ -93,7 +93,7 @@ body {
     --background: 30 15% 10%; /* Dark warm brown */
     --foreground: 30 50% 90%; /* Light cream/off-white */
 
-    --card: 30 15% 15%;
+    --card: 30 15% 15%; /* Darker card for dark mode */
     --card-foreground: 30 50% 90%;
 
     --popover: 30 15% 10%;
@@ -118,34 +118,35 @@ body {
     --input: 30 15% 18%; 
     --ring: 25 90% 65%;
     
-    /* TinyWow Homepage Category Card Colors - Dark Mode */
-    --card-pdf-bg: 258 60% 50%;
-    --card-pdf-fg: 0 0% 100%;
-    --card-image-bg: 26 85% 48%;
-    --card-image-fg: 0 0% 100%;
-    --card-video-bg: 347 75% 50%;
-    --card-video-fg: 0 0% 100%;
-    --card-ai-write-bg: 230 50% 55%;
-    --card-ai-write-fg: 0 0% 100%;
-    --card-file-bg: 175 60% 38%;
-    --card-file-fg: 0 0% 100%;
-
-    --hero-highlight-bg: 26 85% 48%; 
-    --hero-highlight-fg: 0 0% 100%;
+    /* Hero "Everything" Highlight - Dark Mode */
+    --hero-highlight-bg-hsl: 26 85% 48%; 
+    --hero-highlight-fg-hsl: 0 0% 100%;
     
-    /* Popular Tool Card specific - Now blue themed */
-    --popular-tool-card-bg: 210 70% 18%; /* Dark, desaturated blue */
-    --popular-tool-card-fg: 210 80% 85%; /* Lighter blue for text */
-    --popular-tool-card-border-color: 210 60% 28%; /* Dark blue border, slightly distinct */
+    /* Category Specific Accent Colors - Dark Mode */
+    /* PDF Tools: Purple #7B61FF */
+    --category-pdf-main-hsl: 251 100% 75%; /* Slightly brighter for dark mode */
+    --category-pdf-bg-light-hsl: 251 70% 20%; 
+    --category-pdf-text-hsl: var(--category-pdf-main-hsl);
 
-    /* Category Labels for Dark Mode - Adjust if needed */
-    --category-label-pdf: 258 70% 60%;
-    --category-label-image: 26 90% 55%;
-    --category-label-video: 347 80% 60%;
-    --category-label-ai-write: 230 65% 65%;
-    --category-label-file: 175 70% 50%;
-    --category-label-converter: 145 65% 50%;
-    --category-label-other: 30 15% 60%; /* Lighter warm grey */
+    /* Image Tools: Orange-Red #FF5722 */
+    --category-image-main-hsl: 14 100% 63%; /* Slightly brighter */
+    --category-image-bg-light-hsl: 14 70% 22%;
+    --category-image-text-hsl: var(--category-image-main-hsl);
+
+    /* Video Tools: Pink-Red #FF4E8E */
+    --category-video-main-hsl: 339 100% 70%; /* Slightly brighter */
+    --category-video-bg-light-hsl: 339 70% 23%;
+    --category-video-text-hsl: var(--category-video-main-hsl);
+
+    /* AI Write Tools: Blue-Violet #6C63FF */
+    --category-ai-write-main-hsl: 242 100% 75%; /* Slightly brighter */
+    --category-ai-write-bg-light-hsl: 242 70% 20%;
+    --category-ai-write-text-hsl: var(--category-ai-write-main-hsl);
+
+    /* Other Tools / File Tools: Teal #00BCD4 */
+    --category-other-main-hsl: 187 100% 50%; /* Slightly brighter */
+    --category-other-bg-light-hsl: 187 70% 18%;
+    --category-other-text-hsl: var(--category-other-main-hsl);
 
     --chart-1: 25 70% 70%; 
     --chart-2: 40 70% 65%; 
@@ -174,4 +175,3 @@ body {
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
-
