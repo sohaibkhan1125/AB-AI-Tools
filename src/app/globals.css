@@ -56,10 +56,10 @@ body {
     --hero-highlight-bg: 26 95% 54%; /* Orange, aligns with new primary theme */
     --hero-highlight-fg: 0 0% 100%;
 
-    /* Popular Tool Card specific - Adjusted for Sunset Glow theme */
-    --popular-tool-card-bg: 25 95% 96%; /* Very light coral/orange tint */
-    --popular-tool-card-fg: 30 30% 20%; /* Dark warm brown (same as main foreground) */
-    --popular-tool-card-border-color: 45 70% 80%; /* Softer Gold/Yellow for border */
+    /* Popular Tool Card specific - Now blue themed */
+    --popular-tool-card-bg: 210 100% 96%; /* Very light blue */
+    --popular-tool-card-fg: 210 30% 25%;  /* Darker blue for text */
+    --popular-tool-card-border-color: 210 90% 88%; /* Light blue border */
     
     /* Category Label Colors for Popular Tool Cards - These might need adjustment */
     --category-label-pdf: 258 70% 50%;
@@ -133,10 +133,10 @@ body {
     --hero-highlight-bg: 26 85% 48%; 
     --hero-highlight-fg: 0 0% 100%;
     
-    /* Popular Tool Card specific - Adjusted for Sunset Glow theme */
-    --popular-tool-card-bg: 25 30% 20%; /* Dark, desaturated coral/brown */
-    --popular-tool-card-fg: 30 50% 90%; /* Light cream/off-white (same as main foreground) */
-    --popular-tool-card-border-color: 45 60% 45%; /* Darker, muted gold for border */
+    /* Popular Tool Card specific - Now blue themed */
+    --popular-tool-card-bg: 210 70% 18%; /* Dark, desaturated blue */
+    --popular-tool-card-fg: 210 80% 85%; /* Lighter blue for text */
+    --popular-tool-card-border-color: 210 60% 28%; /* Dark blue border, slightly distinct */
 
     /* Category Labels for Dark Mode - Adjust if needed */
     --category-label-pdf: 258 70% 60%;
@@ -174,3 +174,4 @@ body {
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
