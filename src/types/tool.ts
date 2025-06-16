@@ -31,6 +31,9 @@ export type FunctionalToolCategory =
   | 'File Management'
   | 'Video Tools';
 
+export type TinyWowCategoryKey = 'pdf' | 'image' | 'video' | 'ai-write' | 'file';
+
+
 export interface Tool {
   id: string;
   name: string;
@@ -38,28 +41,25 @@ export interface Tool {
   icon: LucideIcon;
   href: string;
   keywords?: string[];
-  functionalCategory: FunctionalToolCategory; // Renamed from 'category' for clarity
+  functionalCategory: FunctionalToolCategory; 
   headerCategory?: 'PDF' | 'Image' | 'Write' | 'Video' | 'File' | 'Other';
   
-  // For Popular Tool Card display (TinyWow style grid)
   isPopular?: boolean; 
   popularCardName?: string; 
   popularCardDescription?: string; 
   popularDisplayCategory?: string; 
-  // categoryLabelColorClass and iconBgClass are removed, will be derived from functionalCategory
 }
 
 // Specific type for the 5 homepage category cards (TinyWow style)
 export interface TinyWowCategoryCardData {
-  id: string;
+  id: string; // Corresponds to categoryKey for simplicity now
   title: string;
   subtitle: string;
   icon: LucideIcon;
   label: string; 
   featuredToolName: string;
   href: string; 
-  bgColorClass: string; // This uses direct hsl vars from globals for the 5 main category cards
-  textColorClass: string; // This uses direct hsl vars from globals for the 5 main category cards
+  categoryKey: TinyWowCategoryKey; // Used to derive pastel background and vibrant accents
 }
 
 // Specific type for the "Featured Tools Strip"
@@ -70,7 +70,6 @@ export interface FeaturedStripTool {
   href: string;
   imageSrc: string;
   imageAlt: string;
-  functionalCategory: FunctionalToolCategory; // Added to determine accent color
+  functionalCategory: FunctionalToolCategory; 
   dataAiHint: string;
-  // imageBgClass is removed, will be derived from functionalCategory
 }

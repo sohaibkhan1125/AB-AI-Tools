@@ -1,5 +1,5 @@
 
-import type { Tool, TinyWowCategoryCardData, FunctionalToolCategory, FeaturedStripTool } from '@/types/tool';
+import type { Tool, TinyWowCategoryCardData, FunctionalToolCategory, FeaturedStripTool, TinyWowCategoryKey } from '@/types/tool';
 import {
   QrCode, FileImage, Scaling, Replace, KeyRound, Network, Baseline, Mic, Gauge, CaseSensitive, Binary, Link as LinkIcon, Palette, ArrowRightLeft, Calculator, ClipboardList, FileCode2, FileSpreadsheet, Braces, HardDrive, CodeXml, CircleDollarSign, Cake, TrendingUp, HeartPulse, DollarSign, Landmark, Percent, Receipt, FileText as FileTextIconLucide, LineChart, Combine, Sheet, FileText, Presentation, Unlock, RotateCw, Trash2, Scissors, Image as ImageIconLucide, Eraser, ScanText, ZoomIn, ScanSearch, SplitSquareHorizontal, DatabaseZap, Volume2, Video as VideoIconLucide, Folder, PenTool, Sparkles, LayoutGrid, Box, Settings2, Clapperboard, Shuffle, GanttChartSquare, Users, FileCog, Wrench, Grip, Type as TypeIcon, ListFilter, ArrowLeftRight
 } from 'lucide-react';
@@ -203,19 +203,19 @@ export const TOOLS_DATA: AppTool[] = [
 // For TinyWow-style homepage category cards
 export const TINY_WOW_CATEGORIES: TinyWowCategoryCardData[] = [
   {
-    id: 'pdf', title: 'PDF Tools', subtitle: 'Solve Your PDF Problems', icon: FileText, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'PDF Tools').length}+ tools`, featuredToolName: 'PDF Creator', href: '/#popular-tools-section?filter=PDF Tools', bgColorClass: 'bg-[hsl(var(--category-pdf-main-hsl))]', textColorClass: 'text-white' // Using main purple
+    id: 'pdf', title: 'PDF Tools', subtitle: 'Solve Your PDF Problems', icon: FileText, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'PDF Tools').length}+ tools`, featuredToolName: 'PDF Creator', href: '/#popular-tools-section?filter=PDF Tools', categoryKey: 'pdf'
   },
   {
-    id: 'image', title: 'Image Tools', subtitle: 'Solve Your Image Problems', icon: ImageIconLucide, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'Image Tools').length}+ tools`, featuredToolName: 'Remove Background', href: '/#popular-tools-section?filter=Image Tools', bgColorClass: 'bg-[hsl(var(--category-image-main-hsl))]', textColorClass: 'text-white' // Using main orange-red
+    id: 'image', title: 'Image Tools', subtitle: 'Solve Your Image Problems', icon: ImageIconLucide, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'Image Tools').length}+ tools`, featuredToolName: 'Remove Background', href: '/#popular-tools-section?filter=Image Tools', categoryKey: 'image'
   },
   {
-    id: 'video', title: 'Video Tools', subtitle: 'Solve Your Video Problems', icon: VideoIconLucide, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'Video Tools').length}+ tools`, featuredToolName: 'Mute Video', href: '/#popular-tools-section?filter=Video Tools', bgColorClass: 'bg-[hsl(var(--category-video-main-hsl))]', textColorClass: 'text-white' // Using main pink-red
+    id: 'video', title: 'Video Tools', subtitle: 'Solve Your Video Problems', icon: VideoIconLucide, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'Video Tools').length}+ tools`, featuredToolName: 'Mute Video', href: '/#popular-tools-section?filter=Video Tools', categoryKey: 'video'
   },
   {
-    id: 'ai-write', title: 'AI Write Tools', subtitle: 'Solve Your Text Problems', icon: TypeIcon, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'Text & AI Tools').length}+ tools`, featuredToolName: 'Essay Writer', href: '/#popular-tools-section?filter=AI Write', bgColorClass: 'bg-[hsl(var(--category-ai-write-main-hsl))]', textColorClass: 'text-white' // Using main blue-violet
+    id: 'ai-write', title: 'AI Write Tools', subtitle: 'Solve Your Text Problems', icon: TypeIcon, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'Text & AI Tools').length}+ tools`, featuredToolName: 'Essay Writer', href: '/#popular-tools-section?filter=AI Write', categoryKey: 'ai-write'
   },
   {
-    id: 'file', title: 'File Tools', subtitle: 'Solve Your File Problems', icon: Folder, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'File Management' || t.functionalCategory === 'Data Converters').length}+ tools`, featuredToolName: 'Split Excel', href: '/#popular-tools-section?filter=Converter Tools', bgColorClass: 'bg-[hsl(var(--category-other-main-hsl))]', textColorClass: 'text-white' // Using main teal
+    id: 'file', title: 'File Tools', subtitle: 'Solve Your File Problems', icon: Folder, label: `${TOOLS_DATA.filter(t => t.functionalCategory === 'File Management' || t.functionalCategory === 'Data Converters').length}+ tools`, featuredToolName: 'Split Excel', href: '/#popular-tools-section?filter=Converter Tools', categoryKey: 'file'
   },
 ];
 
@@ -235,7 +235,7 @@ export const POPULAR_TOOLS_FILTER_CATEGORIES = [
   { name: 'Video Tools', filterKey: 'Video Tools', icon: VideoIconLucide, mappedCategories: ['Video Tools'] as FunctionalToolCategory[] },
   { name: 'Image Tools', filterKey: 'Image Tools', icon: ImageIconLucide, mappedCategories: ['Image Tools'] as FunctionalToolCategory[] },
   { name: 'Converter Tools', filterKey: 'Converter Tools', icon: Shuffle, mappedCategories: ['Data Converters'] as FunctionalToolCategory[] },
-  { name: 'Other Tools', filterKey: 'Other Tools', icon: Settings2, mappedCategories: ['Calculators', 'Web Utilities', 'File Management', 'Other Tools'] as FunctionalToolCategory[] }, // Added 'Other Tools'
+  { name: 'Other Tools', filterKey: 'Other Tools', icon: Settings2, mappedCategories: ['Calculators', 'Web Utilities', 'File Management', 'Other Tools'] as FunctionalToolCategory[] }, 
   { name: 'AI Write', filterKey: 'AI Write', icon: PenTool, mappedCategories: ['Text & AI Tools'] as FunctionalToolCategory[] },
 ];
 
@@ -278,7 +278,7 @@ export const FEATURED_TOOLS_STRIP_DATA: FeaturedStripTool[] = [
     href: '#', 
     imageSrc: 'https://placehold.co/300x200.png',
     imageAlt: 'Video Converter preview',
-    functionalCategory: 'Video Tools', // Assigning a category
+    functionalCategory: 'Video Tools', 
     dataAiHint: 'video format conversion',
   },
   {

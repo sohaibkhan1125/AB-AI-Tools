@@ -49,41 +49,59 @@ body {
     --category-pdf-main-hsl: 251 100% 69%;
     --category-pdf-bg-light-hsl: 251 100% 96%; 
     --category-pdf-text-hsl: var(--category-pdf-main-hsl);
+    --category-pdf-pastel-bg-hsl: 251 100% 97%; /* Lighter for card bg */
+    --category-pdf-pastel-bg-hover-hsl: 251 100% 94%; /* Darker for hover */
+
 
     /* Image Tools: Orange-Red #FF5722 */
     --category-image-main-hsl: 14 100% 57%;
     --category-image-bg-light-hsl: 14 100% 95%;
     --category-image-text-hsl: var(--category-image-main-hsl);
+    --category-image-pastel-bg-hsl: 14 100% 97%;
+    --category-image-pastel-bg-hover-hsl: 14 100% 94%;
 
     /* Video Tools: Pink-Red #FF4E8E */
     --category-video-main-hsl: 339 100% 65%;
     --category-video-bg-light-hsl: 339 100% 96%;
     --category-video-text-hsl: var(--category-video-main-hsl);
+    --category-video-pastel-bg-hsl: 339 100% 97%;
+    --category-video-pastel-bg-hover-hsl: 339 100% 94%;
 
     /* AI Write Tools: Blue-Violet #6C63FF */
     --category-ai-write-main-hsl: 242 100% 69%;
     --category-ai-write-bg-light-hsl: 242 100% 96%;
     --category-ai-write-text-hsl: var(--category-ai-write-main-hsl);
+    --category-ai-write-pastel-bg-hsl: 242 100% 97%;
+    --category-ai-write-pastel-bg-hover-hsl: 242 100% 94%;
 
-    /* Other Tools / File Tools: Teal #00BCD4 */
-    --category-other-main-hsl: 187 100% 42%;
-    --category-other-bg-light-hsl: 187 100% 93%; /* slightly less pale for better contrast on white cards */
-    --category-other-text-hsl: var(--category-other-main-hsl);
+    /* File Tools (using Other Tools color): Teal #00BCD4 */
+    --category-file-main-hsl: 187 100% 42%;
+    --category-file-bg-light-hsl: 187 100% 93%;
+    --category-file-text-hsl: var(--category-file-main-hsl);
+    --category-file-pastel-bg-hsl: 187 100% 97%;
+    --category-file-pastel-bg-hover-hsl: 187 100% 94%;
+    
+    /* Other Tools / Generic Fallback (uses File Tools color for consistency if needed) */
+    --category-other-main-hsl: var(--category-file-main-hsl);
+    --category-other-bg-light-hsl: var(--category-file-bg-light-hsl);
+    --category-other-text-hsl: var(--category-file-text-hsl);
+    --category-other-pastel-bg-hsl: var(--category-file-pastel-bg-hsl);
+    --category-other-pastel-bg-hover-hsl: var(--category-file-pastel-bg-hover-hsl);
 
 
-    --chart-1: 25 80% 65%; /* Orange series */
-    --chart-2: 40 80% 60%; /* Gold series */
-    --chart-3: 15 70% 60%; /* Softer Orange/Red series */
-    --chart-4: 30 75% 55%; /* Brownish Orange series */
-    --chart-5: 20 85% 70%; /* Lighter Orange series */
+    --chart-1: 25 80% 65%; 
+    --chart-2: 40 80% 60%; 
+    --chart-3: 15 70% 60%; 
+    --chart-4: 30 75% 55%; 
+    --chart-5: 20 85% 70%; 
 
     /* Sidebar - Adjusted for new theme */
-    --sidebar-background: 30 40% 94%; /* Light cream */
-    --sidebar-foreground: 30 25% 23%; /* Dark warm brown */
-    --sidebar-primary: 25 95% 60%;    /* Coral/Orange */
+    --sidebar-background: 30 40% 94%; 
+    --sidebar-foreground: 30 25% 23%; 
+    --sidebar-primary: 25 95% 60%;    
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 100%;       /* White accent on sidebar */
-    --sidebar-accent-foreground: 25 95% 60%; /* Coral/Orange text on white accent */
+    --sidebar-accent: 0 0% 100%;       
+    --sidebar-accent-foreground: 25 95% 60%; 
     --sidebar-border: 30 30% 90%;
     --sidebar-ring: 25 95% 60%;
   }
@@ -124,29 +142,46 @@ body {
     
     /* Category Specific Accent Colors - Dark Mode */
     /* PDF Tools: Purple #7B61FF */
-    --category-pdf-main-hsl: 251 100% 75%; /* Slightly brighter for dark mode */
+    --category-pdf-main-hsl: 251 100% 75%; 
     --category-pdf-bg-light-hsl: 251 70% 20%; 
     --category-pdf-text-hsl: var(--category-pdf-main-hsl);
+    --category-pdf-pastel-bg-hsl: 251 70% 22%; /* Darker pastel for dark mode */
+    --category-pdf-pastel-bg-hover-hsl: 251 70% 25%;
 
     /* Image Tools: Orange-Red #FF5722 */
-    --category-image-main-hsl: 14 100% 63%; /* Slightly brighter */
+    --category-image-main-hsl: 14 100% 63%; 
     --category-image-bg-light-hsl: 14 70% 22%;
     --category-image-text-hsl: var(--category-image-main-hsl);
+    --category-image-pastel-bg-hsl: 14 70% 24%;
+    --category-image-pastel-bg-hover-hsl: 14 70% 27%;
 
     /* Video Tools: Pink-Red #FF4E8E */
-    --category-video-main-hsl: 339 100% 70%; /* Slightly brighter */
+    --category-video-main-hsl: 339 100% 70%; 
     --category-video-bg-light-hsl: 339 70% 23%;
     --category-video-text-hsl: var(--category-video-main-hsl);
+    --category-video-pastel-bg-hsl: 339 70% 25%;
+    --category-video-pastel-bg-hover-hsl: 339 70% 28%;
 
     /* AI Write Tools: Blue-Violet #6C63FF */
-    --category-ai-write-main-hsl: 242 100% 75%; /* Slightly brighter */
+    --category-ai-write-main-hsl: 242 100% 75%; 
     --category-ai-write-bg-light-hsl: 242 70% 20%;
     --category-ai-write-text-hsl: var(--category-ai-write-main-hsl);
+    --category-ai-write-pastel-bg-hsl: 242 70% 22%;
+    --category-ai-write-pastel-bg-hover-hsl: 242 70% 25%;
 
-    /* Other Tools / File Tools: Teal #00BCD4 */
-    --category-other-main-hsl: 187 100% 50%; /* Slightly brighter */
-    --category-other-bg-light-hsl: 187 70% 18%;
-    --category-other-text-hsl: var(--category-other-main-hsl);
+    /* File Tools (using Other Tools color): Teal #00BCD4 */
+    --category-file-main-hsl: 187 100% 50%; 
+    --category-file-bg-light-hsl: 187 70% 18%;
+    --category-file-text-hsl: var(--category-file-main-hsl);
+    --category-file-pastel-bg-hsl: 187 70% 20%;
+    --category-file-pastel-bg-hover-hsl: 187 70% 23%;
+
+    /* Other Tools / Generic Fallback */
+    --category-other-main-hsl: var(--category-file-main-hsl);
+    --category-other-bg-light-hsl: var(--category-file-bg-light-hsl);
+    --category-other-text-hsl: var(--category-file-text-hsl);
+    --category-other-pastel-bg-hsl: var(--category-file-pastel-bg-hsl);
+    --category-other-pastel-bg-hover-hsl: var(--category-file-pastel-bg-hover-hsl);
 
     --chart-1: 25 70% 70%; 
     --chart-2: 40 70% 65%; 
@@ -155,12 +190,12 @@ body {
     --chart-5: 20 75% 75%;
 
     /* Sidebar Dark - Adjusted for new theme */
-    --sidebar-background: 30 10% 18%; /* Dark warm brown for sidebar */
-    --sidebar-foreground: 30 40% 90%; /* Light cream text */
-    --sidebar-primary: 25 90% 65%;    /* Brighter Coral/Orange */
+    --sidebar-background: 30 10% 18%; 
+    --sidebar-foreground: 30 40% 90%; 
+    --sidebar-primary: 25 90% 65%;    
     --sidebar-primary-foreground: 30 10% 10%;
-    --sidebar-accent: 30 10% 12%;      /* Very dark accent for sidebar */
-    --sidebar-accent-foreground: 25 90% 65%; /* Primary color on accent */
+    --sidebar-accent: 30 10% 12%;      
+    --sidebar-accent-foreground: 25 90% 65%; 
     --sidebar-border: 30 10% 20%;
     --sidebar-ring: 25 90% 65%;
   }
