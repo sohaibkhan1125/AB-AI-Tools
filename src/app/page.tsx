@@ -4,10 +4,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input'; // Ensure Input is imported
+import { Input } from '@/components/ui/input'; 
 import TinyWowCategoryCard from '@/components/tiny-wow-category-card';
 import PopularToolCardV2 from '@/components/popular-tool-card-v2'; 
-import FeaturedToolStripCard from '@/components/featured-tool-strip-card'; // Import new card
+import FeaturedToolStripCard from '@/components/featured-tool-strip-card';
 import { TOOLS_DATA, TINY_WOW_CATEGORIES, POPULAR_TOOLS_FILTER_CATEGORIES, FEATURED_TOOLS_STRIP_DATA } from '@/lib/tools-data';
 import type { Tool, FunctionalToolCategory } from '@/types/tool';
 import { Users, FileCog, Wrench, Search as SearchIconLucide, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -70,10 +70,10 @@ export default function HomePage() {
       const currentFilterConfig = POPULAR_TOOLS_FILTER_CATEGORIES.find(f => f.filterKey === activeFilter);
       if (currentFilterConfig && currentFilterConfig.mappedCategories.length > 0) {
         toolsToFilter = TOOLS_DATA.filter(tool => 
-          currentFilterConfig.mappedCategories.includes(tool.category as FunctionalToolCategory)
+          currentFilterConfig.mappedCategories.includes(tool.functionalCategory as FunctionalToolCategory)
         );
       } else if (currentFilterConfig) { 
-        toolsToFilter = TOOLS_DATA.filter(tool => tool.category === activeFilter);
+        toolsToFilter = TOOLS_DATA.filter(tool => tool.functionalCategory === activeFilter);
       }
     }
     
@@ -85,7 +85,7 @@ export default function HomePage() {
       (tool.popularCardName || tool.name).toLowerCase().includes(lowerCaseQuery) ||
       (tool.popularCardDescription || tool.description).toLowerCase().includes(lowerCaseQuery) ||
       (tool.keywords && tool.keywords.some(keyword => keyword.toLowerCase().includes(lowerCaseQuery))) ||
-      (tool.popularDisplayCategory || tool.category).toLowerCase().includes(lowerCaseQuery)
+      (tool.popularDisplayCategory || tool.functionalCategory).toLowerCase().includes(lowerCaseQuery)
     );
   }, [searchQuery, activeFilter]);
   
@@ -114,7 +114,7 @@ export default function HomePage() {
       <section className="bg-card py-16 md:py-24 text-center">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4">
-            Free Tools to Make <span className="bg-[hsl(var(--hero-highlight-bg))] text-[hsl(var(--hero-highlight-fg))] px-2 py-1 rounded-md">Everything</span> Simple
+            Free Tools to Make <span className="bg-[hsl(var(--hero-highlight-bg-hsl))] text-[hsl(var(--hero-highlight-fg-hsl))] px-2 py-1 rounded-md">Everything</span> Simple
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
             We provide a suite of free online tools including PDF tools, image editing, video utilities, AI writing aids, and file converters. All accessible without sign-up.
@@ -157,8 +157,8 @@ export default function HomePage() {
             {stats.map((stat) => (
               <div key={stat.id} className="bg-card p-6 rounded-lg shadow-sm">
                 <stat.icon className="h-10 w-10 text-primary mb-3 mx-auto" />
-                <p className="text-2xl md:text-3xl font-semibold text-foreground">{stat.value}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
+                <p className="text-2xl md:text-3xl font-semibold text-primary">{stat.value}</p>
+                <p className="text-sm text-foreground/90">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -251,3 +251,4 @@ export default function HomePage() {
     </div>
   );
 }
+
