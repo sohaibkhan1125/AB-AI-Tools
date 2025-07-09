@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef, ChangeEvent } from 'react';
@@ -24,7 +23,7 @@ interface ImageFile {
 export default function ImageToPDFPage() {
   const [selectedImages, setSelectedImages] = useState<ImageFile[]>([]);
   const [isConverting, setIsConverting] = useState(false);
-  const [pdfName, setPdfName] = useState('toolhub_converted');
+  const [pdfName, setPdfName] = useState('ab_ai_tools_hub_converted');
   const [pageSize, setPageSize] = useState<"a4" | "letter">("a4");
   const [imageQuality, setImageQuality] = useState(0.92); // Corresponds to jsPDF's default
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -151,7 +150,7 @@ export default function ImageToPDFPage() {
         });
       }
 
-      pdf.save(`${pdfName || 'toolhub_converted'}.pdf`);
+      pdf.save(`${pdfName || 'ab_ai_tools_hub_converted'}.pdf`);
       toast({
         title: 'Conversion Successful!',
         description: 'Your PDF has been downloaded.',
@@ -286,4 +285,3 @@ export default function ImageToPDFPage() {
     </div>
   );
 }
-

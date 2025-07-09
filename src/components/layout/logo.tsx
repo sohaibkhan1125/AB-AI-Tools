@@ -9,7 +9,7 @@ const Logo = () => {
         <Wrench className="h-5 w-5 sm:h-6 sm:w-6" />
       </div>
       <span className="text-xl sm:text-2xl font-bold font-headline">
-        <span className="text-foreground">Tiny</span><span className="text-primary">Wow</span>
+        <span className="text-foreground">AB AI</span><span className="text-primary"> Tools Hub</span>
       </span>
     </Link>
   );

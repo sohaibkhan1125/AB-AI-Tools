@@ -5,7 +5,7 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 
 export const metadata: Metadata = {
-  title: 'AI Tools Hub - Your Ultimate AI Toolkit',
+  title: 'AB AI Tools Hub - Your Ultimate AI Toolkit',
   description: 'A collection of handy AI-powered online tools including QR Code Scanner, Image to PDF Converter, AI Image Generator, and more. Free and easy to use.',
 };
 

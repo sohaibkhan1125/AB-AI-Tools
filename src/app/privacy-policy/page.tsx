@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
         </CardHeader>
         <CardContent className="space-y-6 text-foreground/90 leading-relaxed prose prose-sm sm:prose-base max-w-none">
           <p>
-            Welcome to AI Tools Hub. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our tools. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
+            Welcome to AB AI Tools Hub. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our tools. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
           </p>
 
           <h2 className="text-xl font-semibold font-headline text-primary">1. Information We Collect</h2>
@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="text-xl font-semibold font-headline text-primary">6. Contact Us</h2>
           <p>
-            If you have questions or comments about this Privacy Policy, please contact us through our contact page or at: <a href="mailto:privacy@aitoolshub.example.com" className="text-primary hover:underline">privacy@aitoolshub.example.com</a>.
+            If you have questions or comments about this Privacy Policy, please contact us through our contact page or at: <a href="mailto:privacy@ab-ai-tools-hub.example.com" className="text-primary hover:underline">privacy@ab-ai-tools-hub.example.com</a>.
           </p>
         </CardContent>
       </Card>

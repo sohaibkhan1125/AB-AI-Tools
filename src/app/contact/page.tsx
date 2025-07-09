@@ -17,7 +17,7 @@ export default function ContactPage() {
           </div>
           <CardTitle className="text-3xl font-bold font-headline">Contact Us</CardTitle>
           <CardDescription className="text-lg text-muted-foreground pt-2">
-            We'd love to hear from you! Send us a message with any questions or feedback regarding AI Tools Hub.
+            We'd love to hear from you! Send us a message with any questions or feedback regarding AB AI Tools Hub.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -32,7 +32,7 @@ export default function ContactPage() {
             </div>
             <div>
               <Label htmlFor="subject" className="font-medium">Subject</Label>
-              <Input id="subject" type="text" placeholder="Regarding AI Tools Hub..." className="mt-1" />
+              <Input id="subject" type="text" placeholder="Regarding AB AI Tools Hub..." className="mt-1" />
             </div>
             <div>
               <Label htmlFor="message" className="font-medium">Message</Label>
@@ -43,7 +43,7 @@ export default function ContactPage() {
             </Button>
           </form>
           <p className="text-sm text-muted-foreground text-center">
-            Alternatively, you can reach us at <a href="mailto:support@aitoolshub.example.com" className="text-primary hover:underline">support@aitoolshub.example.com</a>.
+            Alternatively, you can reach us at <a href="mailto:support@ab-ai-tools-hub.example.com" className="text-primary hover:underline">support@ab-ai-tools-hub.example.com</a>.
           </p>
         </CardContent>
       </Card>
