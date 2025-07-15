@@ -1,7 +1,19 @@
+
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ShieldCheck } from 'lucide-react';
 
 export default function PrivacyPolicyPage() {
+  const [lastUpdatedDate, setLastUpdatedDate] = useState('');
+
+  useEffect(() => {
+    // This code runs only on the client, after the component has mounted.
+    // This prevents a hydration mismatch.
+    setLastUpdatedDate(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+  }, []);
+
   return (
     <div className="container mx-auto py-12 px-4">
       <Card className="max-w-3xl mx-auto shadow-lg">
@@ -11,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </div>
           <CardTitle className="text-3xl font-bold font-headline">Privacy Policy</CardTitle>
            <CardDescription className="text-lg text-muted-foreground pt-2">
-            Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            Last updated: {lastUpdatedDate || '...'}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6 text-foreground/90 leading-relaxed prose prose-sm sm:prose-base max-w-none">
