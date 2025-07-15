@@ -111,7 +111,9 @@ const Header = () => {
                 ))}
                 {category.tools.length > 7 && (
                    <DropdownMenuItem asChild>
-                     <Link href={`/#popular-tools-section?filter=${category.name}`} className="text-primary text-sm font-medium hover:underline p-2 text-center block">
+                     <Link 
+                        href={category.name.toLowerCase() === 'pdf' ? '/tools/pdf' : `/#popular-tools-section?filter=${category.name}`} 
+                        className="text-primary text-sm font-medium hover:underline p-2 text-center block">
                        View all {category.name.toLowerCase()} tools...
                      </Link>
                    </DropdownMenuItem>
@@ -217,7 +219,8 @@ const Header = () => {
                             )}
                              {categoryTools.length > 10 && (
                                <SheetClose asChild>
-                                <NavLink href={`/#popular-tools-section?filter=${categoryKey}`}
+                                <NavLink 
+                                  href={categoryKey.toLowerCase() === 'pdf' ? '/tools/pdf' : `/#popular-tools-section?filter=${categoryKey}`}
                                   className="py-2 text-sm text-primary font-medium hover:underline"
                                   >
                                   View all {categoryKey} tools...
