@@ -32,6 +32,8 @@ import {
 import { HEADER_DROPDOWN_CATEGORIES, TOOLS_DATA } from '@/lib/tools-data';
 import type { Tool } from '@/types/tool';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { useToast } from '@/hooks/use-toast';
+import { Facebook, Twitter, Linkedin, Link as LinkIcon } from 'lucide-react';
 
 interface GroupedTools {
   [category: string]: Tool[];
@@ -41,6 +43,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { toast } = useToast();
 
   useEffect(() => {
     setIsMounted(true);
@@ -68,6 +71,45 @@ const Header = () => {
       if(isMobileMenuOpen) setIsMobileMenuOpen(false);
     }
   };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: 'AB AI Tools Hub',
+      text: 'Check out this awesome collection of free AI tools!',
+      url: window.location.origin,
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback for browsers that don't support navigator.share
+        // The dropdown will be triggered instead, so this else block can be for logging or a toast.
+        toast({ title: "Share", description: "Use the options to share this page."});
+      }
+    } catch (err) {
+      console.error('Share failed:', err);
+      toast({ variant: 'destructive', title: "Sharing Failed", description: "Could not share at this time."});
+    }
+  };
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(window.location.origin);
+    toast({ title: "Link Copied!", description: "The website URL has been copied to your clipboard." });
+  }
+
+  const socialShareUrl = (platform: 'twitter' | 'facebook' | 'linkedin') => {
+    const url = encodeURIComponent(window.location.origin);
+    const text = encodeURIComponent('Check out this awesome collection of free AI tools from AB AI Tools Hub!');
+    switch (platform) {
+      case 'twitter':
+        return `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+      case 'facebook':
+        return `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      case 'linkedin':
+        return `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=AB%20AI%20Tools%20Hub&summary=${text}`;
+    }
+  }
+
 
   if (!isMounted) {
     // Simplified skeleton or null during SSR/hydration mismatch prevention
@@ -116,6 +158,7 @@ const Header = () => {
                         href={
                           category.name.toLowerCase() === 'pdf' ? '/tools/pdf' :
                           category.name.toLowerCase() === 'image' ? '/tools/image' :
+                          category.name.toLowerCase() === 'ai write' ? '/tools/ai-write' :
                           category.name.toLowerCase() === 'file' ? '/tools/file' :
                           `/#popular-tools-section?filter=${category.name}`
                         } 
@@ -138,9 +181,24 @@ const Header = () => {
         {/* Desktop Right side elements */}
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
-          <Button variant="ghost" size="icon" aria-label="Share">
-            <Share2 className="h-5 w-5 text-foreground/70 hover:text-primary" />
-          </Button>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+               <Button variant="ghost" size="icon" aria-label="Share" onClick={handleShare}>
+                 <Share2 className="h-5 w-5 text-foreground/70 hover:text-primary" />
+               </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuLabel>Share on Social Media</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild><a href={socialShareUrl('twitter')} target="_blank" rel="noopener noreferrer"><Twitter className="mr-2 h-4 w-4 text-[#1DA1F2]" />Twitter</a></DropdownMenuItem>
+                <DropdownMenuItem asChild><a href={socialShareUrl('facebook')} target="_blank" rel="noopener noreferrer"><Facebook className="mr-2 h-4 w-4 text-[#1877F2]" />Facebook</a></DropdownMenuItem>
+                <DropdownMenuItem asChild><a href={socialShareUrl('linkedin')} target="_blank" rel="noopener noreferrer"><Linkedin className="mr-2 h-4 w-4 text-[#0A66C2]" />LinkedIn</a></DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={copyLink}><LinkIcon className="mr-2 h-4 w-4" />Copy Link</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <form onSubmit={handleSearchSubmit} className="relative w-48">
             <SearchIconLucide className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -224,7 +282,13 @@ const Header = () => {
                              {categoryTools.length > 10 && (
                                <SheetClose asChild>
                                 <NavLink 
-                                  href={categoryKey.toLowerCase() === 'pdf' ? '/tools/pdf' : `/#popular-tools-section?filter=${categoryKey}`}
+                                  href={
+                                    categoryKey.toLowerCase() === 'pdf' ? '/tools/pdf' :
+                                    categoryKey.toLowerCase() === 'image' ? '/tools/image' :
+                                    categoryKey.toLowerCase() === 'ai write' ? '/tools/ai-write' :
+                                    categoryKey.toLowerCase() === 'file' ? '/tools/file' :
+                                    `/#popular-tools-section?filter=${categoryKey}`
+                                  }
                                   className="py-2 text-sm text-primary font-medium hover:underline"
                                   >
                                   View all {categoryKey} tools...
@@ -246,7 +310,11 @@ const Header = () => {
                     <div className="flex items-center gap-2 py-2.5 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer">
                         <ThemeToggle /> <span className="ml-[-8px]">Theme</span>
                     </div>
-                    <div className="flex items-center gap-2 py-2.5 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer" aria-label="Share">
+                    <div 
+                      className="flex items-center gap-2 py-2.5 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer" 
+                      aria-label="Share"
+                      onClick={handleShare}
+                    >
                         <Share2 className="h-5 w-5" /> Share
                     </div>
                 </div>
