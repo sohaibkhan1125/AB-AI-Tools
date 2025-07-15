@@ -115,6 +115,7 @@ const Header = () => {
                         href={
                           category.name.toLowerCase() === 'pdf' ? '/tools/pdf' :
                           category.name.toLowerCase() === 'image' ? '/tools/image' :
+                          category.name.toLowerCase() === 'file' ? '/tools/file' :
                           `/#popular-tools-section?filter=${category.name}`
                         } 
                         className="text-primary text-sm font-medium hover:underline p-2 text-center block">
