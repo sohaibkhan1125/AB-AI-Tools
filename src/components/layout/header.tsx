@@ -112,7 +112,11 @@ const Header = () => {
                 {category.tools.length > 7 && (
                    <DropdownMenuItem asChild>
                      <Link 
-                        href={category.name.toLowerCase() === 'pdf' ? '/tools/pdf' : `/#popular-tools-section?filter=${category.name}`} 
+                        href={
+                          category.name.toLowerCase() === 'pdf' ? '/tools/pdf' :
+                          category.name.toLowerCase() === 'image' ? '/tools/image' :
+                          `/#popular-tools-section?filter=${category.name}`
+                        } 
                         className="text-primary text-sm font-medium hover:underline p-2 text-center block">
                        View all {category.name.toLowerCase()} tools...
                      </Link>
