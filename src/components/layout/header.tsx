@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Menu, X, Search as SearchIconLucide, Moon, ChevronDown, Share2 } from 'lucide-react';
+import { Menu, X, Search as SearchIconLucide, Moon, Sun, ChevronDown, Share2 } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './logo';
 import NavLink from './nav-link';
@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { HEADER_DROPDOWN_CATEGORIES, TOOLS_DATA } from '@/lib/tools-data';
 import type { Tool } from '@/types/tool';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 interface GroupedTools {
   [category: string]: Tool[];
@@ -136,9 +137,7 @@ const Header = () => {
 
         {/* Desktop Right side elements */}
         <div className="hidden md:flex items-center gap-2">
-          <Button variant="ghost" size="icon" aria-label="Toggle theme (visual only)">
-            <Moon className="h-5 w-5 text-foreground/70 hover:text-primary" />
-          </Button>
+          <ThemeToggle />
           <Button variant="ghost" size="icon" aria-label="Share">
             <Share2 className="h-5 w-5 text-foreground/70 hover:text-primary" />
           </Button>
@@ -244,8 +243,8 @@ const Header = () => {
                            Sign In
                         </NavLink>
                     </SheetClose>
-                    <div className="flex items-center gap-2 py-2.5 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer" aria-label="Toggle theme (visual only)">
-                        <Moon className="h-5 w-5" /> Theme
+                    <div className="flex items-center gap-2 py-2.5 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer">
+                        <ThemeToggle /> <span className="ml-[-8px]">Theme</span>
                     </div>
                     <div className="flex items-center gap-2 py-2.5 px-2 text-base text-foreground/80 hover:bg-accent rounded-md cursor-pointer" aria-label="Share">
                         <Share2 className="h-5 w-5" /> Share
