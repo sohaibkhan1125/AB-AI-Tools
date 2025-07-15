@@ -19,6 +19,10 @@ const NavLink = ({ href, children, className, ...props }: NavLinkProps) => {
     setIsMounted(true);
   }, []);
 
+  if (!isMounted) {
+    return null;
+  }
+
   // Calculate the actual active state
   const actualIsActive = pathname === href || (href !== "/" && pathname.startsWith(href));
 
@@ -27,9 +31,7 @@ const NavLink = ({ href, children, className, ...props }: NavLinkProps) => {
       href={href}
       className={cn(
         'text-sm sm:text-base font-medium transition-colors hover:text-primary',
-        // Apply active styles only if mounted and actually active.
-        // Otherwise, default to inactive style for server render and initial client render.
-        isMounted && actualIsActive ? 'text-primary' : 'text-foreground/80',
+        actualIsActive ? 'text-primary' : 'text-foreground/80',
         className
       )}
       {...props}
