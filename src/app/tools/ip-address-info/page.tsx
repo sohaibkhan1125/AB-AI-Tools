@@ -10,25 +10,9 @@ import { Network, Search, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
+import { getIpInfo, type IpInfoInput, type IpInfoOutput } from '@/ai/flows/ip-info-flow';
 
-interface IpInfo {
-  query: string;
-  status: string;
-  country?: string;
-  countryCode?: string;
-  regionName?: string;
-  city?: string;
-  zip?: string;
-  lat?: number;
-  lon?: number;
-  timezone?: string;
-  isp?: string;
-  org?: string;
-  as?: string;
-  message?: string; // For errors from ip-api
-}
-
-const IPInfoDisplay: React.FC<{ info: IpInfo | null; title: string }> = ({ info, title }) => {
+const IPInfoDisplay: React.FC<{ info: IpInfoOutput | null; title: string }> = ({ info, title }) => {
   if (!info) return null;
   if (info.status === 'fail') {
     return (
@@ -39,8 +23,8 @@ const IPInfoDisplay: React.FC<{ info: IpInfo | null; title: string }> = ({ info,
     );
   }
 
-  const displayFields: (keyof IpInfo)[] = ['query', 'country', 'regionName', 'city', 'isp', 'org', 'lat', 'lon', 'timezone'];
-  const fieldLabels: Record<keyof IpInfo, string> = {
+  const displayFields: (keyof IpInfoOutput)[] = ['query', 'country', 'regionName', 'city', 'isp', 'org', 'lat', 'lon', 'timezone'];
+  const fieldLabels: Record<keyof IpInfoOutput, string> = {
     query: 'IP Address',
     country: 'Country',
     regionName: 'Region',
@@ -87,8 +71,8 @@ const LoadingSkeleton = () => (
 
 
 export default function IpAddressInfoPage() {
-  const [currentIpInfo, setCurrentIpInfo] = useState<IpInfo | null>(null);
-  const [lookupIpInfo, setLookupIpInfo] = useState<IpInfo | null>(null);
+  const [currentIpInfo, setCurrentIpInfo] = useState<IpInfoOutput | null>(null);
+  const [lookupIpInfo, setLookupIpInfo] = useState<IpInfoOutput | null>(null);
   const [lookupIp, setLookupIp] = useState('');
   const [isLoadingCurrent, setIsLoadingCurrent] = useState(true);
   const [isLoadingLookup, setIsLoadingLookup] = useState(false);
@@ -108,11 +92,8 @@ export default function IpAddressInfoPage() {
     }
 
     try {
-      const response = await fetch(`https://ip-api.com/json/${ipAddress || ''}?fields=status,message,query,country,countryCode,regionName,city,zip,lat,lon,timezone,isp,org,as`);
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
-      const data: IpInfo = await response.json();
+      const input: IpInfoInput = { ipAddress: ipAddress || undefined };
+      const data = await getIpInfo(input);
 
       if (data.status === 'success') {
         if (isCurrentIpLookup) {
@@ -232,4 +213,3 @@ export default function IpAddressInfoPage() {
     </div>
   );
 }
-

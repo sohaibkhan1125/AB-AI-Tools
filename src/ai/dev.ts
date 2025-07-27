@@ -27,3 +27,4 @@ import '@/ai/flows/xml-to-csv-flow';
 import '@/ai/flows/json-to-xml-flow';
 import '@/ai/flows/csv-to-xml-flow';
 import '@/ai/flows/xml-to-json-flow';
+import '@/ai/flows/ip-info-flow';
