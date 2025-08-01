@@ -116,7 +116,7 @@ const Header = () => {
     return (
       <header className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 h-[70px] flex items-center justify-between">
-          <Logo />
+          <Link href="/"><Logo /></Link>
           <div className="md:hidden">
             <Button variant="ghost" size="icon">
               <Menu className="h-6 w-6" />
@@ -130,7 +130,7 @@ const Header = () => {
   return (
     <header className="bg-card border-b border-border/80 shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 h-[70px] flex items-center justify-between gap-4">
-        <Logo />
+        <Link href="/"><Logo /></Link>
 
         {/* Desktop Centered Navigation with Dropdowns */}
         <nav className="hidden md:flex items-center gap-1">
@@ -226,7 +226,7 @@ const Header = () => {
             <SheetContent side="right" className="w-[300px] p-0 flex flex-col bg-card">
               <SheetHeader className="p-4 border-b">
                  <div className="flex justify-between items-center">
-                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)} passHref>
+                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
                       <Logo />
                     </Link>
                    <SheetClose asChild>

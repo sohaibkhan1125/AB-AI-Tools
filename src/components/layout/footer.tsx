@@ -1,5 +1,7 @@
+
 import NavLink from './nav-link';
 import Logo from './logo';
+import Link from 'next/link';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,7 +17,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           <div className="flex justify-center md:justify-start">
-            <Logo />
+            <Link href="/"><Logo /></Link>
           </div>
           
           <nav className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
